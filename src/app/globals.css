@@ -1,0 +1,596 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 210 100% 50%; /* Progress IT blue */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 210 100% 50%;
+    --radius: 0.25rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --progress-it-blue: 210 100% 50%;
+    --progress-it-dark: 0 0% 13%;
+    --progress-it-light: 0 0% 98%;
+    --button-height: 48px;
+  }
+
+  @media (min-width: 640px) {
+    :root {
+      --button-height: 52px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --button-height: 56px;
+    }
+  }
+
+  .dark {
+    --background: 0 0% 13%; /* Progress IT dark background */
+    --foreground: 0 0% 98%;
+    --card: 0 0% 13%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 13%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 210 100% 50%; /* Progress IT blue */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 210 100% 50%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  .progress-it-container {
+    @apply container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl;
+  }
+
+  .progress-it-heading {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight;
+  }
+
+  .progress-it-subheading {
+    @apply text-xl md:text-2xl font-medium;
+  }
+
+  .progress-it-gradient-bg {
+    @apply bg-gradient-to-r from-blue-600 to-blue-400;
+  }
+
+  .progress-it-card {
+    @apply bg-white dark:bg-slate-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl;
+  }
+
+  .progress-it-button {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors;
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-x {
+  background-size: 200% 100%;
+  animation: gradient-x 4s ease infinite;
+}
+
+/* Scroll Animation Styles */
+@layer scroll {
+  @supports (animation-timeline: scroll()) and (animation-range: entry 0 100%) {
+    @property --progress {
+      syntax: "<integer>";
+      inherits: true;
+      initial-value: 0;
+    }
+
+    .fluid section {
+      --progress: 0;
+      animation: progress both linear;
+      animation-timeline: scroll(root);
+      counter-set: p var(--progress);
+    }
+
+    .fluid .progress [aria-hidden] {
+      padding-inline: 0.125rem;
+      color: transparent;
+
+      @media (max-width: 768px) {
+        position: absolute;
+        height: 1px;
+        width: 1px;
+      }
+    }
+
+    .fluid .progress .sync {
+      position: absolute;
+      inset: 0;
+      color: transparent;
+      container-type: size;
+    }
+
+    .fluid .progress .sync span {
+      position: absolute;
+      right: 0.75rem;
+      display: inline-block;
+      translate: 0 calc((-50% + 1px) + (((var(--progress) * 1cqh) - 1px)));
+
+      @media (max-width: 768px) {
+        right: 1rem;
+        transform-origin: 100% 50%;
+        rotate: -90deg;
+        translate: 0 -50%;
+        transform: translateX(
+          calc(-6px + (var(--progress) / 100) * (-100cqh + 100% + 12px))
+        );
+      }
+    }
+
+    .fluid .progress .sync span::after {
+      background: linear-gradient(90deg, var(--primary) 0 0) 50% 50% / 100% 4px
+        no-repeat;
+      content: counter(p) "% complete";
+      color: white;
+      position: absolute;
+      font-variant: tabular-nums;
+      padding-inline: 0.125rem;
+      right: 0;
+    }
+
+    .fluid .heading h1 {
+      background-position-x: 200%, 0;
+      animation: fill both linear;
+      animation-timeline: scroll(root);
+    }
+  }
+
+  @keyframes fill {
+    to {
+      background-position-x: 100%, 0;
+    }
+  }
+
+  /* Make the fill animation faster by adjusting the animation range */
+  .fluid .heading h1 {
+    animation-range: entry 0% 30%; /* Reduced from 60% to 30% to make it fill 2x faster */
+  }
+
+  @keyframes progress {
+    to {
+      --progress: 100;
+    }
+  }
+}
+
+/* Scroll Animation Demo Styles */
+@layer demo {
+  .fluid section {
+    --font-level: 4.5;
+    width: 18ch;
+    max-width: calc(100vw - 4rem);
+    display: flex;
+    position: relative;
+    width: 100%;
+    padding: 4rem 0;
+  }
+
+  .fluid .heading {
+    position: relative;
+    padding-left: 4px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .fluid .heading h1::selection {
+    background: var(--primary);
+    color: white;
+  }
+
+  .fluid .progress {
+    font-size: 0.875rem;
+    white-space: nowrap;
+    display: grid;
+    place-items: start;
+    padding-inline: 0.75rem;
+    position: relative;
+  }
+
+  .fluid .progress .sync span {
+    padding: 0.125rem;
+    position: relative;
+  }
+
+  .fluid h1 {
+    margin: 0;
+    line-height: 1.2;
+    font-size: inherit;
+    background-image: linear-gradient(90deg, white 0 0);
+    background-size: 200% 1lh;
+    background-repeat: no-repeat;
+    background-position-x: 180%;
+    background-position-y: 100%;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-stroke: 2px white;
+    display: inline;
+    text-wrap: pretty;
+    letter-spacing: 0.05ch;
+    outline-offset: 0.5rem;
+    outline: none;
+  }
+
+  @media (max-width: 768px) {
+    .fluid h1 {
+      -webkit-text-stroke: unset;
+      background-image: linear-gradient(90deg, white 0 0),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.15) 0 0);
+      background-size:
+        200% 1lh,
+        100% 100%;
+      background-repeat: no-repeat, repeat;
+      background-position-x: 180%;
+      background-position-y: 100%;
+    }
+  }
+}
+
+/* Progress IT-specific styles */
+.progress-it-text-gradient {
+  background: linear-gradient(90deg, #0070f3 0%, #00c8ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.progress-it-border-gradient {
+  border-image: linear-gradient(90deg, #0070f3 0%, #00c8ff 100%) 1;
+  border-width: 2px;
+  border-style: solid;
+}
+
+/* Looping Words Animation Styles - Osmo Style */
+@font-face {
+  font-family: "PP Neue Corp";
+  src: url("https://cdn.prod.website-files.com/6717aac16c9ea22eeef1e79e/6717de2d56e40b921572d2d9_PPNeueCorp-TightUltrabold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+.looping-words {
+  height: 2.7em;
+  padding-left: 0.1em;
+  padding-right: 0.1em;
+  font-size: 11vw;
+  line-height: 0.9;
+  position: relative;
+}
+
+.looping-words__list {
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-flow: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-family: "PP Neue Corp", sans-serif;
+  font-weight: 700;
+  list-style: none;
+  display: flex;
+  position: relative;
+  color: hsl(var(--primary));
+}
+
+.looping-words__list.is--primary {
+  color: hsl(var(--primary));
+}
+
+.looping-words__list.is--gray {
+  color: hsl(var(--muted-foreground));
+}
+
+.looping-words__fade {
+  background-image: linear-gradient(
+    180deg,
+    black 5%,
+    transparent 40%,
+    transparent 60%,
+    black 95%
+  );
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.looping-words__fade.is--radial {
+  background-image: radial-gradient(
+    circle closest-side at 50% 50%,
+    transparent 64%,
+    hsl(var(--muted)) 93%
+  );
+  width: 140%;
+  display: block;
+  left: -20%;
+}
+
+.looping-words__selector {
+  pointer-events: none;
+  width: 100%;
+  height: 0.9em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.looping-words__edge {
+  border-top: 0.035em solid hsl(var(--primary));
+  border-left: 0.035em solid hsl(var(--primary));
+  width: 0.125em;
+  height: 0.125em;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.looping-words__edge.is--2 {
+  left: auto;
+  right: 0;
+  transform: rotate(90deg);
+}
+
+.looping-words__edge.is--3 {
+  inset: auto 0 0 auto;
+  transform: rotate(180deg);
+}
+
+.looping-words__edge.is--4 {
+  top: auto;
+  bottom: 0;
+  transform: rotate(270deg);
+}
+
+.looping-words__containers {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.looping-words__p {
+  margin: 0;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.btn-gradient-hover {
+  background-size: 200% auto;
+  transition: 0.3s;
+}
+
+.btn-gradient-hover:hover {
+  background-position: right center;
+  transition: 0.5s ease;
+  animation: gradient-shift 1.5s ease infinite alternate;
+}
+
+@keyframes grid-move {
+  0% {
+    background-position: 0px 0px, 0px 0px;
+  }
+  100% {
+    background-position: 40px 40px, 40px 40px;
+  }
+}
+
+.animated-grid {
+  animation: grid-move 3s linear infinite;
+  background-image: 
+    linear-gradient(rgba(80, 50, 250, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(80, 50, 250, 0.3) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.animated-grid-blue-purple {
+  animation: grid-move 3s linear infinite;
+  background-image: 
+    linear-gradient(0deg, rgba(65, 39, 255, 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(191, 50, 250, 0.2) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Bubbly Button Animation */
+.bubbly-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: rgba(191, 50, 250, 0.9);
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+  box-shadow: 0 2px 25px rgba(191, 50, 250, 0.5);
+  height: var(--button-height);
+}
+
+.bubbly-button:focus {
+  outline: 0;
+}
+
+.bubbly-button:before, .bubbly-button:after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 140%;
+  height: 100%;
+  left: -20%;
+  z-index: -1000;
+  transition: all ease-in-out 0.5s;
+  background-repeat: no-repeat;
+}
+
+.bubbly-button:before {
+  display: none;
+  top: -75%;
+  background-image:  
+    radial-gradient(circle, rgba(191, 50, 250, 0.9) 20%, transparent 20%),
+    radial-gradient(circle, transparent 20%, rgba(191, 50, 250, 0.9) 20%, transparent 30%),
+    radial-gradient(circle, rgba(191, 50, 250, 0.9) 20%, transparent 20%), 
+    radial-gradient(circle, rgba(191, 50, 250, 0.9) 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, rgba(191, 50, 250, 0.9) 15%, transparent 20%),
+    radial-gradient(circle, rgba(191, 50, 250, 0.9) 20%, transparent 20%),
+    radial-gradient(circle, rgba(191, 50, 250, 0.9) 20%, transparent 20%),
+    radial-gradient(circle, rgba(191, 50, 250, 0.9) 20%, transparent 20%),
+    radial-gradient(circle, rgba(191, 50, 250, 0.9) 20%, transparent 20%);
+  background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
+}
+
+.bubbly-button:after {
+  display: none;
+  bottom: -75%;
+  background-image:  
+    radial-gradient(circle, rgba(191, 50, 250, 0.9) 20%, transparent 20%), 
+    radial-gradient(circle, rgba(191, 50, 250, 0.9) 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, rgba(191, 50, 250, 0.9) 15%, transparent 20%),
+    radial-gradient(circle, rgba(191, 50, 250, 0.9) 20%, transparent 20%),
+    radial-gradient(circle, rgba(191, 50, 250, 0.9) 20%, transparent 20%),
+    radial-gradient(circle, rgba(191, 50, 250, 0.9) 20%, transparent 20%),
+    radial-gradient(circle, rgba(191, 50, 250, 0.9) 20%, transparent 20%);
+  background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
+}
+
+.bubbly-button:active {
+  transform: scale(0.9);
+  background-color: rgba(170, 45, 225, 0.9);
+  box-shadow: 0 2px 25px rgba(191, 50, 250, 0.2);
+}
+
+.bubbly-button.animate:before {
+  display: block;
+  animation: topBubbles ease-in-out 0.75s forwards;
+}
+
+.bubbly-button.animate:after {
+  display: block;
+  animation: bottomBubbles ease-in-out 0.75s forwards;
+}
+
+@keyframes topBubbles {
+  0% {
+    background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
+  }
+  50% {
+    background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%;
+  }
+  100% {
+    background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%;
+    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+}
+
+@keyframes bottomBubbles {
+  0% {
+    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
+  }
+  50% {
+    background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;
+  }
+  100% {
+    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
+    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+}

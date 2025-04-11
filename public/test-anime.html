@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Anime.js Test</title>
+  <script src="/js/anime.min.js"></script>
+</head>
+<body>
+  <div id="box" style="width: 100px; height: 100px; background-color: blue;"></div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof anime !== 'undefined') {
+        console.log('Anime.js is loaded!');
+        
+        // Simple animation to test
+        anime({
+          targets: '#box',
+          translateX: 250,
+          rotate: '1turn',
+          backgroundColor: '#ff0000',
+          duration: 2000,
+          loop: true
+        });
+      } else {
+        console.error('Anime.js is not loaded');
+      }
+    });
+  </script>
+</body>
+</html> 

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Technology Cards Animation Test</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <style>
+    body { 
+      background: #000; 
+      color: #fff; 
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    
+    .card {
+      position: relative;
+      background: #111;
+      border-radius: 10px;
+      padding: 20px;
+      min-height: 200px;
+      border: 1px solid #333;
+    }
+    
+    h3 {
+      color: #0ea5e9;
+    }
+    
+    p {
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>Technology Cards Animation Test</h1>
+  
+  <div class="grid">
+    <div class="card" data-card="242">
+      <h3>Adaptive Interfaces</h3>
+      <p>Building responsive systems that evolve with user behavior and device capabilities.</p>
+    </div>
+    <div class="card" data-card="627">
+      <h3>Quantum-Ready Architecture</h3>
+      <p>Developing systems prepared for the next generation of computing paradigms.</p>
+    </div>
+    <div class="card" data-card="675">
+      <h3>Neural Integration</h3>
+      <p>Merging AI capabilities with human-centered design for intuitive experiences.</p>
+    </div>
+    <div class="card" data-card="937">
+      <h3>Data Mesh Systems</h3>
+      <p>Distributed domain-specific data architecture for enterprise-scale solutions.</p>
+    </div>
+    <div class="card" data-card="886">
+      <h3>Cybernetic Security</h3>
+      <p>Advanced threat detection with self-healing protection protocols.</p>
+    </div>
+    <div class="card" data-card="727">
+      <h3>Digital Twin Engineering</h3>
+      <p>Creating virtual replicas of physical systems for testing and optimization.</p>
+    </div>
+    <div class="card" data-card="889">
+      <h3>Holographic Interfaces</h3>
+      <p>Developing next-generation spatial computing experiences beyond traditional screens.</p>
+    </div>
+    <div class="card" data-card="646">
+      <h3>Edge Computing Solutions</h3>
+      <p>Processing data closer to its source for reduced latency and enhanced performance.</p>
+    </div>
+    <div class="card" data-card="739">
+      <h3>Synthetic Media Creation</h3>
+      <p>Generating hyper-realistic content through advanced AI algorithms.</p>
+    </div>
+  </div>
+
+  <script src="/js/tech-animate.js"></script>
+</body>
+</html> 
