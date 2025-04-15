@@ -336,7 +336,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
             </div>
           </div>
           <div className="flex space-x-6 text-sm">
-            <Link href="/contact" className="hover:text-blue-400 transition-colors">
+            <Link href="/#contact" className="hover:text-blue-400 transition-colors">
               Contact Us
             </Link>
             <Link href="/privacy-policy" className="hover:text-blue-400 transition-colors">

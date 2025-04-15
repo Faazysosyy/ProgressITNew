@@ -1,13 +1,14 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  output: 'export',
+  // Removing 'export' output which causes issues with dev server
+  // output: 'export',
   images: {
     unoptimized: true,
   },
   reactStrictMode: true,
   experimental: {
-    appDir: true,
+    // appDir is no longer needed as it's the default in Next.js 14+
   },
 };
 

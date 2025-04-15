@@ -7,6 +7,7 @@ import AISection from "@/components/AISection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import LoopingWords from "@/components/LoopingWords";
+import CreativeAlliance from "@/components/CreativeAlliance";
 
 export default function Home() {
   return (
@@ -41,16 +42,14 @@ export default function Home() {
       {/* Looping Words Animation */}
       <LoopingWords words={["WHAT", "ARE", "YOU", "WAITING", "FOR?"]} />
 
+      {/* Creative Alliance Section */}
+      <CreativeAlliance />
+
       {/* Contact Section */}
-      <ContactSection
-        title="Let's Create Together"
-        subtitle="Ready to transform your digital presence? Reach out and let's build something extraordinary."
-      />
+      <ContactSection />
 
       {/* Footer */}
-      <Footer
-        companyName="Progress IT"
-      />
+      <Footer />
     </main>
   );
 }

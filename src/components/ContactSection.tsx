@@ -152,8 +152,10 @@ const ContactSection = ({
                     </p>
                     <div className="mt-auto">
                       <Button className="group-hover:bg-blue-700 bg-blue-600 transition-all duration-300 flex items-center gap-2">
-                        Calculate Now
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                        <a href="/calculator" className="flex items-center gap-2">
+                          Calculate Now
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                        </a>
                       </Button>
                     </div>
                   </div>
@@ -184,8 +186,10 @@ const ContactSection = ({
                     </p>
                     <div className="mt-auto">
                       <Button className="group-hover:bg-indigo-700 bg-indigo-600 transition-all duration-300 flex items-center gap-2">
-                        Start Now
-                        <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                        <a href="https://t.me/SlavoSS" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                          Start Now
+                          <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                        </a>
                       </Button>
                     </div>
                   </div>
@@ -216,8 +220,10 @@ const ContactSection = ({
                     </p>
                     <div className="mt-auto">
                       <Button className="group-hover:bg-teal-700 bg-teal-600 transition-all duration-300 flex items-center gap-2">
-                        Book Now
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                        <a href="https://calendly.com/artjom-lupjak" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                          Book Now
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                        </a>
                       </Button>
                     </div>
                   </div>
@@ -256,10 +262,10 @@ const ContactSection = ({
                   <h4 className="text-2xl font-bold mb-2 text-white">
                     Riga, Latvia
                   </h4>
-                  <a href="mailto:riga@progressit.online" className="text-blue-400 mb-1 font-medium hover:underline">
-                    riga@progressit.online
+                  <a href="mailto:info@progressit.online" className="text-blue-400 mb-1 font-medium hover:underline">
+                    info@progressit.online
                   </a>
-                  <p className="text-gray-400 mt-1">+12345678910</p>
+                  <p className="text-gray-400 mt-1">+371 28674827</p>
 
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
@@ -298,10 +304,10 @@ const ContactSection = ({
                   <h4 className="text-2xl font-bold mb-2 text-white">
                     Heidelberg, Germany
                   </h4>
-                  <a href="mailto:germany@progressit.online" className="text-indigo-400 mb-1 font-medium hover:underline">
-                    germany@progressit.online
+                  <a href="mailto:v.popp@progressit.online" className="text-indigo-400 mb-1 font-medium hover:underline">
+                    v.popp@progressit.online
                   </a>
-                  <p className="text-gray-400 mt-1">+12345678910</p>
+                  <p className="text-gray-400 mt-1">+49 1781378688</p>
 
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
@@ -340,10 +346,10 @@ const ContactSection = ({
                   <h4 className="text-2xl font-bold mb-2 text-white">
                     London, UK
                   </h4>
-                  <a href="mailto:uk@progressit.online" className="text-teal-400 mb-1 font-medium hover:underline">
-                    uk@progressit.online
+                  <a href="mailto:info@progressit.online" className="text-teal-400 mb-1 font-medium hover:underline">
+                    info@progressit.online
                   </a>
-                  <p className="text-gray-400 mt-1">+12345678910</p>
+                  <p className="text-gray-400 mt-1">+44 7440965458</p>
 
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
