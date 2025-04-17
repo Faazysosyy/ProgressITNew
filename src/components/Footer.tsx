@@ -217,47 +217,47 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
             {/* Case Studies Column */}
             <div className="space-y-6">
               <h3 className="text-sm font-medium uppercase tracking-wider text-gray-400">
-                CASE STUDIES
+                SHOWCASE
               </h3>
               <ul className="space-y-4">
                 <li>
                   <Link
-                    href="#"
+                    href="/showcase"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    The California Endowment Website Redesign
+                    Elevate Inc. - Benefits Platform
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/showcase"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    BEGA Website Redesign
+                    Woosh Air - Smart Air Filtration
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/showcase"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    BSM Consulting Website and Portal Redesign
+                    GastroGuide App - Restaurant Discovery
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/showcase"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    Spexster Web App Design & Development
+                    CHMedic App - Healthcare Platform
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/showcase"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    KPFF Website Redesign & Development
+                    Care AI - Customer Support Solution
                   </Link>
                 </li>
               </ul>
