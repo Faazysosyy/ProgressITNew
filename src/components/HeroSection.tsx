@@ -16,7 +16,7 @@ interface HeroSectionProps {
 
 const HeroSection = ({
   title = "Driving Digital Evolution For Forward-Thinking Businesses",
-  subtitle = "We engineer powerful digital ecosystems that connect brands with their audiences through innovative technology, strategic design, and results-driven development.",
+  subtitle = "We engineer  powerful digital ecosystems that connect brands with their audiences through innovative technology, strategic design, and results-driven development.",
   ctaText = "Let's Create",
   ctaLink = "#contact",
   scrollText = "Scroll to explore",
