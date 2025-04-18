@@ -28,9 +28,7 @@ const HeroSection = ({
   
   // Minimal scroll handler
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-    
+    let lastScrollY = window.scrollY;W
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {

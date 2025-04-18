@@ -361,9 +361,8 @@ const CreativeAlliance = () => {
                 const { x, y, z } = member.planePosition;
                 const isActive = activeNode === member.id;
                 
-                // Use z position to affect the appearance
+                // Use constant scale instead of z-based scale
                 const zOpacity = (z + 50) / 100; // Map -50 to 50 range to 0 to 1
-                const zScale = 0.5 + zOpacity; // Size effect based on z position
                 
                 return (
                   <div 
@@ -372,9 +371,9 @@ const CreativeAlliance = () => {
                     style={{ 
                       left: `${50 + x}%`, 
                       top: `${50 + y}%`, 
-                      transform: `translate(-50%, -50%) scale(${zScale})`,
+                      transform: `translate(-50%, -50%) scale(1.4)`, /* Fixed scale for all nodes */
                       transitionDelay: `${Math.random() * 300}ms`,
-                      zIndex: Math.round(z + 50)
+                      zIndex: member.id === "node-1" ? 10 : Math.round(z + 50)
                     }}
                   >
                     {/* Node */}
@@ -393,8 +392,18 @@ const CreativeAlliance = () => {
                             : 'border-gray-700 hover:border-cyan-900'
                         }`}
                       >
-                        <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center text-cyan-400">
-                          {member.name.charAt(0)}
+                        <div className="w-full h-full relative">
+                          <Image 
+                            src={`/img/team_${member.id === "node-2" 
+                              ? 5 
+                              : (parseInt(member.id.split('-')[1]) <= 4) 
+                                ? parseInt(member.id.split('-')[1]) 
+                                : (parseInt(member.id.split('-')[1]) % 4) + 1}.png`} 
+                            alt={member.name}
+                            fill
+                            className="object-cover"
+                            sizes="56px"
+                          />
                         </div>
                       </div>
                       
@@ -404,33 +413,113 @@ const CreativeAlliance = () => {
                           isActive ? 'border border-cyan-400 animate-pulse opacity-70' : 'border border-gray-700 opacity-30'
                         }`}
                       ></div>
-                      
-                      {/* Info Panel */}
-                      <div 
-                        className={`absolute top-full left-1/2 transform -translate-x-1/2 w-64 mt-4 ${
-                          isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'
-                        } transition-opacity duration-300 z-10`}
-                      >
-                        <div className="bg-black border border-cyan-500/30 p-4 shadow-lg shadow-cyan-500/5">
-                          <div className="flex items-center space-x-2 mb-2">
-                            <div className="w-3 h-3 bg-cyan-400"></div>
-                            <h3 className="text-cyan-400 text-lg font-mono">{member.name}</h3>
-                          </div>
-                          <p className="text-blue-300 text-sm mb-2">{member.role}</p>
-                          <p className="text-gray-400 text-xs">{member.bio}</p>
-                          
-                          {/* Dimensional Coordinates */}
-                          <div className="mt-3 flex justify-between text-xs text-gray-500 font-mono">
-                            <span>x: {x}</span>
-                            <span>y: {y}</span>
-                            <span>z: {z}</span>
-                          </div>
+
+                      {/* Only show a small cyan indicator when active */}
+                      {isActive && (
+                        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 flex flex-col items-center">
+                          <div className="w-1.5 h-1.5 bg-cyan-400"></div>
+                          <div className="w-px h-4 bg-cyan-400/30"></div>
                         </div>
-                      </div>
+                      )}
                     </button>
                   </div>
                 );
               })}
+
+              {/* Central Information Display - Only visible when a team member is selected */}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: activeNode ? 1 : 0 }}
+                transition={{ duration: 0.3 }}
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none"
+              >
+                {activeNode && (() => {
+                  const activeMember = teamMembers.find(m => m.id === activeNode);
+                  if (!activeMember) return null;
+                  const { x, y, z } = activeMember.planePosition;
+                  
+                  return (
+                    <motion.div 
+                      className="flex flex-col items-center"
+                      initial={{ scale: 0.9 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 0.4, type: "spring" }}
+                    >
+                      {/* Tech hexagon frame */}
+                      <div className="absolute -inset-6 border border-cyan-500/30 rounded-lg"></div>
+                      <div className="absolute -inset-6 border border-cyan-500/10 rounded-lg rotate-45"></div>
+                      
+                      {/* Animated tech lines */}
+                      <motion.div 
+                        className="absolute -top-8 left-1/2 w-px h-8 bg-gradient-to-b from-cyan-500/0 to-cyan-500"
+                        animate={{ height: [0, 8], opacity: [0, 1] }}
+                        transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
+                      />
+                      <motion.div 
+                        className="absolute -bottom-8 left-1/2 w-px h-8 bg-gradient-to-t from-cyan-500/0 to-cyan-500"
+                        animate={{ height: [0, 8], opacity: [0, 1] }}
+                        transition={{ duration: 1, repeat: Infinity, repeatType: "reverse", delay: 0.5 }}
+                      />
+                      
+                      {/* Glowing background */}
+                      <div className="absolute inset-0 bg-cyan-900/5 blur-xl rounded-full"></div>
+                      
+                      {/* Upper status bar */}
+                      <div className="mb-4 bg-black/40 px-6 py-1 rounded-full border border-cyan-500/20 backdrop-blur-sm flex items-center gap-3">
+                        <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full"></div>
+                        <span className="text-xs text-cyan-300 font-mono tracking-widest">NODE.ACTIVE</span>
+                        <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full"></div>
+                      </div>
+
+                      {/* Name with tech style */}
+                      <div className="flex items-center">
+                        <div className="w-2 h-2 bg-cyan-400 mr-2"></div>
+                        <motion.div 
+                          className="text-2xl font-mono text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 font-bold tracking-wider mb-1"
+                          animate={{ opacity: [0.8, 1, 0.8] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          {activeMember.name.split(' ')[0]}
+                        </motion.div>
+                      </div>
+                      
+                      {/* Role with smaller tech style */}
+                      <div className="text-lg font-mono text-blue-300/90 tracking-wide mb-3">
+                        {activeMember.role}
+                      </div>
+                      
+                      {/* Tech line under text */}
+                      <div className="w-48 h-px bg-gradient-to-r from-cyan-500/0 via-cyan-500 to-cyan-500/0 mb-3"></div>
+                      
+                      {/* Dimensional Coordinates with tech styling */}
+                      <div className="flex justify-between w-48 text-xs font-mono mt-2 px-2 py-1 border border-cyan-800/30 bg-black/30 rounded-sm">
+                        <div className="flex flex-col items-center">
+                          <span className="text-cyan-500">X</span>
+                          <span className="text-gray-400">{x}</span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <span className="text-cyan-500">Y</span>
+                          <span className="text-gray-400">{y}</span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <span className="text-cyan-500">Z</span>
+                          <span className="text-gray-400">{z}</span>
+                        </div>
+                      </div>
+                      
+                      {/* Connection status */}
+                      <div className="mt-4 text-xs font-mono text-gray-500 flex items-center">
+                        <motion.div 
+                          className="w-1 h-1 bg-cyan-400 mr-1.5 rounded-full"
+                          animate={{ opacity: [0.2, 1, 0.2] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        />
+                        <span>CONNECTION.ESTABLISHED</span>
+                      </div>
+                    </motion.div>
+                  );
+                })()}
+              </motion.div>
             </motion.div>
             
             {/* Dimensional Stats */}

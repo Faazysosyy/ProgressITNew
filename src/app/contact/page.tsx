@@ -1,178 +1,106 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { ChevronLeft, Mail, Phone, MapPin } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export default function Contact() {
+  const router = useRouter();
+
+  // Redirect to home page after a delay
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.push('/');
+    }, 4000);
+    
+    return () => clearTimeout(timer);
+  }, [router]);
+
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-black text-white overflow-hidden">
       <Navbar />
       
-      <section className="pt-32 pb-24">
-        <div className="progress-it-container">
-          <div className="max-w-4xl mb-8">
-            <Link href="/" className="inline-flex items-center text-gray-400 hover:text-blue-500 mb-6 transition-colors">
-              <ChevronLeft className="h-4 w-4 mr-1" />
-              Back to home
-            </Link>
-            
+      <div className="h-screen flex flex-col items-center justify-center relative">
+        {/* Tech grid background */}
+        <div className="absolute inset-0 overflow-hidden opacity-10">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div 
+              key={`h-${i}`} 
+              className="absolute h-px w-full bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"
+              style={{ top: `${(i + 1) * 5}%` }}
+            />
+          ))}
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div 
+              key={`v-${i}`} 
+              className="absolute w-px h-full bg-gradient-to-b from-transparent via-purple-500/30 to-transparent"
+              style={{ left: `${(i + 1) * 5}%` }}
+            />
+          ))}
+        </div>
+        
+        <div className="max-w-2xl mx-auto text-center px-6 relative z-10">
+          {/* Status indicator */}
+          <div className="flex justify-center space-x-6 text-xs tracking-widest mb-4">
+            <span className="text-red-500">ERROR.404</span>
+            <span className="text-gray-500">ACCESS.DENIED</span>
+            <span className="text-gray-500">SYS.2050</span>
+          </div>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.5 }}
+            className="bg-gray-900/50 backdrop-blur-md border border-red-500/20 rounded-lg p-10 mb-6"
+          >
             <motion.h1 
-              initial={{ opacity: 0, y: -20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ duration: 0.5 }}
-              className="text-5xl md:text-6xl font-bold mb-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-4xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400"
             >
-              <span className="bg-gradient-to-r from-blue-400 to-teal-400 text-transparent bg-clip-text animate-gradient-x">
-                Contact Us
-              </span>
+              Access Restricted
             </motion.h1>
             
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-xl text-gray-400 mb-10"
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="text-xl text-gray-300 mb-8"
             >
-              Have a question or ready to start your next project? Reach out to our team and let's discuss how we can help bring your vision to life.
+              This page is currently unavailable or under maintenance.
             </motion.p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-            <div className="lg:col-span-3">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="bg-gray-950 rounded-xl p-8 border border-gray-800"
-              >
-                <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
-                <form>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">
-                        Name
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        className="w-full bg-gray-900 border border-gray-700 rounded-md px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Your name"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        className="w-full bg-gray-900 border border-gray-700 rounded-md px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Your email"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="mb-6">
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-400 mb-2">
-                      Subject
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      className="w-full bg-gray-900 border border-gray-700 rounded-md px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="How can we help?"
-                      required
-                    />
-                  </div>
-                  <div className="mb-6">
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      rows={6}
-                      className="w-full bg-gray-900 border border-gray-700 rounded-md px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="Tell us about your project..."
-                      required
-                    ></textarea>
-                  </div>
-                  <button
-                    type="submit"
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-md transition-colors"
-                  >
-                    Send Message
-                  </button>
-                </form>
-              </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="text-sm text-gray-500 font-mono"
+            >
+              Redirecting to home page in 4 seconds...
+            </motion.div>
+          </motion.div>
+          
+          {/* System status */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="flex justify-center items-center"
+          >
+            <div className="flex items-center gap-2 text-xs text-gray-500 font-mono">
+              <motion.div 
+                className="w-1.5 h-1.5 bg-red-500 rounded-full"
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+              <span>CONTACT.SYSTEM: OFFLINE</span>
             </div>
-
-            <div className="lg:col-span-2">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="bg-gray-950 rounded-xl p-8 border border-gray-800 mb-8"
-              >
-                <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
-                <div className="space-y-6">
-                  <div className="flex items-start">
-                    <Mail className="w-5 h-5 mt-1 mr-4 text-blue-400" />
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-400">Email</h3>
-                      <p className="text-white">info@progressit.com</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <Phone className="w-5 h-5 mt-1 mr-4 text-blue-400" />
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-400">Phone</h3>
-                      <p className="text-white">+1 (555) 123-4567</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <MapPin className="w-5 h-5 mt-1 mr-4 text-blue-400" />
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-400">Address</h3>
-                      <p className="text-white">
-                        123 Tech Plaza, Suite 200<br />
-                        San Francisco, CA 94103
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-                className="bg-gray-950 rounded-xl p-8 border border-gray-800"
-              >
-                <h2 className="text-2xl font-bold mb-6">Office Hours</h2>
-                <ul className="space-y-3">
-                  <li className="flex justify-between">
-                    <span className="text-gray-400">Monday - Friday</span>
-                    <span className="text-white">9:00 AM - 6:00 PM</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span className="text-gray-400">Saturday</span>
-                    <span className="text-white">10:00 AM - 2:00 PM</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span className="text-gray-400">Sunday</span>
-                    <span className="text-white">Closed</span>
-                  </li>
-                </ul>
-              </motion.div>
-            </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </div>
       
       <Footer companyName="Progress IT" />
     </main>
