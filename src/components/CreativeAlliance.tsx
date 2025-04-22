@@ -80,18 +80,18 @@ const CreativeAlliance = () => {
         <div className="absolute inset-0 bg-black"></div>
         
         {/* Circuit Board Grid Lines */}
-        <div className="absolute inset-0 overflow-hidden opacity-20">
+        <div className="absolute inset-0 overflow-hidden opacity-30">
           {Array.from({ length: 20 }).map((_, i) => (
             <div 
               key={`h-${i}`} 
-              className="absolute h-px w-full bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"
+              className="absolute h-px w-full bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent"
               style={{ top: `${(i + 1) * 5}%` }}
             />
           ))}
           {Array.from({ length: 20 }).map((_, i) => (
             <div 
               key={`v-${i}`} 
-              className="absolute w-px h-full bg-gradient-to-b from-transparent via-purple-500/30 to-transparent"
+              className="absolute w-px h-full bg-gradient-to-b from-transparent via-purple-500/40 to-transparent"
               style={{ left: `${(i + 1) * 5}%` }}
             />
           ))}
@@ -313,7 +313,7 @@ const CreativeAlliance = () => {
                         y1={`${fromY}%`} 
                         x2={`${toX}%`} 
                         y2={`${toY}%`} 
-                        className={`stroke-1 ${isActive ? 'stroke-cyan-400/30' : 'stroke-gray-700/50'} transition-colors duration-300`}
+                        className={`stroke-1 ${isActive ? 'stroke-cyan-400/40' : 'stroke-gray-700/60'} transition-colors duration-300`}
                       />
                       
                       {/* Animated gradient line */}
@@ -325,7 +325,7 @@ const CreativeAlliance = () => {
                         stroke="url(#lineGradient)"
                         strokeWidth="1.5"
                         strokeDasharray="4 4"
-                        className={`${isActive ? 'opacity-100' : 'opacity-30'} transition-opacity duration-300`}
+                        className={`${isActive ? 'opacity-100' : 'opacity-40'} transition-opacity duration-300`}
                       >
                         <animate
                           attributeName="stroke-dashoffset"

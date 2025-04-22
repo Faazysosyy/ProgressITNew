@@ -134,8 +134,8 @@ export default function Navbar({
           {/* Mobile Menu Button */}
           <button
             className={cn(
-              "lg:hidden z-50 relative transition-colors p-2",
-              isMenuOpen ? "text-cyan-400" : "text-white",
+              "lg:hidden z-[100] relative transition-colors p-2",
+              isMenuOpen ? "text-cyan-400 fixed top-5 right-5" : "text-white",
             )}
             onClick={toggleMenu}
             aria-label="Toggle menu"
@@ -171,7 +171,7 @@ export default function Navbar({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="fixed inset-0 bg-black/95 backdrop-blur-md z-50 lg:hidden overflow-hidden"
+              className="fixed inset-0 bg-black/95 backdrop-blur-md z-[90] lg:hidden overflow-hidden"
               style={{ backdropFilter: "blur(10px)" }}
             >
               {/* Tech grid background */}
@@ -206,8 +206,8 @@ export default function Navbar({
                 </div>
               </motion.div>
               
-              {/* Main menu container - centered in viewport */}
-              <div className="absolute inset-0 flex items-center justify-center py-16">
+              {/* Main menu container - properly positioned in viewport */}
+              <div className="fixed inset-0 top-16 flex items-start justify-center overflow-y-auto pt-16">
                 <div className="relative max-w-md w-full mx-auto px-6">
                   {/* Navigation Links */}
                   <div className="grid grid-cols-1 gap-6">

@@ -94,7 +94,7 @@ export default function IndustriesPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
+      <section className="pt-24 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-blue-900/30 to-black/95 z-10"></div>
           <div className="absolute top-0 left-0 right-0 h-[30vh] bg-gradient-to-b from-black to-transparent z-20"></div>
@@ -156,7 +156,7 @@ export default function IndustriesPage() {
         <section 
           id={industry.id}
           key={industry.id}
-          className={`py-24 ${index % 2 === 0 ? 'bg-black' : 'bg-gray-950'} relative overflow-hidden`}
+          className={`py-16 ${index % 2 === 0 ? 'bg-black' : 'bg-gray-950'} relative overflow-hidden`}
         >
           {/* Decorative elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -212,7 +212,7 @@ export default function IndustriesPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className={`relative h-[30rem] order-1 ${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}
+                className={`relative h-[24rem] order-1 ${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}
               >
                 <div className="absolute inset-0 overflow-hidden rounded-2xl">
                   <div className="absolute inset-0 bg-black/20 backdrop-blur-sm z-10 rounded-2xl"></div>
@@ -479,7 +479,7 @@ export default function IndustriesPage() {
       ))}
 
       {/* Animated Text Section - Between Real Estate and E-commerce */}
-      <section className="relative overflow-hidden bg-black h-[50vh] flex items-center justify-center">
+      <section className="relative overflow-hidden bg-black py-16 flex items-center justify-center">
         {/* Adding black fade gradient effect */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-blue-900/10 to-black/95 z-10"></div>
@@ -499,7 +499,7 @@ export default function IndustriesPage() {
         <section 
           id={industry.id}
           key={industry.id}
-          className={`py-24 ${(index + 2) % 2 === 0 ? 'bg-black' : 'bg-gray-950'} relative overflow-hidden`}
+          className={`py-16 ${(index + 2) % 2 === 0 ? 'bg-black' : 'bg-gray-950'} relative overflow-hidden`}
         >
           {/* Decorative elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -555,7 +555,7 @@ export default function IndustriesPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className={`relative h-[30rem] order-1 ${(index + 2) % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}
+                className={`relative h-[24rem] order-1 ${(index + 2) % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}
               >
                 <div className="absolute inset-0 overflow-hidden rounded-2xl">
                   <div className="absolute inset-0 bg-black/20 backdrop-blur-sm z-10 rounded-2xl"></div>
@@ -822,7 +822,7 @@ export default function IndustriesPage() {
       ))}
 
       {/* Call to Action */}
-      <section className="py-24 bg-gradient-to-b from-black to-gray-950 relative overflow-hidden">
+      <section className="py-16 bg-gradient-to-b from-black to-gray-950 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/grid-pattern.svg')] opacity-10"></div>
           <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-blue-900 opacity-10 blur-3xl"></div>
