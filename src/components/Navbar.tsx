@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "@/lib/useTranslation";
 
 interface NavItem {
   label: string;
@@ -31,8 +32,18 @@ export default function Navbar({
   ctaText = "Let's Talk",
   ctaHref = "#contact",
 }: NavbarProps) {
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  // Translation-enabled navigation items
+  const translatedNavItems = [
+    { label: t('navbar.home'), href: "/" },
+    { label: t('navbar.services'), href: "/services" },
+    { label: t('navbar.industries'), href: "/industries" },
+    { label: t('navbar.technologies'), href: "/technologies" },
+    { label: t('navbar.showcase'), href: "/showcase" },
+  ];
 
   // CSS styles
   const gridPatternStyle = `
@@ -122,7 +133,7 @@ export default function Navbar({
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => (
+            {translatedNavItems.map((item) => (
               <div key={item.label} className="relative group">
                 <Link
                   href={item.href}
@@ -151,7 +162,7 @@ export default function Navbar({
                 href="/#contact?tab=contact"
                 onClick={(e) => handleScrollAndSetTab(e, 'contact')}
               >
-                <span className="relative z-10">{ctaText}</span>
+                <span className="relative z-10">{t('navbar.letsTalk')}</span>
                 <span className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-white transition-opacity duration-300"></span>
               </a>
             </Button>
@@ -237,7 +248,7 @@ export default function Navbar({
                 <div className="relative max-w-md w-full mx-auto px-6">
                   {/* Navigation Links (Mobile) */}
                   <div className="grid grid-cols-1 gap-6">
-                    {navItems.map((item, index) => (
+                    {translatedNavItems.map((item, index) => (
                       <motion.div
                         key={item.label}
                         initial={{ opacity: 0, x: -50 }}
@@ -288,7 +299,7 @@ export default function Navbar({
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.5 + navItems.length * 0.1 }}
+                    transition={{ duration: 0.5, delay: 0.5 + translatedNavItems.length * 0.1 }}
                     className="mt-10"
                   >
                     <button 
@@ -317,7 +328,7 @@ export default function Navbar({
                       />
                       
                       <div className="relative py-3 px-6 flex items-center justify-between">
-                        <div className="text-white font-mono tracking-wide">{ctaText}</div>
+                        <div className="text-white font-mono tracking-wide">{t('navbar.letsTalk')}</div>
                         <div className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center">
                           <motion.div
                             animate={{ rotate: 360 }}
@@ -336,7 +347,7 @@ export default function Navbar({
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.8 + navItems.length * 0.1 }}
+                    transition={{ duration: 0.5, delay: 0.8 + translatedNavItems.length * 0.1 }}
                     className="absolute bottom-4 left-0 right-0 flex justify-center"
                   >
                     <div className="flex items-center gap-2 text-xs text-gray-500 font-mono">

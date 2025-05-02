@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import TranslationProvider from "@/components/TranslationProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +28,9 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap" rel="stylesheet" />
       </head>
       <body className={inter.className}>
-        {children}
+        <TranslationProvider>
+          {children}
+        </TranslationProvider>
         <TempoInit />
       </body>
     </html>

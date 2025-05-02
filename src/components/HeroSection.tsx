@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import BlackHole from "./BlackHole";
+import { useTranslation } from "@/lib/useTranslation";
 
 interface HeroSectionProps {
   title?: string;
@@ -21,10 +22,18 @@ const HeroSection = ({
   ctaLink = "#contact",
   scrollText = "Scroll to explore",
 }: HeroSectionProps) => {
+  const { t } = useTranslation();
   const [scrollY, setScrollY] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLAnchorElement>(null);
+  
+  // Get translated values
+  const translatedTitle = t('hero.drivingDigital');
+  const translatedSubtitle = t('hero.subtitle');
+  const translatedCtaText = t('hero.getPrice');
+  const translatedContact = t('hero.contact');
+  const translatedScrollText = t('hero.scrollToExplore');
   
   // Minimal scroll handler
   useEffect(() => {
@@ -159,7 +168,7 @@ const HeroSection = ({
             className="mb-4 inline-block"
           >
             <span className="text-blue-500 font-semibold uppercase tracking-widest text-xs sm:text-sm md:text-base">
-              Innovation Lab
+              {t('hero.innovationLab')}
             </span>
           </motion.div>
 
@@ -175,7 +184,7 @@ const HeroSection = ({
               transition={{ delay: 0.3, duration: 0.5 }}
               className="inline-block mr-2 sm:mr-3 mb-2 text-white"
             >
-              We
+              {t('hero.we')}
             </motion.span>
             <motion.span
               initial={{ opacity: 0, y: 20 }}
@@ -183,9 +192,9 @@ const HeroSection = ({
               transition={{ delay: 0.4, duration: 0.5 }}
               className="inline-block mr-2 sm:mr-3 mb-2 text-white"
             >
-              are
+              {t('hero.are')}
             </motion.span>
-            {title.split(" ").slice(2).map((word, i) => (
+            {translatedTitle.split(" ").slice(2).map((word, i) => (
               <motion.span
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
@@ -204,7 +213,7 @@ const HeroSection = ({
             transition={{ delay: 0.8, duration: 0.8 }}
             className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 md:mb-8 max-w-full sm:max-w-2xl"
           >
-            {subtitle}
+            {translatedSubtitle}
           </motion.p>
 
           <motion.div
@@ -225,7 +234,7 @@ const HeroSection = ({
                 href="#contact?tab=quote" 
                 onClick={(e) => handleScrollAndSetTab(e, 'quote')}
               >
-                {ctaText}
+                {translatedCtaText}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
@@ -240,7 +249,7 @@ const HeroSection = ({
                 height: "var(--button-height)"
               }}
             >
-              Contact
+              {translatedContact}
             </a>
           </motion.div>
         </div>
@@ -256,7 +265,7 @@ const HeroSection = ({
           }}
         >
           <span className="text-xs sm:text-sm text-gray-400 mb-1 sm:mb-2">
-            {scrollText}
+            {translatedScrollText}
           </span>
           <motion.div
             animate={{ y: [0, 10, 0] }}

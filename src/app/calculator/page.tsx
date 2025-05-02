@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import BigBangAnimation from "@/components/BigBangAnimation";
 import MatrixAnimation from '@/components/BigBangAnimation';
+import { useTranslation } from "@/lib/useTranslation";
 
 interface FeatureOption {
   id: string;
@@ -31,6 +32,7 @@ interface CalculationResults {
 }
 
 const CalculatorPage = () => {
+  const { t } = useTranslation();
   const [projectType, setProjectType] = useState<string>('');
   const [complexity, setComplexity] = useState<'low' | 'medium' | 'high' | 'insane'>('medium');
   const [teamSize, setTeamSize] = useState<number>(5);
@@ -272,11 +274,11 @@ const CalculatorPage = () => {
         <div className="text-center relative">
           <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-60 h-0.5 bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
           <h1 className="text-4xl md:text-5xl font-bold mb-5 text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-400">
-            Project Cost Estimator
+            {t('calculator.projectCostEstimator')}
           </h1>
           <div className="max-w-3xl mx-auto">
             <p className="text-lg text-gray-300 mb-6">
-              Instantly calculate the cost, timeline, and resource requirements for your next technology project with our advanced estimation tool.
+              {t('calculator.estimatorDescription')}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
               <div className="bg-[#121a29]/60 p-5 rounded-lg border border-cyan-500/10 relative group">
@@ -285,8 +287,8 @@ const CalculatorPage = () => {
                 <div className="text-cyan-400 text-3xl mb-3 flex justify-center">
                   <ClipboardList size={36} />
                 </div>
-                <h3 className="text-lg font-semibold mb-2 text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400">Define Your Project</h3>
-                <p className="text-gray-400 text-sm text-center">Select your project type, complexity level, and team size to start building your estimate.</p>
+                <h3 className="text-lg font-semibold mb-2 text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400">{t('calculator.defineProject')}</h3>
+                <p className="text-gray-400 text-sm text-center">{t('calculator.defineProjectDescription')}</p>
               </div>
               <div className="bg-[#121a29]/60 p-5 rounded-lg border border-purple-500/10 relative group">
                 <div className="absolute -top-1 -left-1 w-2 h-2 bg-purple-500/30 rounded-full"></div>
@@ -294,8 +296,8 @@ const CalculatorPage = () => {
                 <div className="text-purple-400 text-3xl mb-3 flex justify-center">
                   <ListChecks size={36} />
                 </div>
-                <h3 className="text-lg font-semibold mb-2 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-purple-400">Select Features</h3>
-                <p className="text-gray-400 text-sm text-center">Choose from core, security, infrastructure, and advanced features to customize your project scope.</p>
+                <h3 className="text-lg font-semibold mb-2 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-purple-400">{t('calculator.selectFeatures')}</h3>
+                <p className="text-gray-400 text-sm text-center">{t('calculator.selectFeaturesDescription')}</p>
               </div>
               <div className="bg-[#121a29]/60 p-5 rounded-lg border border-blue-500/10 relative group">
                 <div className="absolute -top-1 -left-1 w-2 h-2 bg-blue-500/30 rounded-full"></div>
@@ -303,8 +305,8 @@ const CalculatorPage = () => {
                 <div className="text-blue-400 text-3xl mb-3 flex justify-center">
                   <BarChart3 size={36} />
                 </div>
-                <h3 className="text-lg font-semibold mb-2 text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400">Get Detailed Estimate</h3>
-                <p className="text-gray-400 text-sm text-center">Receive instant calculation of cost, timeline, team size, and annual maintenance requirements.</p>
+                <h3 className="text-lg font-semibold mb-2 text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400">{t('calculator.getDetailedEstimate')}</h3>
+                <p className="text-gray-400 text-sm text-center">{t('calculator.getDetailedEstimateDescription')}</p>
               </div>
             </div>
           </div>

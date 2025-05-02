@@ -10,8 +10,11 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslation } from "@/lib/useTranslation";
 
 export default function IndustriesPage() {
+  const { t } = useTranslation();
+  
   // Function copied from HeroSection.tsx
   const handleScrollAndSetTab = (e: React.MouseEvent<HTMLElement>, tab: 'quote' | 'contact') => {
     e.preventDefault(); // Prevent default anchor jump
@@ -43,10 +46,10 @@ export default function IndustriesPage() {
   const industries = [
     {
       id: "financial",
-      title: "Financial Services Digital Transformation",
+      title: t('industries.financialServices'),
       icon: <Landmark className="w-10 h-10 text-blue-500" />,
       color: "from-blue-500 to-indigo-500",
-      description: "Transforming financial institutions with cutting-edge technology solutions that enhance customer experience, streamline operations, and ensure regulatory compliance.",
+      description: t('industries.financialDescription'),
       features: [
         "Secure payment processing systems",
         "Mobile banking applications",
@@ -58,10 +61,10 @@ export default function IndustriesPage() {
     },
     {
       id: "realestate",
-      title: "Real Estate Digital Marketing",
+      title: t('industries.realEstate'),
       icon: <Home className="w-10 h-10 text-purple-500" />,
       color: "from-purple-500 to-pink-500",
-      description: "Comprehensive digital marketing strategies for real estate professionals that drive leads, showcase properties, and build lasting client relationships.",
+      description: t('industries.realEstateDescription'),
       features: [
         "Virtual property tours",
         "Property listing websites",
@@ -73,10 +76,10 @@ export default function IndustriesPage() {
     },
     {
       id: "ecommerce",
-      title: "E-commerce & Retail Solutions",
+      title: t('industries.ecommerce'),
       icon: <Store className="w-10 h-10 text-emerald-500" />,
       color: "from-emerald-500 to-teal-500",
-      description: "Scalable e-commerce platforms and retail solutions that optimize inventory, enhance shopping experiences, and maximize conversion rates.",
+      description: t('industries.ecommerceDescription'),
       features: [
         "Custom e-commerce stores",
         "Inventory management systems",
@@ -88,10 +91,10 @@ export default function IndustriesPage() {
     },
     {
       id: "blockchain",
-      title: "Blockchain & DApp Solutions",
+      title: t('industries.blockchain'),
       icon: <Boxes className="w-10 h-10 text-amber-500" />,
       color: "from-amber-500 to-orange-500",
-      description: "Innovative blockchain applications and decentralized solutions that enhance security, transparency, and efficiency across various business operations.",
+      description: t('industries.blockchainDescription'),
       features: [
         "Smart contract development",
         "Decentralized applications (DApps)",
@@ -103,10 +106,10 @@ export default function IndustriesPage() {
     },
     {
       id: "entertainment",
-      title: "Entertainment & Media Platforms",
+      title: t('industries.entertainment'),
       icon: <Ticket className="w-10 h-10 text-rose-500" />,
       color: "from-rose-500 to-red-500",
-      description: "Engaging digital platforms for entertainment and media companies that captivate audiences, optimize content delivery, and enhance monetization.",
+      description: t('industries.entertainmentDescription'),
       features: [
         "Content streaming platforms",
         "Digital rights management",
@@ -144,13 +147,13 @@ export default function IndustriesPage() {
               transition={{ delay: 0.3, duration: 0.5 }}
               className="inline-block px-4 py-1 rounded-full bg-blue-600 text-white font-medium text-sm mb-6"
             >
-              INDUSTRY EXPERTISE
+              {t('industries.expertise')}
             </motion.span>
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              We Drive <span className="bg-gradient-to-r from-blue-400 to-indigo-500 text-transparent bg-clip-text">Innovation</span> Across Industries
+              {t('industries.driveInnovation')}
             </h1>
             <p className="text-xl text-gray-300 mt-6 max-w-3xl mx-auto">
-              Specialized digital solutions tailored to the unique challenges and opportunities of your industry
+              {t('industries.subtitle')}
             </p>
           </motion.div>
 
@@ -171,7 +174,7 @@ export default function IndustriesPage() {
                   {industry.title.split(' ').slice(0, 2).join(' ')}
                 </p>
                 <div className="mt-2 inline-flex items-center text-indigo-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span>Learn more</span>
+                  <span>{t('industries.learnMore')}</span>
                   <ChevronRight className="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
               </motion.a>
@@ -857,13 +860,13 @@ export default function IndustriesPage() {
               transition={{ delay: 0.3, duration: 0.5 }}
               className="inline-block px-4 py-1 rounded-full bg-indigo-600 text-white font-medium text-sm mb-6"
             >
-              LET'S WORK TOGETHER
+              {t('industries.letsWorkTogether')}
             </motion.span>
             <h2 className="text-4xl md:text-6xl font-bold mb-6">
-              Ready to Transform Your <span className="bg-gradient-to-r from-blue-400 to-indigo-500 text-transparent bg-clip-text">Industry</span>?
+              {t('industries.readyToTransform')} <span className="bg-gradient-to-r from-blue-400 to-indigo-500 text-transparent bg-clip-text">Industry</span>?
             </h2>
             <p className="text-xl text-gray-300 mb-10 mx-auto max-w-3xl">
-              Our team of experts is ready to help you navigate the digital landscape and leverage technology to achieve your business goals.
+              {t('industries.readyToTransformDescription')}
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
@@ -873,7 +876,7 @@ export default function IndustriesPage() {
                 onClick={(e) => handleScrollAndSetTab(e, 'contact')}
                 className="inline-flex items-center px-8 py-4 rounded-lg bg-gray-900 text-white font-medium transition-all hover:bg-gray-800 border border-gray-800"
               >
-                <span>Contact</span>
+                <span>{t('hero.contact')}</span>
               </a>
             </div>
           </motion.div>
