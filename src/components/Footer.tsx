@@ -46,7 +46,11 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
   }, []);
 
   return (
-    <footer ref={footerRef} className="bg-black text-white py-16 relative">
+    <footer 
+      ref={footerRef} 
+      className="bg-black text-white py-16 relative" 
+      style={{ zIndex: 20 }}
+    >
       <div className="container mx-auto px-4">
         {/* Main Footer Content */}
         <div className="border-b border-gray-800 pb-12">
@@ -307,6 +311,8 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
             <h3 className="text-sm font-medium uppercase tracking-wider text-gray-400">
               FOLLOW US ON
             </h3>
+            {/* Commented out social icons */}
+            {/*
             <div className="flex space-x-6">
               <Link href="#" className="hover:text-blue-400 transition-colors">
                 <Linkedin size={24} />
@@ -324,6 +330,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                 <Instagram size={24} />
               </Link>
             </div>
+            */}
           </div>
         </div>
 
@@ -336,9 +343,9 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
             </div>
           </div>
           <div className="flex space-x-6 text-sm">
-            <Link href="/#contact" className="hover:text-blue-400 transition-colors">
+            {/* <Link href="/#contact" className="hover:text-blue-400 transition-colors">
               Contact Us
-            </Link>
+            </Link> */}
             <Link href="/privacy-policy" className="hover:text-blue-400 transition-colors">
               Privacy Policy
             </Link>

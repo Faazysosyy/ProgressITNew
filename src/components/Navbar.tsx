@@ -26,7 +26,7 @@ export default function Navbar({
     { label: "Services", href: "/services" },
     { label: "Industries", href: "/industries" },
     { label: "Technologies", href: "/technologies" },
-    { label: "Contact", href: "#contact" },
+    { label: "Showcase", href: "/showcase" },
   ],
   ctaText = "Let's Talk",
   ctaHref = "#contact",
@@ -42,6 +42,29 @@ export default function Navbar({
       background-size: 20px 20px;
     }
   `;
+
+  // Function copied from other components
+  const handleScrollAndSetTab = (e: React.MouseEvent<HTMLElement>, tab: 'quote' | 'contact') => {
+    e.preventDefault(); // Prevent default anchor jump
+    
+    const targetPath = '/';
+    const targetId = 'contact';
+    const targetHash = `#${targetId}?tab=${tab}`;
+
+    if (window.location.pathname === targetPath) {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (window.location.hash !== targetHash) {
+          window.location.hash = targetHash;
+        }
+      } else {
+        window.location.href = targetPath + targetHash;
+      }
+    } else {
+      window.location.href = targetPath + targetHash;
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -115,7 +138,7 @@ export default function Navbar({
             ))}
           </div>
 
-          {/* CTA Button */}
+          {/* CTA Button (Desktop) */}
           <div className="hidden lg:block">
             <Button
               asChild
@@ -124,10 +147,13 @@ export default function Navbar({
                 "bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 hover:shadow-lg text-white border-none"
               )}
             >
-              <Link href={ctaHref}>
+              <a 
+                href="/#contact?tab=contact"
+                onClick={(e) => handleScrollAndSetTab(e, 'contact')}
+              >
                 <span className="relative z-10">{ctaText}</span>
                 <span className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-white transition-opacity duration-300"></span>
-              </Link>
+              </a>
             </Button>
           </div>
 
@@ -209,7 +235,7 @@ export default function Navbar({
               {/* Main menu container - properly positioned in viewport */}
               <div className="fixed inset-0 top-16 flex items-start justify-center overflow-y-auto pt-16">
                 <div className="relative max-w-md w-full mx-auto px-6">
-                  {/* Navigation Links */}
+                  {/* Navigation Links (Mobile) */}
                   <div className="grid grid-cols-1 gap-6">
                     {navItems.map((item, index) => (
                       <motion.div
@@ -224,23 +250,15 @@ export default function Navbar({
                           onClick={toggleMenu}
                           className="group relative block w-full"
                         >
-                          {/* Tech decorative element */}
                           <div className="absolute -left-4 top-1/2 transform -translate-y-1/2 h-full flex items-center">
                             <div className="w-2 h-2 bg-cyan-500 group-hover:bg-cyan-400 transition-colors"></div>
                           </div>
-                          
-                          {/* Main button content */}
                           <div className="flex items-center w-full group-hover:translate-x-2 transition-transform duration-300">
                             <div className="w-full">
-                              {/* Label */}
                               <div className="text-xl sm:text-2xl font-mono text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-blue-500 transition-all duration-300 mb-1">
                                 {item.label}
                               </div>
-                              
-                              {/* Tech line */}
                               <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent group-hover:via-cyan-500 transition-colors"></div>
-                              
-                              {/* Route ID */}
                               <div className="text-xs text-gray-500 mt-1 font-mono flex items-center">
                                 <span className="mr-1 w-1 h-1 bg-cyan-900 group-hover:bg-cyan-500 rounded-full transition-colors"></span>
                                 <span>ROUTE.{index + 1}</span>
@@ -251,8 +269,6 @@ export default function Navbar({
                                 >READY</motion.span>
                               </div>
                             </div>
-                            
-                            {/* Animated arrow */}
                             <motion.div
                               className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity"
                               animate={{ x: [0, 5, 0] }}
@@ -268,7 +284,7 @@ export default function Navbar({
                     ))}
                   </div>
                   
-                  {/* CTA Button */}
+                  {/* CTA Button (Mobile) */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -276,13 +292,12 @@ export default function Navbar({
                     className="mt-10"
                   >
                     <button 
-                      onClick={() => {
-                        window.location.href = ctaHref;
+                      onClick={(e) => {
+                        handleScrollAndSetTab(e as any, 'contact');
                         toggleMenu();
                       }}
                       className="w-full relative overflow-hidden group"
                     >
-                      {/* Button background with animation */}
                       <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 group-hover:opacity-80 transition-opacity"></div>
                       <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
                       <motion.div 
@@ -301,7 +316,6 @@ export default function Navbar({
                         }}
                       />
                       
-                      {/* Content */}
                       <div className="relative py-3 px-6 flex items-center justify-between">
                         <div className="text-white font-mono tracking-wide">{ctaText}</div>
                         <div className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center">
@@ -315,11 +329,6 @@ export default function Navbar({
                           </motion.div>
                         </div>
                       </div>
-                      
-                      {/* Border effect */}
-                      <div className="absolute inset-0 border border-cyan-500/50"></div>
-                      <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-cyan-500/70"></div>
-                      <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-cyan-500/70"></div>
                     </button>
                   </motion.div>
                   

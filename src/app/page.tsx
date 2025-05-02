@@ -19,7 +19,7 @@ export default function Home() {
       <HeroSection
         title="Driving Digital Evolution For Forward-Thinking Businesses"
         subtitle="We engineer powerful digital ecosystems that connect brands with their audiences through innovative technology, strategic design, and results-driven development."
-        ctaText="Let's Create"
+        ctaText="Get Price!"
         ctaLink="#contact"
       />
 
@@ -38,9 +38,6 @@ export default function Home() {
       
       {/* AI Section */}
       <AISection />
-
-      {/* Looping Words Animation */}
-      <LoopingWords words={["WHAT", "ARE", "YOU", "WAITING", "FOR?"]} />
 
       {/* Creative Alliance Section */}
       <CreativeAlliance />

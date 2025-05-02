@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -39,8 +39,82 @@ const ContactSection = ({
     linkedin: "https://linkedin.com",
   },
 }: ContactSectionProps) => {
-  const [activeTab, setActiveTab] = useState<"quote" | "contact">("contact");
+  const [activeTab, setActiveTab] = useState<"quote" | "contact">("quote");
   const [hoverButton, setHoverButton] = useState<string | null>(null);
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    console.log("ContactSection mounted or hash changed. Hash:", hash);
+    let shouldScroll = false;
+
+    if (hash.startsWith("#contact")) {
+      shouldScroll = true; // Mark that we should scroll
+      const params = new URLSearchParams(hash.split('?')[1]);
+      const tab = params.get("tab");
+      console.log("Found #contact hash. Tab parameter:", tab);
+      if (tab === "contact") {
+        setActiveTab("contact");
+        console.log("Setting active tab to: contact");
+      } else {
+        setActiveTab("quote");
+        console.log("Setting active tab to: quote (default or explicit)");
+      }
+    } else {
+      // If the component renders without the #contact hash, default to quote
+      setActiveTab("quote");
+      console.log("No #contact hash found. Setting active tab to: quote (default)");
+    }
+
+    // Perform scrolling if the hash matched #contact
+    if (shouldScroll) {
+      const targetElement = document.getElementById('contact');
+      if (targetElement) {
+        // Use a small timeout to ensure the DOM is ready and tab switch has rendered
+        setTimeout(() => {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          console.log("Scrolling to #contact section.");
+        }, 100); // 100ms delay might be adjusted
+      }
+    }
+
+    // Add listener for hash changes for dynamic updates
+    const handleHashChange = () => {
+      const currentHash = window.location.hash;
+      console.log("Hash changed to:", currentHash);
+      let shouldScrollOnHashChange = false;
+      if (currentHash.startsWith("#contact")) {
+        shouldScrollOnHashChange = true;
+        const params = new URLSearchParams(currentHash.split('?')[1]);
+        const tab = params.get("tab");
+        console.log("Hash changed - Tab parameter:", tab);
+        if (tab === "contact") {
+          setActiveTab("contact");
+          console.log("Hash changed - Setting active tab to: contact");
+        } else {
+          setActiveTab("quote");
+          console.log("Hash changed - Setting active tab to: quote");
+        }
+      } else {
+        // Optional: handle cases where hash changes to something else
+      }
+
+      // Scroll if the new hash matches #contact
+      if (shouldScrollOnHashChange) {
+        const targetElement = document.getElementById('contact');
+        if (targetElement) {
+          // Use a small timeout
+          setTimeout(() => {
+             targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+             console.log("Hash changed - Scrolling to #contact section.");
+          }, 100);
+        }
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+
+  }, []); // Empty dependency array means this runs on mount and cleans up on unmount
 
   return (
     <section
@@ -100,7 +174,7 @@ const ContactSection = ({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="bg-gray-900 p-8 md:p-12 rounded-2xl shadow-xl mb-16 relative overflow-hidden border border-gray-800"
+              className="bg-[#0f1623]/80 backdrop-blur-sm p-8 md:p-12 rounded-2xl shadow-xl mb-16 relative overflow-hidden border border-cyan-500/20"
             >
               {/* Decorative elements */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-900 to-transparent rounded-bl-full opacity-30"></div>
@@ -126,36 +200,38 @@ const ContactSection = ({
                 your specific needs.
               </motion.p>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto relative z-10">
                 <motion.div
                   onMouseEnter={() => setHoverButton("calculator")}
                   onMouseLeave={() => setHoverButton(null)}
                   whileHover={{
-                    scale: 1.03,
-                    boxShadow:
-                      "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                    scale: 1.02,
+                    boxShadow: "0 0 30px rgba(6, 182, 212, 0.3)",
                   }}
-                  className="w-full bg-gray-800 rounded-xl overflow-hidden shadow-md group border border-gray-700"
+                  className="contact-card w-full bg-[#121a29]/90 rounded-lg overflow-hidden group border border-blue-900/30 relative hover:border-cyan-500/70 transition-all duration-300"
                 >
-                  <div className="p-6 flex flex-col items-center text-center h-full">
+                  <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-300"></div>
+                  <div className="p-6 flex flex-col items-center text-center h-full relative z-10">
                     <div
-                      className={`w-16 h-16 rounded-xl flex items-center justify-center mb-4 transition-all duration-500 ${hoverButton === "calculator" ? "bg-blue-600 text-white" : "bg-gray-700 text-blue-400"}`}
+                      className={`w-16 h-16 rounded-lg flex items-center justify-center mb-6 transition-all duration-500 relative overflow-hidden ${hoverButton === "calculator" ? "bg-blue-900/50 text-white shadow-lg shadow-blue-500/40" : "bg-gray-800/70 text-blue-400"}`}
                     >
-                      <Calculator className="w-8 h-8" />
+                      <div className={`absolute inset-0 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 opacity-0 group-hover:opacity-50 transition-opacity duration-300 blur-lg`}></div>
+                      <Calculator className="w-8 h-8 relative z-10" />
                     </div>
-                    <h4 className="font-bold text-xl mb-2 text-white">
+                    <h4 className="font-mono font-bold text-xl mb-2 text-white tracking-wide">
                       Project Calculator
                     </h4>
-                    <p className="text-gray-400 text-sm mb-4">
+                    <p className="text-gray-400 text-sm mb-auto pb-6">
                       Get an instant estimate for your project based on your
                       requirements
                     </p>
-                    <div className="mt-auto">
-                      <Button className="group-hover:bg-blue-700 bg-blue-600 transition-all duration-300 flex items-center gap-2">
-                        <a href="/calculator" className="flex items-center gap-2">
-                          Calculate Now
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                        </a>
+                    <div className="mt-auto w-full">
+                      <Button 
+                        size="sm"
+                        className="w-full group/btn bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300 flex items-center gap-2 relative overflow-hidden py-2.5"
+                      >
+                        Calculate Now
+                        <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                       </Button>
                     </div>
                   </div>
@@ -165,30 +241,33 @@ const ContactSection = ({
                   onMouseEnter={() => setHoverButton("project")}
                   onMouseLeave={() => setHoverButton(null)}
                   whileHover={{
-                    scale: 1.03,
-                    boxShadow:
-                      "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                    scale: 1.02,
+                    boxShadow: "0 0 30px rgba(139, 92, 246, 0.3)",
                   }}
-                  className="w-full bg-gray-800 rounded-xl overflow-hidden shadow-md group border border-gray-700"
+                  className="contact-card w-full bg-[#121a29]/90 rounded-lg overflow-hidden shadow-md group border border-indigo-900/30 relative hover:border-indigo-500/70 transition-all duration-300"
                 >
-                  <div className="p-6 flex flex-col items-center text-center h-full">
+                  <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-300"></div>
+                  <div className="p-6 flex flex-col items-center text-center h-full relative z-10">
                     <div
-                      className={`w-16 h-16 rounded-xl flex items-center justify-center mb-4 transition-all duration-500 ${hoverButton === "project" ? "bg-indigo-600 text-white" : "bg-gray-700 text-indigo-400"}`}
+                      className={`w-16 h-16 rounded-lg flex items-center justify-center mb-6 transition-all duration-500 relative overflow-hidden ${hoverButton === "project" ? "bg-indigo-900/50 text-white shadow-lg shadow-indigo-500/40" : "bg-gray-800/70 text-indigo-400"}`}
                     >
-                      <MessageSquare className="w-8 h-8" />
+                      <div className={`absolute inset-0 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500 opacity-0 group-hover:opacity-50 transition-opacity duration-300 blur-lg`}></div>
+                      <MessageSquare className="w-8 h-8 relative z-10" />
                     </div>
-                    <h4 className="font-bold text-xl mb-2 text-white">
+                    <h4 className="font-mono font-bold text-xl mb-2 text-white tracking-wide">
                       Project Details
                     </h4>
-                    <p className="text-gray-400 text-sm mb-4">
-                      Tell us about your project needs and get a personalized
-                      quote
+                    <p className="text-gray-400 text-sm mb-auto pb-6">
+                      Tell us about your project needs and get a personalized quote
                     </p>
-                    <div className="mt-auto">
-                      <Button className="group-hover:bg-indigo-700 bg-indigo-600 transition-all duration-300 flex items-center gap-2">
+                    <div className="mt-auto w-full">
+                      <Button 
+                        size="sm"
+                        className="w-full group/btn bg-indigo-600 hover:bg-indigo-700 text-white transition-all duration-300 flex items-center gap-2 relative overflow-hidden py-2.5"
+                      >
                         <a href="https://t.me/SlavoSS" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                           Start Now
-                          <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                          <Send className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                         </a>
                       </Button>
                     </div>
@@ -199,30 +278,33 @@ const ContactSection = ({
                   onMouseEnter={() => setHoverButton("call")}
                   onMouseLeave={() => setHoverButton(null)}
                   whileHover={{
-                    scale: 1.03,
-                    boxShadow:
-                      "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                    scale: 1.02,
+                    boxShadow: "0 0 30px rgba(20, 184, 166, 0.3)",
                   }}
-                  className="w-full bg-gray-800 rounded-xl overflow-hidden shadow-md group border border-gray-700"
+                  className="contact-card w-full bg-[#121a29]/90 rounded-lg overflow-hidden shadow-md group border border-teal-900/30 relative hover:border-teal-500/70 transition-all duration-300"
                 >
-                  <div className="p-6 flex flex-col items-center text-center h-full">
+                  <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-300"></div>
+                  <div className="p-6 flex flex-col items-center text-center h-full relative z-10">
                     <div
-                      className={`w-16 h-16 rounded-xl flex items-center justify-center mb-4 transition-all duration-500 ${hoverButton === "call" ? "bg-teal-600 text-white" : "bg-gray-700 text-teal-400"}`}
+                      className={`w-16 h-16 rounded-lg flex items-center justify-center mb-6 transition-all duration-500 relative overflow-hidden ${hoverButton === "call" ? "bg-teal-900/50 text-white shadow-lg shadow-teal-500/40" : "bg-gray-800/70 text-teal-400"}`}
                     >
-                      <Calendar className="w-8 h-8" />
+                      <div className={`absolute inset-0 rounded-lg bg-gradient-to-br from-teal-500 to-emerald-500 opacity-0 group-hover:opacity-50 transition-opacity duration-300 blur-lg`}></div>
+                      <Calendar className="w-8 h-8 relative z-10" />
                     </div>
-                    <h4 className="font-bold text-xl mb-2 text-white">
+                    <h4 className="font-mono font-bold text-xl mb-2 text-white tracking-wide">
                       Schedule a Call
                     </h4>
-                    <p className="text-gray-400 text-sm mb-4">
-                      Book a consultation with our experts to discuss your
-                      project in detail
+                    <p className="text-gray-400 text-sm mb-auto pb-6">
+                      Book a consultation with our experts to discuss your project in detail
                     </p>
-                    <div className="mt-auto">
-                      <Button className="group-hover:bg-teal-700 bg-teal-600 transition-all duration-300 flex items-center gap-2">
+                    <div className="mt-auto w-full">
+                      <Button 
+                        size="sm"
+                        className="w-full group/btn bg-teal-600 hover:bg-teal-700 text-white transition-all duration-300 flex items-center gap-2 relative overflow-hidden py-2.5"
+                      >
                         <a href="https://calendly.com/artjom-lupjak" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                           Book Now
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                          <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                         </a>
                       </Button>
                     </div>
@@ -246,41 +328,27 @@ const ContactSection = ({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.5 }}
                   whileHover={{
-                    y: -10,
-                    boxShadow:
-                      "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                    y: -5,
+                    boxShadow: "0 0 25px rgba(59, 130, 246, 0.25)",
                   }}
-                  className="bg-gray-900 p-8 rounded-xl shadow-lg text-center relative overflow-hidden group border border-gray-800"
+                  className="contact-card w-full bg-[#121a29]/90 rounded-lg overflow-hidden shadow-md group border border-blue-900/40 relative hover:border-blue-500/70 transition-all duration-300 p-8 text-center"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-transparent to-transparent opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-blue-900 rounded-bl-full opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-
-                  <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-gray-700 transition-colors duration-300">
-                    <MapPin className="w-8 h-8 text-blue-400" />
-                  </div>
-
-                  <h4 className="text-2xl font-bold mb-2 text-white">
-                    Riga, Latvia
-                  </h4>
-                  <a href="mailto:info@progressit.online" className="text-blue-400 mb-1 font-medium hover:underline">
-                    info@progressit.online
-                  </a>
-                  <p className="text-gray-400 mt-1">+371 28674827</p>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileHover={{ opacity: 1, y: 0 }}
-                    className="mt-4 pt-4 border-t border-gray-800"
-                  >
-                    <a href="https://maps.google.com/?q=Riga,Latvia" target="_blank" rel="noopener noreferrer">
-                      <Button
-                        variant="outline"
-                        className="text-blue-400 border-gray-700 hover:bg-gray-800 hover:text-blue-300 hover:border-gray-600"
-                      >
-                        Get Directions
-                      </Button>
+                  <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03] group-hover:opacity-[0.05] transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
+                  
+                  <div className="relative z-10">
+                    <div className="w-16 h-16 bg-gray-800/70 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-900/50 transition-colors duration-300 relative overflow-hidden">
+                       <div className={`absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 opacity-0 group-hover:opacity-40 transition-opacity duration-300 blur-md`}></div>
+                      <MapPin className="w-8 h-8 text-blue-400 relative z-10" />
+                    </div>
+                    <h4 className="text-2xl font-bold mb-2 text-white font-mono tracking-wide">
+                      Riga, Latvia
+                    </h4>
+                    <a href="mailto:info@progressit.online" className="text-blue-300 mb-1 font-medium hover:text-blue-200 hover:underline transition-colors">
+                      info@progressit.online
                     </a>
-                  </motion.div>
+                    <p className="text-gray-400 mt-1 font-mono">+371 28674827</p>
+                  </div>
                 </motion.div>
 
                 <motion.div
@@ -288,41 +356,26 @@ const ContactSection = ({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.5 }}
                   whileHover={{
-                    y: -10,
-                    boxShadow:
-                      "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                    y: -5,
+                    boxShadow: "0 0 25px rgba(168, 85, 247, 0.25)",
                   }}
-                  className="bg-gray-900 p-8 rounded-xl shadow-lg text-center relative overflow-hidden group border border-gray-800"
+                   className="contact-card w-full bg-[#121a29]/90 rounded-lg overflow-hidden shadow-md group border border-purple-900/40 relative hover:border-purple-500/70 transition-all duration-300 p-8 text-center"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-transparent to-transparent opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-indigo-900 rounded-bl-full opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-
-                  <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-gray-700 transition-colors duration-300">
-                    <MapPin className="w-8 h-8 text-indigo-400" />
-                  </div>
-
-                  <h4 className="text-2xl font-bold mb-2 text-white">
-                    Heidelberg, Germany
-                  </h4>
-                  <a href="mailto:v.popp@progressit.online" className="text-indigo-400 mb-1 font-medium hover:underline">
-                    v.popp@progressit.online
-                  </a>
-                  <p className="text-gray-400 mt-1">+49 1781378688</p>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileHover={{ opacity: 1, y: 0 }}
-                    className="mt-4 pt-4 border-t border-gray-800"
-                  >
-                    <a href="https://maps.google.com/?q=Heidelberg,Germany" target="_blank" rel="noopener noreferrer">
-                      <Button
-                        variant="outline"
-                        className="text-indigo-400 border-gray-700 hover:bg-gray-800 hover:text-indigo-300 hover:border-gray-600"
-                      >
-                        Get Directions
-                      </Button>
+                   <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03] group-hover:opacity-[0.05] transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
+                  <div className="relative z-10">
+                    <div className="w-16 h-16 bg-gray-800/70 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-900/50 transition-colors duration-300 relative overflow-hidden">
+                       <div className={`absolute inset-0 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 opacity-0 group-hover:opacity-40 transition-opacity duration-300 blur-md`}></div>
+                      <MapPin className="w-8 h-8 text-purple-400 relative z-10" />
+                    </div>
+                    <h4 className="text-2xl font-bold mb-2 text-white font-mono tracking-wide">
+                      Heidelberg, Germany
+                    </h4>
+                    <a href="mailto:v.popp@progressit.online" className="text-purple-300 mb-1 font-medium hover:text-purple-200 hover:underline transition-colors">
+                      v.popp@progressit.online
                     </a>
-                  </motion.div>
+                    <p className="text-gray-400 mt-1 font-mono">+49 1781378688</p>
+                  </div>
                 </motion.div>
 
                 <motion.div
@@ -330,73 +383,61 @@ const ContactSection = ({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.5 }}
                   whileHover={{
-                    y: -10,
-                    boxShadow:
-                      "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                    y: -5,
+                    boxShadow: "0 0 25px rgba(20, 184, 166, 0.25)",
                   }}
-                  className="bg-gray-900 p-8 rounded-xl shadow-lg text-center relative overflow-hidden group border border-gray-800"
+                  className="contact-card w-full bg-[#121a29]/90 rounded-lg overflow-hidden shadow-md group border border-teal-900/40 relative hover:border-teal-500/70 transition-all duration-300 p-8 text-center"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-teal-900 via-transparent to-transparent opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-teal-900 rounded-bl-full opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-
-                  <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-gray-700 transition-colors duration-300">
-                    <MapPin className="w-8 h-8 text-teal-400" />
-                  </div>
-
-                  <h4 className="text-2xl font-bold mb-2 text-white">
-                    London, UK
-                  </h4>
-                  <a href="mailto:info@progressit.online" className="text-teal-400 mb-1 font-medium hover:underline">
-                    info@progressit.online
-                  </a>
-                  <p className="text-gray-400 mt-1">+44 7440965458</p>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileHover={{ opacity: 1, y: 0 }}
-                    className="mt-4 pt-4 border-t border-gray-800"
-                  >
-                    <a href="https://maps.google.com/?q=London,UK" target="_blank" rel="noopener noreferrer">
-                      <Button
-                        variant="outline"
-                        className="text-teal-400 border-gray-700 hover:bg-gray-800 hover:text-teal-300 hover:border-gray-600"
-                      >
-                        Get Directions
-                      </Button>
+                   <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03] group-hover:opacity-[0.05] transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-teal-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
+                  <div className="relative z-10">
+                    <div className="w-16 h-16 bg-gray-800/70 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-teal-900/50 transition-colors duration-300 relative overflow-hidden">
+                      <div className={`absolute inset-0 rounded-full bg-gradient-to-br from-teal-500 to-emerald-500 opacity-0 group-hover:opacity-40 transition-opacity duration-300 blur-md`}></div>
+                      <MapPin className="w-8 h-8 text-teal-400 relative z-10" />
+                    </div>
+                    <h4 className="text-2xl font-bold mb-2 text-white font-mono tracking-wide">
+                      London, UK
+                    </h4>
+                    <a href="mailto:info@progressit.online" className="text-teal-300 mb-1 font-medium hover:text-teal-200 hover:underline transition-colors">
+                      info@progressit.online
                     </a>
-                  </motion.div>
+                    <p className="text-gray-400 mt-1 font-mono">+44 7440965458</p>
+                  </div>
                 </motion.div>
               </div>
 
-              {/* Direct contact methods */}
+              {/* Direct contact methods (Styled similarly) */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8, duration: 0.5 }}
-                className="mt-12 bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-800"
+                className="mt-12 bg-[#121a29]/90 p-8 rounded-lg shadow-lg border border-gray-800/50 relative overflow-hidden"
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="flex items-center">
-                    <div className="w-14 h-14 rounded-full bg-gray-800 flex items-center justify-center mr-4">
-                      <Mail className="w-6 h-6 text-blue-400" />
+                <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03]"></div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+                  <div className="flex items-center group">
+                    <div className="w-14 h-14 rounded-full bg-gray-800/70 flex items-center justify-center mr-4 relative overflow-hidden group-hover:bg-blue-900/50 transition-colors duration-300">
+                       <div className={`absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 opacity-0 group-hover:opacity-40 transition-opacity duration-300 blur-md`}></div>
+                      <Mail className="w-6 h-6 text-blue-400 relative z-10" />
                     </div>
                     <div>
-                      <h4 className="text-lg font-semibold mb-1 text-white">
+                      <h4 className="text-lg font-semibold mb-1 text-white font-mono tracking-wide">
                         Email Us
                       </h4>
-                      <a href="mailto:hello@progressit.online" className="text-blue-400 hover:underline">hello@progressit.online</a>
+                      <a href="mailto:hello@progressit.online" className="text-blue-300 hover:text-blue-200 hover:underline transition-colors">hello@progressit.online</a>
                     </div>
                   </div>
 
-                  <div className="flex items-center">
-                    <div className="w-14 h-14 rounded-full bg-gray-800 flex items-center justify-center mr-4">
-                      <Phone className="w-6 h-6 text-indigo-400" />
+                  <div className="flex items-center group">
+                    <div className="w-14 h-14 rounded-full bg-gray-800/70 flex items-center justify-center mr-4 relative overflow-hidden group-hover:bg-indigo-900/50 transition-colors duration-300">
+                      <div className={`absolute inset-0 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 opacity-0 group-hover:opacity-40 transition-opacity duration-300 blur-md`}></div>
+                      <Phone className="w-6 h-6 text-indigo-400 relative z-10" />
                     </div>
                     <div>
-                      <h4 className="text-lg font-semibold mb-1 text-white">
+                      <h4 className="text-lg font-semibold mb-1 text-white font-mono tracking-wide">
                         Call Us
                       </h4>
-                      <a href="tel:+12345678910" className="text-indigo-400 hover:underline">+12345678910</a>
+                      <a href="tel:+12345678910" className="text-indigo-300 hover:text-indigo-200 hover:underline transition-colors">+12345678910</a>
                     </div>
                   </div>
                 </div>
@@ -405,6 +446,51 @@ const ContactSection = ({
           )}
         </AnimatePresence>
       </div>
+       {/* Style block for corner brackets (Re-using from previous attempt) */}
+       <style jsx>{`
+        .contact-card::before, .contact-card::after {
+          content: '';
+          position: absolute;
+          width: 16px;
+          height: 16px;
+          border-style: solid;
+          border-color: rgba(6, 182, 212, 0.3); /* Default cyan, adjust if needed per card */
+          transition: all 0.3s ease;
+          opacity: 0;
+          pointer-events: none; /* Prevent brackets from interfering with hover */
+        }
+        .contact-card::before {
+          top: 10px;
+          left: 10px;
+          border-width: 2px 0 0 2px;
+        }
+        .contact-card::after {
+          bottom: 10px;
+          right: 10px;
+          border-width: 0 2px 2px 0;
+        }
+        .contact-card:hover::before, .contact-card:hover::after {
+          opacity: 1;
+          /* Example: Make border match hover color */
+          /* You might need more specific selectors if card colors differ */
+           border-color: currentColor; /* Inherits text color, or set specific */
+        }
+       
+        /* Example: Specific hover color for blue card */
+        .contact-card:hover:nth-child(1)::before,
+        .contact-card:hover:nth-child(1)::after {
+            border-color: #3b82f6; /* Blue */
+        }
+        /* Add similar rules for other cards if needed */
+        .contact-card:hover:nth-child(2)::before,
+        .contact-card:hover:nth-child(2)::after {
+            border-color: #a855f7; /* Purple */
+        }
+         .contact-card:hover:nth-child(3)::before,
+        .contact-card:hover:nth-child(3)::after {
+            border-color: #14b8a6; /* Teal */
+        }
+      `}</style>
     </section>
   );
 };

@@ -417,8 +417,23 @@ const PortfolioSection = ({
           </motion.div>
         </div>
 
-        {/* Testimonials Section */}
-        <TestimonialSlider />
+        {/* Testimonials Section - Commented Out */}
+        {/* 
+        <div className="mt-24">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold mb-12 text-center"
+          >
+            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 text-transparent bg-clip-text">
+              Testimonials
+            </span>
+          </motion.h2>
+          <TestimonialSlider />
+        </div>
+        */}
 
         {/* Featured client logos - Hidden */}
         <div className="hidden mt-24 pt-12 border-t border-gray-800">

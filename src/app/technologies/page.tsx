@@ -685,6 +685,29 @@ export default function Technologies() {
     }, 8000);
   };
 
+  // Function copied from other pages
+  const handleScrollAndSetTab = (e: React.MouseEvent<HTMLElement>, tab: 'quote' | 'contact') => {
+    e.preventDefault(); // Prevent default anchor jump
+    
+    const targetPath = '/';
+    const targetId = 'contact';
+    const targetHash = `#${targetId}?tab=${tab}`;
+
+    if (window.location.pathname === targetPath) {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (window.location.hash !== targetHash) {
+          window.location.hash = targetHash;
+        }
+      } else {
+        window.location.href = targetPath + targetHash;
+      }
+    } else {
+      window.location.href = targetPath + targetHash;
+    }
+  };
+
   return (
     <main className="min-h-screen bg-black text-white">
       <Navbar />
@@ -1538,175 +1561,55 @@ export default function Technologies() {
         </div>
       </section>
 
-      {/* CSS for animations */}
-      <style jsx>{`
-        @keyframes matrix-scroll {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(-100%); }
-        }
+      {/* --- INSERTED CTA SECTION --- */}
+      <section className="py-16 bg-gradient-to-b from-black to-gray-950 relative overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/grid-pattern.svg')] opacity-10"></div>
+          <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-blue-900 opacity-10 blur-3xl"></div>
+          <div className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-indigo-900 opacity-10 blur-3xl"></div>
+        </div>
         
-        .matrix-code::before {
-          content: "01010111 10101010 00011101 01010111 10101010 00011101 10101010 01010111 10101010 00011101";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 200%;
-          line-height: 1;
-          letter-spacing: -1px;
-          animation: matrix-scroll 20s linear infinite;
-          background-image: linear-gradient(to bottom, transparent, transparent 50%, rgba(0,0,0,0.5));
-          background-size: 100% 100%;
-          background-repeat: repeat-y;
-        }
-        
-        @keyframes hex-pulse {
-          0%, 100% { opacity: 0.1; }
-          50% { opacity: 0.3; }
-        }
-        
-        .hex-grid::before {
-          content: "⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 150%;
-          height: 150%;
-          line-height: 1.5;
-          letter-spacing: 5px;
-          animation: hex-pulse 8s infinite;
-        }
-        
-        .scanlines {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: repeating-linear-gradient(to bottom, transparent, transparent 2px, rgba(0, 0, 0, 0.4) 2px, rgba(0, 0, 0, 0.4) 4px);
-          animation: flicker 0.2s infinite;
-          pointer-events: none;
-        }
-        
-        @keyframes flicker {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.8; }
-        }
-        
-        @keyframes blockchain-float {
-          0%, 100% { transform: translate(0, 0); }
-          25% { transform: translate(2px, 2px); }
-          50% { transform: translate(0, 4px); }
-          75% { transform: translate(-2px, 2px); }
-        }
-        
-        .blockchain-nodes::before {
-          content: "○ ◉ ○ ◉ ○ ◉ ○ ◉ ○ ◉ ○ ◉ ○ ◉ ○ ◉ ○ ◉ ○ ◉ ○ ◉ ○ ◉ ○ ◉ ○ ◉ ○ ◉ ○ ◉ ○ ◉ ○ ◉";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 150%;
-          height: 150%;
-          line-height: 1.5;
-          letter-spacing: 5px;
-          animation: blockchain-float 15s infinite;
-        }
-        
-        @keyframes glitch {
-          0%, 100% { opacity: 0; }
-          10%, 15% { opacity: 0.3; transform: translate(-2px, 0); }
-          20%, 25% { opacity: 0; transform: translate(0, 0); }
-          30%, 35% { opacity: 0.3; transform: translate(2px, 0); }
-          40%, 100% { opacity: 0; transform: translate(0, 0); }
-        }
-        
-        .glitch-effect {
-          animation: glitch 15s infinite;
-          animation-delay: calc(var(--glitch-delay, 0) * 1s);
-        }
-        
-        .group:hover .glitch-effect {
-          --glitch-delay: 0;
-          animation: glitch 3s infinite;
-        }
-        
-        .cyber-glitch-text {
-          position: relative;
-          display: inline-block;
-        }
-        
-        @keyframes line-anim {
-          0% { opacity: 0.3; }
-          50% { opacity: 1; }
-          100% { opacity: 0.3; }
-        }
-        
-        .futuristic-button-wrapper {
-          position: relative;
-        }
-        
-        .futuristic-button {
-          transition: all 0.3s ease;
-        }
-        
-        .futuristic-button:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.3);
-        }
-        
-        .futuristic-button:before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.2), transparent);
-          transform: translateX(-100%);
-          animation: light-sweep 3s infinite;
-        }
-        
-        @keyframes light-sweep {
-          0% { transform: translateX(-100%); }
-          50% { transform: translateX(100%); }
-          100% { transform: translateX(100%); }
-        }
-        
-        .cyberpunk-card {
-          transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        
-        .cyberpunk-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 15px 30px -10px rgba(6, 182, 212, 0.2);
-        }
-        
-        .cyberpunk-timeline:before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 1px;
-          height: 100%;
-          background: linear-gradient(to bottom, 
-            rgba(6, 182, 212, 0),
-            rgba(6, 182, 212, 0.1),
-            rgba(168, 85, 247, 0.1),
-            rgba(168, 85, 247, 0)
-          );
-        }
-      `}</style>
-      
-      {/* Dynamic styles for rocket animation */}
-      <style jsx global>{rocketStyles}</style>
-      
-      {/* Script for animations */}
-      <Script src="/js/animation-loader.js" strategy="afterInteractive" />
-      
-      {/* Debug script to help troubleshoot animation issues */}
-      <Script src="/js/animation-debug.js" strategy="afterInteractive" />
-      
+        <div className="progress-it-container relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <motion.span
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="inline-block px-4 py-1 rounded-full bg-indigo-600 text-white font-medium text-sm mb-6"
+            >
+              LET'S BUILD THE FUTURE
+            </motion.span>
+            {/* Customized Title */}
+            <h2 className="text-4xl md:text-6xl font-bold mb-6">
+              Leverage Our <span className="bg-gradient-to-r from-blue-400 to-indigo-500 text-transparent bg-clip-text">Tech Expertise</span>?
+            </h2>
+            {/* Customized Subtitle */}
+            <p className="text-xl text-gray-300 mb-10 mx-auto max-w-3xl">
+              Ready to implement cutting-edge technology? Discuss your project with our specialists and let's innovate together.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+               {/* Button uses the handleScrollAndSetTab function */}
+              <a
+                href="/#contact?tab=contact" 
+                onClick={(e) => handleScrollAndSetTab(e, 'contact')}
+                className="inline-flex items-center px-8 py-4 rounded-lg bg-gray-900 text-white font-medium transition-all hover:bg-gray-800 border border-gray-800"
+              >
+                <span>Contact Us</span> { /* Changed button text */ }
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+      {/* --- END OF INSERTED CTA SECTION --- */}
+
       <Footer />
     </main>
   );

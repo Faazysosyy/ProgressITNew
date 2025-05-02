@@ -444,7 +444,7 @@ const ServicesSection = ({
           viewport={{ once: true }}
           className="mt-24"
         >
-          <h3 className="text-xl font-medium text-center text-gray-400 mb-8">Trusted by leading companies worldwide</h3>
+          <h3 className="text-xl font-medium text-center text-gray-400 mb-8">Working with leading companies worldwide to deliver exceptional solutions and services.</h3>
           <div className="container brandsCarousel">
             <div className="carouselTrack">
               <div className="brandLogo">
@@ -587,7 +587,7 @@ const styles = `
 .brandLogo svg {
   width: 4rem;
   height: 4rem;
-  fill: var(--light-gray, #9ca6a2);
+  fill: white; /* Changed from var(--light-gray, #9ca6a2) */
 }
 `;
 

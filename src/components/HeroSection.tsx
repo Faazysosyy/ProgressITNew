@@ -55,7 +55,6 @@ const HeroSection = ({
     if (!button) return;
     
     const animateButton = (e: MouseEvent) => {
-      e.preventDefault();
       button.classList.add('animate');
       setTimeout(() => button.classList.remove('animate'), 700);
     };
@@ -99,6 +98,27 @@ const HeroSection = ({
     const maxScroll = 800;
     const speedMultiplier = 1 + (Math.min(scrollY, maxScroll) / maxScroll) * maxSpeedMultiplier;
     return speedMultiplier;
+  };
+
+  const handleScrollAndSetTab = (e: React.MouseEvent<HTMLElement>, tab: 'quote' | 'contact') => {
+    e.preventDefault(); // Prevent default anchor jump
+    const targetId = 'contact';
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      // Construct the hash before scrolling
+      const targetHash = `#${targetId}?tab=${tab}`;
+      
+      // Scroll smoothly to the element
+      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // Update hash after a short delay to allow scroll to start and trigger listener
+      // Or update immediately if hashchange listener handles it robustly
+      // Let's try updating immediately
+      if (window.location.hash !== targetHash) {
+          window.location.hash = targetHash;
+      }
+    }
   };
 
   return (
@@ -201,7 +221,10 @@ const HeroSection = ({
                 height: "var(--button-height)"
               }}
             >
-              <a href={ctaLink}>
+              <a 
+                href="#contact?tab=quote" 
+                onClick={(e) => handleScrollAndSetTab(e, 'quote')}
+              >
                 {ctaText}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </a>
@@ -210,13 +233,14 @@ const HeroSection = ({
             {/* Bubbly Button */}
             <a 
               ref={buttonRef}
-              href="#services" 
+              href="#contact?tab=contact" 
+              onClick={(e) => handleScrollAndSetTab(e, 'contact')}
               className="bubbly-button px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 text-base sm:text-lg font-medium w-full sm:w-auto mt-2 sm:mt-0 inline-flex items-center justify-center min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
               style={{
                 height: "var(--button-height)"
               }}
             >
-              See Our Success
+              Contact
             </a>
           </motion.div>
         </div>

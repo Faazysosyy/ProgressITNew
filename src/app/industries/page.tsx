@@ -4,18 +4,47 @@ import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowRight, ChevronRight, Zap, LineChart, Building, ShoppingCart, Binary, FilmIcon } from "lucide-react";
+import { 
+  ArrowRight, ChevronRight, Zap, Landmark, Home, Store, Boxes, Ticket, LineChart,
+  Building, ShoppingCart, Binary, FilmIcon
+} from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import AnimatedText from "@/components/AnimatedText";
 
 export default function IndustriesPage() {
+  // Function copied from HeroSection.tsx
+  const handleScrollAndSetTab = (e: React.MouseEvent<HTMLElement>, tab: 'quote' | 'contact') => {
+    e.preventDefault(); // Prevent default anchor jump
+    
+    // Check if we are already on the home page or need to navigate first
+    const targetPath = '/';
+    const targetId = 'contact';
+    const targetHash = `#${targetId}?tab=${tab}`;
+
+    if (window.location.pathname === targetPath) {
+      // Already on the home page, just scroll and update hash
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (window.location.hash !== targetHash) {
+          window.location.hash = targetHash;
+        }
+      } else {
+        // Fallback if element not found immediately (rare)
+        window.location.href = targetPath + targetHash;
+      }
+    } else {
+      // Navigate to the home page with the specific hash
+      window.location.href = targetPath + targetHash;
+    }
+  };
+
   // Industry data
   const industries = [
     {
       id: "financial",
       title: "Financial Services Digital Transformation",
-      icon: <LineChart className="w-12 h-12 text-blue-500" />,
+      icon: <Landmark className="w-10 h-10 text-blue-500" />,
       color: "from-blue-500 to-indigo-500",
       description: "Transforming financial institutions with cutting-edge technology solutions that enhance customer experience, streamline operations, and ensure regulatory compliance.",
       features: [
@@ -30,7 +59,7 @@ export default function IndustriesPage() {
     {
       id: "realestate",
       title: "Real Estate Digital Marketing",
-      icon: <Building className="w-12 h-12 text-purple-500" />,
+      icon: <Home className="w-10 h-10 text-purple-500" />,
       color: "from-purple-500 to-pink-500",
       description: "Comprehensive digital marketing strategies for real estate professionals that drive leads, showcase properties, and build lasting client relationships.",
       features: [
@@ -45,7 +74,7 @@ export default function IndustriesPage() {
     {
       id: "ecommerce",
       title: "E-commerce & Retail Solutions",
-      icon: <ShoppingCart className="w-12 h-12 text-emerald-500" />,
+      icon: <Store className="w-10 h-10 text-emerald-500" />,
       color: "from-emerald-500 to-teal-500",
       description: "Scalable e-commerce platforms and retail solutions that optimize inventory, enhance shopping experiences, and maximize conversion rates.",
       features: [
@@ -60,7 +89,7 @@ export default function IndustriesPage() {
     {
       id: "blockchain",
       title: "Blockchain & DApp Solutions",
-      icon: <Binary className="w-12 h-12 text-amber-500" />,
+      icon: <Boxes className="w-10 h-10 text-amber-500" />,
       color: "from-amber-500 to-orange-500",
       description: "Innovative blockchain applications and decentralized solutions that enhance security, transparency, and efficiency across various business operations.",
       features: [
@@ -75,7 +104,7 @@ export default function IndustriesPage() {
     {
       id: "entertainment",
       title: "Entertainment & Media Platforms",
-      icon: <FilmIcon className="w-12 h-12 text-rose-500" />,
+      icon: <Ticket className="w-10 h-10 text-rose-500" />,
       color: "from-rose-500 to-red-500",
       description: "Engaging digital platforms for entertainment and media companies that captivate audiences, optimize content delivery, and enhance monetization.",
       features: [
@@ -478,22 +507,6 @@ export default function IndustriesPage() {
         </section>
       ))}
 
-      {/* Animated Text Section - Between Real Estate and E-commerce */}
-      <section className="relative overflow-hidden bg-black py-16 flex items-center justify-center">
-        {/* Adding black fade gradient effect */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-blue-900/10 to-black/95 z-10"></div>
-          <div className="absolute top-0 left-0 right-0 h-[20vh] bg-gradient-to-b from-black to-transparent z-20"></div>
-          <div className="absolute inset-0 bg-black/40 z-0"></div>
-        </div>
-        
-        <div className="relative z-10 w-full flex justify-center items-center">
-          <div className="max-w-3xl mx-auto">
-            <AnimatedText text="Innovations" />
-          </div>
-        </div>
-      </section>
-      
       {/* Remaining industry sections (E-commerce, Blockchain, Entertainment) */}
       {industries.slice(2).map((industry, index) => (
         <section 
@@ -514,7 +527,7 @@ export default function IndustriesPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className={`order-2 ${(index + 2) % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}`}
+                className={`order-2 ${index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}`}
               >
                 <div className={`inline-flex items-center justify-center p-3 rounded-lg bg-gradient-to-r ${industry.color} mb-6`}>
                   {industry.icon}
@@ -555,7 +568,7 @@ export default function IndustriesPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className={`relative h-[24rem] order-1 ${(index + 2) % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}
+                className={`relative h-[24rem] order-1 ${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}
               >
                 <div className="absolute inset-0 overflow-hidden rounded-2xl">
                   <div className="absolute inset-0 bg-black/20 backdrop-blur-sm z-10 rounded-2xl"></div>
@@ -602,7 +615,7 @@ export default function IndustriesPage() {
                                 <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>25</span>
                               )}
                               <div className={`w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br ${industry.color}`}>
-                                <LineChart className="w-4 h-4 text-white" />
+                                <Zap className="w-4 h-4 text-white" />
                               </div>
                             </div>
                             <p className="mt-2 text-xs text-gray-400 uppercase tracking-wider font-medium">Enterprise Projects</p>
@@ -855,12 +868,13 @@ export default function IndustriesPage() {
             
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
               {/* "Start Your Project" button removed */}
-              <Link
-                href="/services"
+              <a
+                href="/#contact?tab=contact" 
+                onClick={(e) => handleScrollAndSetTab(e, 'contact')}
                 className="inline-flex items-center px-8 py-4 rounded-lg bg-gray-900 text-white font-medium transition-all hover:bg-gray-800 border border-gray-800"
               >
-                <span>Explore Services</span>
-              </Link>
+                <span>Contact</span>
+              </a>
             </div>
           </motion.div>
         </div>

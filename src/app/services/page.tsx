@@ -9,6 +9,29 @@ import Footer from "@/components/Footer";
 import ServicesSection from "@/components/ServicesSection";
 
 export default function Services() {
+  // Function copied from IndustriesPage.tsx / HeroSection.tsx
+  const handleScrollAndSetTab = (e: React.MouseEvent<HTMLElement>, tab: 'quote' | 'contact') => {
+    e.preventDefault(); // Prevent default anchor jump
+    
+    const targetPath = '/';
+    const targetId = 'contact';
+    const targetHash = `#${targetId}?tab=${tab}`;
+
+    if (window.location.pathname === targetPath) {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (window.location.hash !== targetHash) {
+          window.location.hash = targetHash;
+        }
+      } else {
+        window.location.href = targetPath + targetHash;
+      }
+    } else {
+      window.location.href = targetPath + targetHash;
+    }
+  };
+
   return (
     <main className="min-h-screen bg-black text-white">
       <Navbar />
@@ -931,22 +954,47 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-950">
-        <div className="progress-it-container">
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Transform Your Digital Presence?
+      <section className="py-16 bg-gradient-to-b from-black to-gray-950 relative overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/grid-pattern.svg')] opacity-10"></div>
+          <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-blue-900 opacity-10 blur-3xl"></div>
+          <div className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-indigo-900 opacity-10 blur-3xl"></div>
+        </div>
+        
+        <div className="progress-it-container relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <motion.span
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="inline-block px-4 py-1 rounded-full bg-indigo-600 text-white font-medium text-sm mb-6"
+            >
+              LET'S WORK TOGETHER
+            </motion.span>
+            <h2 className="text-4xl md:text-6xl font-bold mb-6">
+              Ready to Start Your <span className="bg-gradient-to-r from-blue-400 to-indigo-500 text-transparent bg-clip-text">Project</span>?
             </h2>
-            <p className="text-lg text-gray-400 mb-8">
+            <p className="text-xl text-gray-300 mb-10 mx-auto max-w-3xl">
               Our team of experts is ready to help you achieve your goals. Let's discuss your project and create a solution that's perfect for your business.
             </p>
-            <Link 
-              href="/contact" 
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-8 py-3 rounded-md inline-flex items-center transition-colors"
-            >
-              Get in Touch
-            </Link>
-          </div>
+            
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+              <a
+                href="/#contact?tab=contact" 
+                onClick={(e) => handleScrollAndSetTab(e, 'contact')}
+                className="inline-flex items-center px-8 py-4 rounded-lg bg-gray-900 text-white font-medium transition-all hover:bg-gray-800"
+              >
+                <span>Contact</span>
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
       

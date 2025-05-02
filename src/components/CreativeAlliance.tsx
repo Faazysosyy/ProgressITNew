@@ -23,40 +23,40 @@ const CreativeAlliance = () => {
   const teamMembers = [
     {
       id: "node-1",
-      name: "Elara V.",
-      role: "Neural Architect",
+      name: "Eduard Vilchuk",
+      role: "CDO",
       bio: "Pioneering brain-machine interfaces and consciousness mapping",
       planePosition: { x: -40, y: -40, z: 20 },
       avatar: "/api/placeholder/400/400"
     },
     {
       id: "node-2",
-      name: "Kai Zenith",
-      role: "Quantum Developer",
+      name: "Artjom Lupjak",
+      role: "COO",
       bio: "Creating algorithms that operate across multiple dimensions",
       planePosition: { x: 40, y: -20, z: -30 },
       avatar: "/api/placeholder/400/400"
     },
     {
       id: "node-3",
-      name: "Nova Chen",
-      role: "System Designer",
+      name: "Valentin Popp",
+      role: "Sales Director",
       bio: "Crafting interfaces between human perception and digital realms",
       planePosition: { x: 20, y: 50, z: 10 },
       avatar: "/api/placeholder/400/400"
     },
     {
       id: "node-4",
-      name: "Aria Flux",
-      role: "Data Sculptor",
+      name: "Yury Smirnov",
+      role: "Lead Designer",
       bio: "Transforming complex datasets into intuitive visual experiences",
       planePosition: { x: -30, y: 30, z: -20 },
       avatar: "/api/placeholder/400/400"
     },
     {
       id: "node-5",
-      name: "Orion J.",
-      role: "Creative Director",
+      name: "Vyacheslav Polski",
+      role: "CEO",
       bio: "Unifying technological innovation with human-centered design",
       planePosition: { x: 10, y: -50, z: 40 },
       avatar: "/api/placeholder/400/400"

@@ -2,7 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Calculator, Code, Clock, Users, DollarSign, Calendar, Server } from 'lucide-react';
+import { 
+  Calculator, Code, Clock, Users, DollarSign, Calendar, Server, 
+  ClipboardList, ListChecks, BarChart3, Wrench
+} from 'lucide-react';
 import BigBangAnimation from "@/components/BigBangAnimation";
 import MatrixAnimation from '@/components/BigBangAnimation';
 
@@ -204,9 +207,11 @@ const CalculatorPage = () => {
   const handleComplexityChange = (newComplexity: 'low' | 'medium' | 'high' | 'insane') => {
     setComplexity(newComplexity);
     
-    if (teamSize === 40 && newComplexity === 'insane') {
-      setShowExplosion(true);
+    if (newComplexity === 'insane') {
+      setShowResults(false); // Hide results immediately when insane is selected
+      setShowExplosion(true); // This covers the case where teamSize might also be 40
     }
+    // The original else if (teamSize === 40 && newComplexity === 'insane') is now redundant
   };
 
   const handleExplosionComplete = () => {
@@ -230,22 +235,22 @@ const CalculatorPage = () => {
 
   // Function to handle hover animation on feature options
   const handleFeatureHover = (e: React.MouseEvent<HTMLDivElement>) => {
-    const target = e.currentTarget;
+    const target = e.currentTarget as HTMLElement; // Cast to HTMLElement
     const rect = target.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     
-    (target as HTMLElement).style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(25, 130, 196, 0.3), transparent 50%)`;
-    (target as HTMLElement).style.borderImage = 'linear-gradient(45deg, #007bff, #00d2ff) 1';
-    (target as HTMLElement).style.borderImageSlice = '1';
+    target.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(25, 130, 196, 0.3), transparent 50%)`;
+    target.style.borderImage = 'linear-gradient(45deg, #007bff, #00d2ff) 1';
+    target.style.borderImageSlice = '1';
   };
 
   // Function to handle mouse leave on feature options
   const handleFeatureLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    const target = e.currentTarget;
-    (target as HTMLElement).style.background = 'transparent';
-    (target as HTMLElement).style.borderImage = 'none';
-    (target as HTMLElement).style.border = '1px solid rgba(255, 255, 255, 0.1)';
+    const target = e.currentTarget as HTMLElement; // Cast to HTMLElement
+    target.style.background = 'transparent';
+    target.style.borderImage = 'none';
+    target.style.border = '1px solid rgba(255, 255, 255, 0.1)';
   };
 
   return (
@@ -277,21 +282,27 @@ const CalculatorPage = () => {
               <div className="bg-[#121a29]/60 p-5 rounded-lg border border-cyan-500/10 relative group">
                 <div className="absolute -top-1 -left-1 w-2 h-2 bg-cyan-500/30 rounded-full"></div>
                 <div className="absolute -bottom-1 -right-1 w-2 h-2 bg-cyan-500/30 rounded-full"></div>
-                <div className="text-cyan-400 text-3xl mb-3 flex justify-center">🔍</div>
+                <div className="text-cyan-400 text-3xl mb-3 flex justify-center">
+                  <ClipboardList size={36} />
+                </div>
                 <h3 className="text-lg font-semibold mb-2 text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400">Define Your Project</h3>
                 <p className="text-gray-400 text-sm text-center">Select your project type, complexity level, and team size to start building your estimate.</p>
               </div>
               <div className="bg-[#121a29]/60 p-5 rounded-lg border border-purple-500/10 relative group">
                 <div className="absolute -top-1 -left-1 w-2 h-2 bg-purple-500/30 rounded-full"></div>
                 <div className="absolute -bottom-1 -right-1 w-2 h-2 bg-purple-500/30 rounded-full"></div>
-                <div className="text-purple-400 text-3xl mb-3 flex justify-center">⚙️</div>
+                <div className="text-purple-400 text-3xl mb-3 flex justify-center">
+                  <ListChecks size={36} />
+                </div>
                 <h3 className="text-lg font-semibold mb-2 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-purple-400">Select Features</h3>
                 <p className="text-gray-400 text-sm text-center">Choose from core, security, infrastructure, and advanced features to customize your project scope.</p>
               </div>
               <div className="bg-[#121a29]/60 p-5 rounded-lg border border-blue-500/10 relative group">
                 <div className="absolute -top-1 -left-1 w-2 h-2 bg-blue-500/30 rounded-full"></div>
                 <div className="absolute -bottom-1 -right-1 w-2 h-2 bg-blue-500/30 rounded-full"></div>
-                <div className="text-blue-400 text-3xl mb-3 flex justify-center">📊</div>
+                <div className="text-blue-400 text-3xl mb-3 flex justify-center">
+                  <BarChart3 size={36} />
+                </div>
                 <h3 className="text-lg font-semibold mb-2 text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400">Get Detailed Estimate</h3>
                 <p className="text-gray-400 text-sm text-center">Receive instant calculation of cost, timeline, team size, and annual maintenance requirements.</p>
               </div>
@@ -684,7 +695,7 @@ const CalculatorPage = () => {
               </div>
             </div>
             
-            {showResults && (
+            {showResults && complexity !== 'insane' && (
               <div className="mt-8 bg-[#121a29]/80 p-6 rounded-lg border border-[#1e2c45] shadow-[0_0_15px_rgba(5,230,255,0.1)] relative">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20"></div>
                 <div className="absolute bottom-0 right-0 w-full h-1 bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-cyan-500/20"></div>
@@ -696,19 +707,19 @@ const CalculatorPage = () => {
                     <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="flex justify-center mb-2">
                       <span className="text-cyan-400 text-4xl font-bold relative">
-                        $
+                        <DollarSign size={36} />
                         <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-cyan-400 animate-ping opacity-75"></span>
                       </span>
                     </div>
                     <div className="text-sm opacity-75 mb-1">Estimated Cost</div>
-                    <div className="text-2xl font-bold">${results?.cost.toLocaleString()}</div>
+                    <div className="text-2xl font-bold">€{results?.cost.toLocaleString()}</div>
                   </div>
                   
                   <div className="bg-[#0a101c]/90 backdrop-blur-sm p-5 rounded-lg text-center border border-[#2a3a55] relative group hover:border-yellow-500/50 transition-colors duration-300">
                     <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="flex justify-center mb-2">
                       <span className="text-yellow-400 text-4xl relative">
-                        ⏱
+                        <Clock size={36} />
                         <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-yellow-400 animate-ping opacity-75"></span>
                       </span>
                     </div>
@@ -720,7 +731,7 @@ const CalculatorPage = () => {
                     <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="flex justify-center mb-2">
                       <span className="text-blue-400 text-4xl relative">
-                        👥
+                        <Users size={36} />
                         <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-blue-400 animate-ping opacity-75"></span>
                       </span>
                     </div>
@@ -732,12 +743,12 @@ const CalculatorPage = () => {
                     <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="flex justify-center mb-2">
                       <span className="text-purple-400 text-4xl relative">
-                        📆
+                        <Wrench size={36} />
                         <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-purple-400 animate-ping opacity-75"></span>
                       </span>
                     </div>
                     <div className="text-sm opacity-75 mb-1">Maintenance/yr</div>
-                    <div className="text-2xl font-bold">${results?.maintenance.toLocaleString()}</div>
+                    <div className="text-2xl font-bold">€{results?.maintenance.toLocaleString()}</div>
                   </div>
                 </div>
                 
