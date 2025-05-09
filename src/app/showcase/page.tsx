@@ -5,9 +5,18 @@ import { motion, useScroll, useTransform, useMotionValue, AnimatePresence } from
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from 'next/image';
+import { useTranslation } from "@/lib/useTranslation";
 
-// Available filter categories
-const categories = ['All', 'UX/UI Design', 'Mobile App', 'Design Strategy', 'Prototyping', 'Animation', 'Backend Development'];
+// Mapping of category keys to their values to be used with translations
+const categoryKeys: Record<string, string> = {
+  'All': 'all',
+  'UX/UI Design': 'uxui',
+  'Mobile App': 'mobile',
+  'Design Strategy': 'design',
+  'Prototyping': 'prototyping',
+  'Animation': 'animation',
+  'Backend Development': 'backend'
+};
 
 // Sample project data with more fields for creative display
 const showcaseProjects = [
@@ -123,6 +132,11 @@ const showcaseProjects = [
 ];
 
 export default function Showcase() {
+  const { t } = useTranslation();
+  
+  // Available filter categories - dynamically created from translation keys
+  const categories = Object.keys(categoryKeys).map(cat => cat);
+  
   const [activeCategory, setActiveCategory] = useState('All');
   const [visibleProjects, setVisibleProjects] = useState(showcaseProjects);
   const [activeProject, setActiveProject] = useState<number | null>(null);
@@ -215,24 +229,24 @@ export default function Showcase() {
             style={{ y: y1, opacity }}
             className="max-w-5xl mx-auto"
           >
-            {/* "We Build" text with gradient */}
+            {/* "Technology" text with gradient */}
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               className="text-7xl md:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-2 text-left"
             >
-              Technology
+              {t('showcase.excellence.title').split(' ')[0]}
             </motion.h2>
             
-            {/* "Digital Excellence" text */}
+            {/* "Excellence" text */}
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-7xl md:text-8xl font-bold text-white mb-6 text-left"
             >
-              Excellence
+              {t('showcase.excellence.title').split(' ')[1]}
             </motion.h1>
             
             {/* Subtitle with services */}
@@ -242,7 +256,7 @@ export default function Showcase() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-2xl md:text-3xl font-medium text-gray-300 mb-12 text-left"
             >
-              Modern Frameworks, Secure Infrastructure & Scalable Architectures
+              {t('showcase.excellence.subtitle')}
             </motion.h3>
             
             {/* Description text */}
@@ -252,7 +266,7 @@ export default function Showcase() {
               transition={{ duration: 1, delay: 0.6 }}
               className="text-gray-400 max-w-2xl text-lg"
             >
-              Behind every showcase project stands our technical foundation. We employ the latest technologies to ensure our solutions remain at the forefront of innovation.
+              {t('showcase.excellence.description')}
             </motion.p>
             
             {/* Futuristic tech dots pattern */}
@@ -332,7 +346,7 @@ export default function Showcase() {
                     : 'text-gray-400 border border-gray-800 hover:border-gray-700'
                 } rounded-full relative overflow-hidden`}
               >
-                {category}
+                {t(`showcase.categories.${categoryKeys[category]}`)}
                 {activeCategory === category && (
                   <>
                     <span className="ml-2 inline-block w-2 h-2 bg-cyan-400 rounded-full"></span>
@@ -425,8 +439,7 @@ export default function Showcase() {
                   
                   {/* Project description */}
                   <p className="text-gray-400 mb-6">
-                    Advanced {project.category.toLowerCase()} technology showcasing the future of digital interaction.
-                    Our {project.title} creates unprecedented capabilities that transform how users connect with technology.
+                    {t('showcase.projectCard.description')}
                   </p>
                   
                   {/* Tags with custom colors */}
@@ -465,7 +478,7 @@ export default function Showcase() {
                       whileHover={{ x: '100%' }}
                       transition={{ duration: 0.6 }}
                     />
-                    <span style={{ color: project.color }}>View Project</span>
+                    <span style={{ color: project.color }}>{t('showcase.viewProject')}</span>
                     <svg 
                       xmlns="http://www.w3.org/2000/svg" 
                       width="16" 
@@ -644,17 +657,17 @@ export default function Showcase() {
                               animate={{ height: 24 }}
                               transition={{ duration: 0.5 }}
                             />
-                            Project Overview
+                            {t('showcase.modal.projectOverview')}
                           </h3>
                           {project.description ? (
                             <p className="text-gray-300 mb-4">{project.description}</p>
                           ) : (
                             <>
                               <p className="text-gray-300 mb-4">
-                                This cutting-edge {project.category.toLowerCase()} project represents the pinnacle of our innovation in {project.year}. By combining advanced technologies with human-centered design, we've created a solution that pushes the boundaries of what's possible.
+                                {t('showcase.modal.defaultDescription')}
                               </p>
                               <p className="text-gray-300">
-                                The {project.title} integrates seamlessly with existing systems while providing unprecedented capabilities that transform how users interact with technology. Its modular architecture enables adaptation to various use cases across industries.
+                                {t('showcase.modal.defaultDescription2')}
                               </p>
                             </>
                           )}
@@ -671,7 +684,7 @@ export default function Showcase() {
                                 animate={{ height: 24 }}
                                 transition={{ duration: 0.5 }}
                               />
-                              Technologies Used
+                              {t('showcase.modal.technologiesUsed')}
                             </h3>
                             <div className="flex flex-wrap gap-3 mb-4">
                               {project.technologies.map((tech, idx) => (
@@ -702,7 +715,7 @@ export default function Showcase() {
                                 animate={{ height: 24 }}
                                 transition={{ duration: 0.5 }}
                               />
-                              Team Composition
+                              {t('showcase.modal.teamComposition')}
                             </h3>
                             <ul className="list-disc list-inside text-gray-300 pl-4 space-y-2">
                               {project.team.map((member, idx) => (
@@ -719,7 +732,7 @@ export default function Showcase() {
                             transition={{ duration: 0.5 }}
                             className="p-4 bg-black/50 rounded-lg border border-gray-800 backdrop-blur-sm"
                           >
-                            <h4 className="text-sm text-gray-400 mb-2 uppercase tracking-wider">Category</h4>
+                            <h4 className="text-sm text-gray-400 mb-2 uppercase tracking-wider">{t('showcase.modal.category')}</h4>
                             <p className="text-white">{project.category}</p>
                           </motion.div>
                           <motion.div 
@@ -728,7 +741,7 @@ export default function Showcase() {
                             transition={{ duration: 0.5, delay: 0.1 }}
                             className="p-4 bg-black/50 rounded-lg border border-gray-800 backdrop-blur-sm"
                           >
-                            <h4 className="text-sm text-gray-400 mb-2 uppercase tracking-wider">Year</h4>
+                            <h4 className="text-sm text-gray-400 mb-2 uppercase tracking-wider">{t('showcase.modal.year')}</h4>
                             <p className="text-white">{project.year}</p>
                           </motion.div>
                           <motion.div 
@@ -737,8 +750,8 @@ export default function Showcase() {
                             transition={{ duration: 0.5, delay: 0.2 }}
                             className="p-4 bg-black/50 rounded-lg border border-gray-800 backdrop-blur-sm"
                           >
-                            <h4 className="text-sm text-gray-400 mb-2 uppercase tracking-wider">Status</h4>
-                            <p className="text-white">Completed</p>
+                            <h4 className="text-sm text-gray-400 mb-2 uppercase tracking-wider">{t('showcase.modal.status')}</h4>
+                            <p className="text-white">{t('showcase.modal.completed')}</p>
                           </motion.div>
                         </div>
                         
@@ -759,7 +772,7 @@ export default function Showcase() {
                               whileHover={{ x: '100%' }}
                               transition={{ duration: 0.6 }}
                             />
-                            <span className="relative z-10">View Full Case Study</span>
+                            <span className="relative z-10">{t('showcase.modal.fullCaseStudy')}</span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="relative z-10">
                               <line x1="5" y1="12" x2="19" y2="12"></line>
                               <polyline points="12 5 19 12 12 19"></polyline>

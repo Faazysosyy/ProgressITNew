@@ -3,8 +3,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useTranslation } from "@/lib/useTranslation";
 
 const CreativeAlliance = () => {
+  const { t } = useTranslation();
   const [isLoaded, setIsLoaded] = useState(false);
   const [activeNode, setActiveNode] = useState<string | null>(null);
   const [animating, setAnimating] = useState(true);
@@ -118,7 +120,7 @@ const CreativeAlliance = () => {
                 </div>
                 
                 <h2 className="text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-500 to-purple-600 tracking-tight">
-                  CREATIVE ALLIANCE
+                  {t('creativeAlliance.title')}
                 </h2>
                 
                 <div className="absolute -bottom-8 left-0 w-full">
@@ -137,7 +139,7 @@ const CreativeAlliance = () => {
                 transition={{ duration: 1, delay: 0.7 }}
                 className="text-gray-300/80 mt-16 max-w-3xl mx-auto text-lg"
               >
-                Forging next-generation technological alliances that transcend traditional boundaries
+                {t('creativeAlliance.description')}
               </motion.p>
             </motion.div>
             
@@ -222,7 +224,7 @@ const CreativeAlliance = () => {
               </div>
               
               <h2 className="text-5xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">
-                DIMENSIONAL TEAM
+                {t('creativeAlliance.dimensionalTeam')}
               </h2>
               
               <div className="flex justify-center space-x-8 text-xs tracking-widest opacity-80 mt-2">
@@ -230,10 +232,6 @@ const CreativeAlliance = () => {
                 <span className="text-blue-400">NEURAL CONNECT</span>
                 <span className="text-purple-500">ACTIVE</span>
               </div>
-              
-              <p className="max-w-lg mx-auto text-gray-400 text-sm mt-4">
-                Forging next-generation technological alliances that transcend traditional boundaries
-              </p>
             </motion.div>
             
             {/* Main Dimensional Plane */}

@@ -51,11 +51,11 @@ export default function IndustriesPage() {
       color: "from-blue-500 to-indigo-500",
       description: t('industries.financialDescription'),
       features: [
-        "Secure payment processing systems",
-        "Mobile banking applications",
-        "Investment portfolio management",
-        "Regulatory compliance solutions",
-        "Customer data analytics"
+        t('industries.financialFeatures.securePayment', "Secure payment processing systems"),
+        t('industries.financialFeatures.mobileBanking', "Mobile banking applications"),
+        t('industries.financialFeatures.investmentPortfolio', "Investment portfolio management"),
+        t('industries.financialFeatures.regulatoryCompliance', "Regulatory compliance solutions"),
+        t('industries.financialFeatures.customerData', "Customer data analytics")
       ],
       imageSrc: "/images/industries/financial.jpg"
     },
@@ -66,11 +66,11 @@ export default function IndustriesPage() {
       color: "from-purple-500 to-pink-500",
       description: t('industries.realEstateDescription'),
       features: [
-        "Virtual property tours",
-        "Property listing websites",
-        "Lead generation systems",
-        "Market analysis tools",
-        "Client relationship management"
+        t('industries.realEstateFeatures.virtualTours', "Virtual property tours"),
+        t('industries.realEstateFeatures.listingWebsites', "Property listing websites"),
+        t('industries.realEstateFeatures.leadGeneration', "Lead generation systems"),
+        t('industries.realEstateFeatures.marketAnalysis', "Market analysis tools"),
+        t('industries.realEstateFeatures.clientRelationship', "Client relationship management")
       ],
       imageSrc: "/images/industries/realestate.jpg"
     },
@@ -81,11 +81,11 @@ export default function IndustriesPage() {
       color: "from-emerald-500 to-teal-500",
       description: t('industries.ecommerceDescription'),
       features: [
-        "Custom e-commerce stores",
-        "Inventory management systems",
-        "Payment processing integration", 
-        "Customer loyalty programs",
-        "Product recommendation engines"
+        t('industries.ecommerceFeatures.customStores', "Custom e-commerce stores"),
+        t('industries.ecommerceFeatures.inventoryManagement', "Inventory management systems"),
+        t('industries.ecommerceFeatures.paymentProcessing', "Payment processing integration"),
+        t('industries.ecommerceFeatures.loyaltyPrograms', "Customer loyalty programs"),
+        t('industries.ecommerceFeatures.recommendationEngines', "Product recommendation engines")
       ],
       imageSrc: "/images/industries/ecommerce.jpg"
     },
@@ -96,11 +96,11 @@ export default function IndustriesPage() {
       color: "from-amber-500 to-orange-500",
       description: t('industries.blockchainDescription'),
       features: [
-        "Smart contract development",
-        "Decentralized applications (DApps)",
-        "Token creation and management",
-        "Blockchain integration services",
-        "Crypto wallet development"
+        t('industries.blockchainFeatures.smartContract', "Smart contract development"),
+        t('industries.blockchainFeatures.dapps', "Decentralized applications (DApps)"),
+        t('industries.blockchainFeatures.tokenCreation', "Token creation and management"),
+        t('industries.blockchainFeatures.integration', "Blockchain integration services"),
+        t('industries.blockchainFeatures.walletDevelopment', "Crypto wallet development")
       ],
       imageSrc: "/images/industries/blockchain.jpg"
     },
@@ -111,11 +111,11 @@ export default function IndustriesPage() {
       color: "from-rose-500 to-red-500",
       description: t('industries.entertainmentDescription'),
       features: [
-        "Content streaming platforms",
-        "Digital rights management",
-        "Media analytics solutions",
-        "Interactive audience experiences",
-        "Ad revenue optimization"
+        t('industries.entertainmentFeatures.streamingPlatforms', "Content streaming platforms"),
+        t('industries.entertainmentFeatures.rightsManagement', "Digital rights management"),
+        t('industries.entertainmentFeatures.mediaAnalytics', "Media analytics solutions"),
+        t('industries.entertainmentFeatures.audienceExperiences', "Interactive audience experiences"),
+        t('industries.entertainmentFeatures.revenueOptimization', "Ad revenue optimization")
       ],
       imageSrc: "/images/industries/entertainment.jpg"
     }
@@ -244,7 +244,7 @@ export default function IndustriesPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className={`relative h-[24rem] order-1 ${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}
+                className={`relative min-h-[24rem] order-1 ${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}
               >
                 <div className="absolute inset-0 overflow-hidden rounded-2xl">
                   <div className="absolute inset-0 bg-black/20 backdrop-blur-sm z-10 rounded-2xl"></div>
@@ -260,7 +260,7 @@ export default function IndustriesPage() {
                 </div>
                 
                 {/* Interactive elements inside frame - Redesigned */}
-                <div className="absolute inset-0 z-30 p-10 flex flex-col justify-between">
+                <div className="absolute inset-0 z-30 p-4 sm:p-6 md:p-10 flex flex-col justify-start">
                   {/* Reimagined stats display */}
                   <div className="relative">
                     <motion.div 
@@ -268,27 +268,27 @@ export default function IndustriesPage() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.6 }}
-                      className="bg-black/40 backdrop-blur-md rounded-xl overflow-hidden border border-gray-800 p-6"
+                      className="bg-black/40 backdrop-blur-md rounded-xl overflow-hidden border border-gray-800 p-3 sm:p-6"
                     >
                       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-gray-900/40 to-transparent"></div>
                       <div className="absolute -bottom-12 -right-12 w-40 h-40 rounded-full bg-gradient-to-tl from-black via-gray-900 to-black z-0 blur-xl"></div>
                       <div className={`absolute -bottom-12 -left-4 w-20 h-20 rounded-full bg-gradient-to-r ${industry.color} opacity-30 blur-xl`}></div>
                       
-                      <div className="grid grid-cols-2 gap-6 relative z-10 mb-8">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 relative z-10 mb-3 sm:mb-5">
                         <div className="relative group">
                           <div className={`absolute -inset-0.5 bg-gradient-to-r ${industry.color} rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-1000`}></div>
                           <div className="relative bg-black rounded-lg p-4">
                             <div className="flex justify-between items-start">
                               {industry.id === "financial" ? (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>32</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>32</span>
                               ) : industry.id === "realestate" ? (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>28</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>28</span>
                               ) : industry.id === "ecommerce" ? (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>35</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>35</span>
                               ) : industry.id === "blockchain" ? (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>18</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>18</span>
                               ) : (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>25</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>25</span>
                               )}
                               <div className={`w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br ${industry.color}`}>
                                 <LineChart className="w-4 h-4 text-white" />
@@ -310,15 +310,15 @@ export default function IndustriesPage() {
                           <div className="relative bg-black rounded-lg p-4">
                             <div className="flex justify-between items-start">
                               {industry.id === "financial" ? (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>98%</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>98%</span>
                               ) : industry.id === "realestate" ? (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>99%</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>99%</span>
                               ) : industry.id === "ecommerce" ? (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>97%</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>97%</span>
                               ) : industry.id === "blockchain" ? (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>94%</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>94%</span>
                               ) : (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>96%</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>96%</span>
                               )}
                               <div className={`w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br ${industry.color}`}>
                                 <Zap className="w-4 h-4 text-white" />
@@ -330,14 +330,14 @@ export default function IndustriesPage() {
                         </div>
                       </div>
                       
-                      <div className="relative group">
+                      <div className="relative group h-full overflow-hidden">
                         <div className={`absolute -inset-0.5 bg-gradient-to-r ${industry.color} rounded-xl blur opacity-15 group-hover:opacity-30 transition duration-1000`}></div>
-                        <div className="relative bg-black rounded-lg p-5">
-                          <h3 className={`text-xl font-bold bg-gradient-to-r ${industry.color} text-transparent bg-clip-text`}>
+                        <div className="relative bg-black rounded-lg p-4 sm:p-5 pb-4 sm:pb-8 h-full">
+                          <h3 className={`text-sm sm:text-xl font-bold bg-gradient-to-r ${industry.color} text-transparent bg-clip-text mb-2 sm:mb-4`}>
                             {industry.title.split(' ')[0]} Industry Excellence
                           </h3>
                           
-                          <div className="mt-4 space-y-2">
+                          <div className="mt-2 sm:mt-4 space-y-2 sm:space-y-3">
                             {industry.id === "financial" ? 
                               ["Regulatory Compliance", "Fraud Detection", "Payment Security"].map((feature, idx) => (
                                 <motion.div
@@ -349,9 +349,9 @@ export default function IndustriesPage() {
                                   className="relative h-2 bg-gray-800 rounded-full overflow-hidden"
                                 >
                                   <div className={`absolute inset-y-0 left-0 rounded-full bg-gradient-to-r ${industry.color}`}></div>
-                                  <div className="flex justify-between items-center mt-1">
-                                    <span className="text-xs text-gray-400">{feature}</span>
-                                    <span className={`text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
+                                  <div className="flex justify-between items-center mt-0.5 sm:mt-1">
+                                    <span className="text-[9px] sm:text-xs text-gray-400">{feature}</span>
+                                    <span className={`text-[9px] sm:text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
                                   </div>
                                 </motion.div>
                               ))
@@ -366,9 +366,9 @@ export default function IndustriesPage() {
                                   className="relative h-2 bg-gray-800 rounded-full overflow-hidden"
                                 >
                                   <div className={`absolute inset-y-0 left-0 rounded-full bg-gradient-to-r ${industry.color}`}></div>
-                                  <div className="flex justify-between items-center mt-1">
-                                    <span className="text-xs text-gray-400">{feature}</span>
-                                    <span className={`text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
+                                  <div className="flex justify-between items-center mt-0.5 sm:mt-1">
+                                    <span className="text-[9px] sm:text-xs text-gray-400">{feature}</span>
+                                    <span className={`text-[9px] sm:text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
                                   </div>
                                 </motion.div>
                               ))
@@ -383,9 +383,9 @@ export default function IndustriesPage() {
                                   className="relative h-2 bg-gray-800 rounded-full overflow-hidden"
                                 >
                                   <div className={`absolute inset-y-0 left-0 rounded-full bg-gradient-to-r ${industry.color}`}></div>
-                                  <div className="flex justify-between items-center mt-1">
-                                    <span className="text-xs text-gray-400">{feature}</span>
-                                    <span className={`text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
+                                  <div className="flex justify-between items-center mt-0.5 sm:mt-1">
+                                    <span className="text-[9px] sm:text-xs text-gray-400">{feature}</span>
+                                    <span className={`text-[9px] sm:text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
                                   </div>
                                 </motion.div>
                               ))
@@ -400,9 +400,9 @@ export default function IndustriesPage() {
                                   className="relative h-2 bg-gray-800 rounded-full overflow-hidden"
                                 >
                                   <div className={`absolute inset-y-0 left-0 rounded-full bg-gradient-to-r ${industry.color}`}></div>
-                                  <div className="flex justify-between items-center mt-1">
-                                    <span className="text-xs text-gray-400">{feature}</span>
-                                    <span className={`text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
+                                  <div className="flex justify-between items-center mt-0.5 sm:mt-1">
+                                    <span className="text-[9px] sm:text-xs text-gray-400">{feature}</span>
+                                    <span className={`text-[9px] sm:text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
                                   </div>
                                 </motion.div>
                               ))
@@ -417,16 +417,16 @@ export default function IndustriesPage() {
                                   className="relative h-2 bg-gray-800 rounded-full overflow-hidden"
                                 >
                                   <div className={`absolute inset-y-0 left-0 rounded-full bg-gradient-to-r ${industry.color}`}></div>
-                                  <div className="flex justify-between items-center mt-1">
-                                    <span className="text-xs text-gray-400">{feature}</span>
-                                    <span className={`text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
+                                  <div className="flex justify-between items-center mt-0.5 sm:mt-1">
+                                    <span className="text-[9px] sm:text-xs text-gray-400">{feature}</span>
+                                    <span className={`text-[9px] sm:text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
                                   </div>
                                 </motion.div>
                               ))
                             }
                           </div>
                           
-                          <div className="flex flex-wrap gap-3 mt-6">
+                          <div className="flex flex-wrap gap-1.5 sm:gap-3 mt-3 sm:mt-6">
                             {industry.id === "financial" ? 
                               ["Banking Software", "FinTech API", "Digital Payments"].map((tag, i) => (
                                 <motion.span
@@ -435,10 +435,10 @@ export default function IndustriesPage() {
                                   whileInView={{ opacity: 1, y: 0 }}
                                   viewport={{ once: true }}
                                   transition={{ delay: 0.7 + (i * 0.1), duration: 0.3 }}
-                                  className={`inline-flex items-center px-3 py-1 text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
+                                  className={`inline-flex items-center px-1.5 sm:px-3 py-0.5 sm:py-1 text-[9px] sm:text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
                                 >
-                                  <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-1.5`}></span>
-                                  <span className="text-white/80">{tag}</span>
+                                  <span className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-0.5 sm:mr-1`}></span>
+                                  <span className="text-white/80 text-[8px] sm:text-xs">{tag}</span>
                                 </motion.span>
                               ))
                             : industry.id === "realestate" ?
@@ -449,10 +449,10 @@ export default function IndustriesPage() {
                                   whileInView={{ opacity: 1, y: 0 }}
                                   viewport={{ once: true }}
                                   transition={{ delay: 0.7 + (i * 0.1), duration: 0.3 }}
-                                  className={`inline-flex items-center px-3 py-1 text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
+                                  className={`inline-flex items-center px-1.5 sm:px-3 py-0.5 sm:py-1 text-[9px] sm:text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
                                 >
-                                  <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-1.5`}></span>
-                                  <span className="text-white/80">{tag}</span>
+                                  <span className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-0.5 sm:mr-1`}></span>
+                                  <span className="text-white/80 text-[8px] sm:text-xs">{tag}</span>
                                 </motion.span>
                               ))
                             : industry.id === "ecommerce" ?
@@ -463,10 +463,10 @@ export default function IndustriesPage() {
                                   whileInView={{ opacity: 1, y: 0 }}
                                   viewport={{ once: true }}
                                   transition={{ delay: 0.7 + (i * 0.1), duration: 0.3 }}
-                                  className={`inline-flex items-center px-3 py-1 text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
+                                  className={`inline-flex items-center px-1.5 sm:px-3 py-0.5 sm:py-1 text-[9px] sm:text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
                                 >
-                                  <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-1.5`}></span>
-                                  <span className="text-white/80">{tag}</span>
+                                  <span className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-0.5 sm:mr-1`}></span>
+                                  <span className="text-white/80 text-[8px] sm:text-xs">{tag}</span>
                                 </motion.span>
                               ))
                             : industry.id === "blockchain" ?
@@ -477,10 +477,10 @@ export default function IndustriesPage() {
                                   whileInView={{ opacity: 1, y: 0 }}
                                   viewport={{ once: true }}
                                   transition={{ delay: 0.7 + (i * 0.1), duration: 0.3 }}
-                                  className={`inline-flex items-center px-3 py-1 text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
+                                  className={`inline-flex items-center px-1.5 sm:px-3 py-0.5 sm:py-1 text-[9px] sm:text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
                                 >
-                                  <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-1.5`}></span>
-                                  <span className="text-white/80">{tag}</span>
+                                  <span className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-0.5 sm:mr-1`}></span>
+                                  <span className="text-white/80 text-[8px] sm:text-xs">{tag}</span>
                                 </motion.span>
                               ))
                             :
@@ -491,10 +491,10 @@ export default function IndustriesPage() {
                                   whileInView={{ opacity: 1, y: 0 }}
                                   viewport={{ once: true }}
                                   transition={{ delay: 0.7 + (i * 0.1), duration: 0.3 }}
-                                  className={`inline-flex items-center px-3 py-1 text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
+                                  className={`inline-flex items-center px-1.5 sm:px-3 py-0.5 sm:py-1 text-[9px] sm:text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
                                 >
-                                  <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-1.5`}></span>
-                                  <span className="text-white/80">{tag}</span>
+                                  <span className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-0.5 sm:mr-1`}></span>
+                                  <span className="text-white/80 text-[8px] sm:text-xs">{tag}</span>
                                 </motion.span>
                               ))
                             }
@@ -571,7 +571,7 @@ export default function IndustriesPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className={`relative h-[24rem] order-1 ${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}
+                className={`relative min-h-[24rem] order-1 ${(index + 2) % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}
               >
                 <div className="absolute inset-0 overflow-hidden rounded-2xl">
                   <div className="absolute inset-0 bg-black/20 backdrop-blur-sm z-10 rounded-2xl"></div>
@@ -587,7 +587,7 @@ export default function IndustriesPage() {
                 </div>
                 
                 {/* Interactive elements inside frame - Redesigned */}
-                <div className="absolute inset-0 z-30 p-10 flex flex-col justify-between">
+                <div className="absolute inset-0 z-30 p-4 sm:p-6 md:p-10 flex flex-col justify-start">
                   {/* Reimagined stats display */}
                   <div className="relative">
                     <motion.div 
@@ -595,30 +595,30 @@ export default function IndustriesPage() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.6 }}
-                      className="bg-black/40 backdrop-blur-md rounded-xl overflow-hidden border border-gray-800 p-6"
+                      className="bg-black/40 backdrop-blur-md rounded-xl overflow-hidden border border-gray-800 p-3 sm:p-6"
                     >
                       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-gray-900/40 to-transparent"></div>
                       <div className="absolute -bottom-12 -right-12 w-40 h-40 rounded-full bg-gradient-to-tl from-black via-gray-900 to-black z-0 blur-xl"></div>
                       <div className={`absolute -bottom-12 -left-4 w-20 h-20 rounded-full bg-gradient-to-r ${industry.color} opacity-30 blur-xl`}></div>
                       
-                      <div className="grid grid-cols-2 gap-6 relative z-10 mb-8">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 relative z-10 mb-3 sm:mb-5">
                         <div className="relative group">
                           <div className={`absolute -inset-0.5 bg-gradient-to-r ${industry.color} rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-1000`}></div>
                           <div className="relative bg-black rounded-lg p-4">
                             <div className="flex justify-between items-start">
                               {industry.id === "financial" ? (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>32</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>32</span>
                               ) : industry.id === "realestate" ? (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>28</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>28</span>
                               ) : industry.id === "ecommerce" ? (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>35</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>35</span>
                               ) : industry.id === "blockchain" ? (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>18</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>18</span>
                               ) : (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>25</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>25</span>
                               )}
                               <div className={`w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br ${industry.color}`}>
-                                <Zap className="w-4 h-4 text-white" />
+                                <LineChart className="w-4 h-4 text-white" />
                               </div>
                             </div>
                             <p className="mt-2 text-xs text-gray-400 uppercase tracking-wider font-medium">Enterprise Projects</p>
@@ -637,15 +637,15 @@ export default function IndustriesPage() {
                           <div className="relative bg-black rounded-lg p-4">
                             <div className="flex justify-between items-start">
                               {industry.id === "financial" ? (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>98%</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>98%</span>
                               ) : industry.id === "realestate" ? (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>99%</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>99%</span>
                               ) : industry.id === "ecommerce" ? (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>97%</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>97%</span>
                               ) : industry.id === "blockchain" ? (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>94%</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>94%</span>
                               ) : (
-                                <span className={`text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>96%</span>
+                                <span className={`text-4xl sm:text-5xl font-extrabold bg-gradient-to-br ${industry.color} text-transparent bg-clip-text group-hover:scale-105 transition-transform`}>96%</span>
                               )}
                               <div className={`w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br ${industry.color}`}>
                                 <Zap className="w-4 h-4 text-white" />
@@ -657,14 +657,14 @@ export default function IndustriesPage() {
                         </div>
                       </div>
                       
-                      <div className="relative group">
+                      <div className="relative group h-full overflow-hidden">
                         <div className={`absolute -inset-0.5 bg-gradient-to-r ${industry.color} rounded-xl blur opacity-15 group-hover:opacity-30 transition duration-1000`}></div>
-                        <div className="relative bg-black rounded-lg p-5">
-                          <h3 className={`text-xl font-bold bg-gradient-to-r ${industry.color} text-transparent bg-clip-text`}>
+                        <div className="relative bg-black rounded-lg p-4 sm:p-5 pb-4 sm:pb-8 h-full">
+                          <h3 className={`text-sm sm:text-xl font-bold bg-gradient-to-r ${industry.color} text-transparent bg-clip-text mb-2 sm:mb-4`}>
                             {industry.title.split(' ')[0]} Industry Excellence
                           </h3>
                           
-                          <div className="mt-4 space-y-2">
+                          <div className="mt-2 sm:mt-4 space-y-2 sm:space-y-3">
                             {industry.id === "financial" ? 
                               ["Regulatory Compliance", "Fraud Detection", "Payment Security"].map((feature, idx) => (
                                 <motion.div
@@ -676,9 +676,9 @@ export default function IndustriesPage() {
                                   className="relative h-2 bg-gray-800 rounded-full overflow-hidden"
                                 >
                                   <div className={`absolute inset-y-0 left-0 rounded-full bg-gradient-to-r ${industry.color}`}></div>
-                                  <div className="flex justify-between items-center mt-1">
-                                    <span className="text-xs text-gray-400">{feature}</span>
-                                    <span className={`text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
+                                  <div className="flex justify-between items-center mt-0.5 sm:mt-1">
+                                    <span className="text-[9px] sm:text-xs text-gray-400">{feature}</span>
+                                    <span className={`text-[9px] sm:text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
                                   </div>
                                 </motion.div>
                               ))
@@ -693,9 +693,9 @@ export default function IndustriesPage() {
                                   className="relative h-2 bg-gray-800 rounded-full overflow-hidden"
                                 >
                                   <div className={`absolute inset-y-0 left-0 rounded-full bg-gradient-to-r ${industry.color}`}></div>
-                                  <div className="flex justify-between items-center mt-1">
-                                    <span className="text-xs text-gray-400">{feature}</span>
-                                    <span className={`text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
+                                  <div className="flex justify-between items-center mt-0.5 sm:mt-1">
+                                    <span className="text-[9px] sm:text-xs text-gray-400">{feature}</span>
+                                    <span className={`text-[9px] sm:text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
                                   </div>
                                 </motion.div>
                               ))
@@ -710,9 +710,9 @@ export default function IndustriesPage() {
                                   className="relative h-2 bg-gray-800 rounded-full overflow-hidden"
                                 >
                                   <div className={`absolute inset-y-0 left-0 rounded-full bg-gradient-to-r ${industry.color}`}></div>
-                                  <div className="flex justify-between items-center mt-1">
-                                    <span className="text-xs text-gray-400">{feature}</span>
-                                    <span className={`text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
+                                  <div className="flex justify-between items-center mt-0.5 sm:mt-1">
+                                    <span className="text-[9px] sm:text-xs text-gray-400">{feature}</span>
+                                    <span className={`text-[9px] sm:text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
                                   </div>
                                 </motion.div>
                               ))
@@ -727,9 +727,9 @@ export default function IndustriesPage() {
                                   className="relative h-2 bg-gray-800 rounded-full overflow-hidden"
                                 >
                                   <div className={`absolute inset-y-0 left-0 rounded-full bg-gradient-to-r ${industry.color}`}></div>
-                                  <div className="flex justify-between items-center mt-1">
-                                    <span className="text-xs text-gray-400">{feature}</span>
-                                    <span className={`text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
+                                  <div className="flex justify-between items-center mt-0.5 sm:mt-1">
+                                    <span className="text-[9px] sm:text-xs text-gray-400">{feature}</span>
+                                    <span className={`text-[9px] sm:text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
                                   </div>
                                 </motion.div>
                               ))
@@ -744,16 +744,16 @@ export default function IndustriesPage() {
                                   className="relative h-2 bg-gray-800 rounded-full overflow-hidden"
                                 >
                                   <div className={`absolute inset-y-0 left-0 rounded-full bg-gradient-to-r ${industry.color}`}></div>
-                                  <div className="flex justify-between items-center mt-1">
-                                    <span className="text-xs text-gray-400">{feature}</span>
-                                    <span className={`text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
+                                  <div className="flex justify-between items-center mt-0.5 sm:mt-1">
+                                    <span className="text-[9px] sm:text-xs text-gray-400">{feature}</span>
+                                    <span className={`text-[9px] sm:text-xs text-${industry.color.split(' ')[0]}`}>{75 + idx * 5}%</span>
                                   </div>
                                 </motion.div>
                               ))
                             }
                           </div>
                           
-                          <div className="flex flex-wrap gap-3 mt-6">
+                          <div className="flex flex-wrap gap-1.5 sm:gap-3 mt-3 sm:mt-6">
                             {industry.id === "financial" ? 
                               ["Banking Software", "FinTech API", "Digital Payments"].map((tag, i) => (
                                 <motion.span
@@ -762,10 +762,10 @@ export default function IndustriesPage() {
                                   whileInView={{ opacity: 1, y: 0 }}
                                   viewport={{ once: true }}
                                   transition={{ delay: 0.7 + (i * 0.1), duration: 0.3 }}
-                                  className={`inline-flex items-center px-3 py-1 text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
+                                  className={`inline-flex items-center px-1.5 sm:px-3 py-0.5 sm:py-1 text-[9px] sm:text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
                                 >
-                                  <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-1.5`}></span>
-                                  <span className="text-white/80">{tag}</span>
+                                  <span className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-0.5 sm:mr-1`}></span>
+                                  <span className="text-white/80 text-[8px] sm:text-xs">{tag}</span>
                                 </motion.span>
                               ))
                             : industry.id === "realestate" ?
@@ -776,10 +776,10 @@ export default function IndustriesPage() {
                                   whileInView={{ opacity: 1, y: 0 }}
                                   viewport={{ once: true }}
                                   transition={{ delay: 0.7 + (i * 0.1), duration: 0.3 }}
-                                  className={`inline-flex items-center px-3 py-1 text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
+                                  className={`inline-flex items-center px-1.5 sm:px-3 py-0.5 sm:py-1 text-[9px] sm:text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
                                 >
-                                  <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-1.5`}></span>
-                                  <span className="text-white/80">{tag}</span>
+                                  <span className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-0.5 sm:mr-1`}></span>
+                                  <span className="text-white/80 text-[8px] sm:text-xs">{tag}</span>
                                 </motion.span>
                               ))
                             : industry.id === "ecommerce" ?
@@ -790,10 +790,10 @@ export default function IndustriesPage() {
                                   whileInView={{ opacity: 1, y: 0 }}
                                   viewport={{ once: true }}
                                   transition={{ delay: 0.7 + (i * 0.1), duration: 0.3 }}
-                                  className={`inline-flex items-center px-3 py-1 text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
+                                  className={`inline-flex items-center px-1.5 sm:px-3 py-0.5 sm:py-1 text-[9px] sm:text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
                                 >
-                                  <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-1.5`}></span>
-                                  <span className="text-white/80">{tag}</span>
+                                  <span className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-0.5 sm:mr-1`}></span>
+                                  <span className="text-white/80 text-[8px] sm:text-xs">{tag}</span>
                                 </motion.span>
                               ))
                             : industry.id === "blockchain" ?
@@ -804,10 +804,10 @@ export default function IndustriesPage() {
                                   whileInView={{ opacity: 1, y: 0 }}
                                   viewport={{ once: true }}
                                   transition={{ delay: 0.7 + (i * 0.1), duration: 0.3 }}
-                                  className={`inline-flex items-center px-3 py-1 text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
+                                  className={`inline-flex items-center px-1.5 sm:px-3 py-0.5 sm:py-1 text-[9px] sm:text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
                                 >
-                                  <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-1.5`}></span>
-                                  <span className="text-white/80">{tag}</span>
+                                  <span className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-0.5 sm:mr-1`}></span>
+                                  <span className="text-white/80 text-[8px] sm:text-xs">{tag}</span>
                                 </motion.span>
                               ))
                             :
@@ -818,10 +818,10 @@ export default function IndustriesPage() {
                                   whileInView={{ opacity: 1, y: 0 }}
                                   viewport={{ once: true }}
                                   transition={{ delay: 0.7 + (i * 0.1), duration: 0.3 }}
-                                  className={`inline-flex items-center px-3 py-1 text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
+                                  className={`inline-flex items-center px-1.5 sm:px-3 py-0.5 sm:py-1 text-[9px] sm:text-xs rounded-full border border-${industry.color.split(' ')[0]}/30 bg-black/50`}
                                 >
-                                  <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-1.5`}></span>
-                                  <span className="text-white/80">{tag}</span>
+                                  <span className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-gradient-to-r ${industry.color} mr-0.5 sm:mr-1`}></span>
+                                  <span className="text-white/80 text-[8px] sm:text-xs">{tag}</span>
                                 </motion.span>
                               ))
                             }
@@ -863,7 +863,7 @@ export default function IndustriesPage() {
               {t('industries.letsWorkTogether')}
             </motion.span>
             <h2 className="text-4xl md:text-6xl font-bold mb-6">
-              {t('industries.readyToTransform')} <span className="bg-gradient-to-r from-blue-400 to-indigo-500 text-transparent bg-clip-text">Industry</span>?
+              {t('industries.readyToTransform')} <span className="bg-gradient-to-r from-blue-400 to-indigo-500 text-transparent bg-clip-text">{t('industries.industry')}</span>
             </h2>
             <p className="text-xl text-gray-300 mb-10 mx-auto max-w-3xl">
               {t('industries.readyToTransformDescription')}

@@ -4,6 +4,14 @@ import React, { useEffect, useRef } from 'react';
 import { ArrowRight, Bot, BarChart3, RefreshCw, MessageSquare, Zap, LineChart } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import Script from 'next/script';
+import { useTranslation } from "@/lib/useTranslation";
+
+// Add type declaration for window.initCreatureAnimation
+declare global {
+  interface Window {
+    initCreatureAnimation?: (element: HTMLDivElement) => void;
+  }
+}
 
 interface AIServiceItem {
   id: string;
@@ -15,87 +23,65 @@ interface AIServiceItem {
 }
 
 const AISection: React.FC = () => {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const creatureWrapperRef = useRef<HTMLDivElement>(null);
   const creatureRef = useRef<HTMLDivElement>(null);
   
-  // AI service items with new content and icons
+  // Initialize creature animation when component mounts
+  useEffect(() => {
+    if (creatureRef.current && typeof window !== 'undefined' && window.initCreatureAnimation) {
+      window.initCreatureAnimation(creatureRef.current);
+    }
+  }, []);
+  
+  // AI service items with translations
   const aiServices: AIServiceItem[] = [
     {
       id: "ai-agents",
-      title: "AI Agents for Business",
-      subtitle: "Advanced automation for your company.",
-      features: [
-        "24/7 automated task handling",
-        "40% reduction in operational costs",
-        "Seamless integration with existing systems",
-        "Free consultation to assess your specific needs"
-      ],
+      title: t('aiSolutions.services.aiAgents.title'),
+      subtitle: t('aiSolutions.services.aiAgents.subtitle'),
+      features: t('aiSolutions.services.aiAgents.features', { returnObjects: true }) as string[],
       icon: <Bot className="w-6 h-6 text-blue-400" />,
       color: "blue-400"
     },
     {
       id: "predictive-analytics",
-      title: "Predictive Analytics",
-      subtitle: "Turn data into actionable business insights.",
-      features: [
-        "35% improved forecasting accuracy",
-        "28% reduced inventory costs",
-        "Stay ahead of market changes",
-        "Data-driven decision making"
-      ],
+      title: t('aiSolutions.services.predictiveAnalytics.title'),
+      subtitle: t('aiSolutions.services.predictiveAnalytics.subtitle'),
+      features: t('aiSolutions.services.predictiveAnalytics.features', { returnObjects: true }) as string[],
       icon: <BarChart3 className="w-6 h-6 text-purple-400" />,
       color: "purple-400"
     },
     {
       id: "seamless-integration",
-      title: "Seamless AI Integration",
-      subtitle: "No disruption to current operations.",
-      features: [
-        "Works with your existing infrastructure",
-        "Phased implementation approach",
-        "Measurable ROI within first 3 months",
-        "Continuous support and optimization"
-      ],
+      title: t('aiSolutions.services.seamlessIntegration.title'),
+      subtitle: t('aiSolutions.services.seamlessIntegration.subtitle'),
+      features: t('aiSolutions.services.seamlessIntegration.features', { returnObjects: true }) as string[],
       icon: <RefreshCw className="w-6 h-6 text-cyan-400" />,
       color: "cyan-400"
     },
     {
       id: "llm-solutions",
-      title: "Industry-Specific LLM Solutions",
-      subtitle: "Custom-trained for your industry.",
-      features: [
-        "Compliance with sector-specific regulations",
-        "65% faster document processing",
-        "Personalized demo available",
-        "Continuous model improvement"
-      ],
+      title: t('aiSolutions.services.industryLLM.title'),
+      subtitle: t('aiSolutions.services.industryLLM.subtitle'),
+      features: t('aiSolutions.services.industryLLM.features', { returnObjects: true }) as string[],
       icon: <MessageSquare className="w-6 h-6 text-indigo-400" />,
       color: "indigo-400"
     },
     {
       id: "workflow-optimization",
-      title: "AI Workflow Optimization",
-      subtitle: "Streamlined processes for maximum efficiency.",
-      features: [
-        "Identify and eliminate process bottlenecks",
-        "30% faster processing times",
-        "75% reduction in manual errors",
-        "Custom solutions for your unique challenges"
-      ],
+      title: t('aiSolutions.services.workflowOptimization.title'),
+      subtitle: t('aiSolutions.services.workflowOptimization.subtitle'),
+      features: t('aiSolutions.services.workflowOptimization.features', { returnObjects: true }) as string[],
       icon: <Zap className="w-6 h-6 text-pink-400" />,
       color: "pink-400"
     },
     {
       id: "decision-support",
-      title: "AI-Powered Decision Support",
-      subtitle: "Strategic insights for smarter business choices.",
-      features: [
-        "Real-time data analysis for better decisions",
-        "42% faster strategic planning cycles",
-        "Risk assessment with 87% accuracy",
-        "Custom dashboards for executive insights"
-      ],
+      title: t('aiSolutions.services.decisionSupport.title'),
+      subtitle: t('aiSolutions.services.decisionSupport.subtitle'),
+      features: t('aiSolutions.services.decisionSupport.features', { returnObjects: true }) as string[],
       icon: <LineChart className="w-6 h-6 text-emerald-400" />,
       color: "emerald-400"
     }
@@ -116,14 +102,14 @@ const AISection: React.FC = () => {
         <div className="mb-16 max-w-4xl mx-auto">
           <h2 className="mb-6 text-6xl md:text-7xl font-bold tracking-tight">
             <span className="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 text-transparent bg-clip-text animate-gradient-x">
-              AI Solutions
+              {t('aiSolutions.title')}
             </span>
           </h2>
           <h3 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-            Advanced AI Development & Integration
+            {t('aiSolutions.subtitle')}
           </h3>
           <p className="text-lg text-gray-300 max-w-3xl">
-            Our team of AI specialists develops cutting-edge artificial intelligence solutions designed to transform your business operations. From custom models to seamless integration, we bring the power of AI to your organization.
+            {t('aiSolutions.description')}
           </p>
         </div>
         
@@ -155,7 +141,7 @@ const AISection: React.FC = () => {
                 {/* Description text */}
                 <div className="text-gray-300 mb-6">
                   <p className="mb-4">
-                    Strategic AI solutions that improve your business operations and drive qualified results.
+                    {t('aiSolutions.commonDescription')}
                   </p>
                 </div>
                 
@@ -181,7 +167,7 @@ const AISection: React.FC = () => {
             asChild
           >
             <a href="/services#ai-development">
-              Explore AI Solutions
+              {t('aiSolutions.exploreButton')}
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </a>
           </Button>
@@ -226,167 +212,7 @@ const AISection: React.FC = () => {
       
       {/* Load the animation as separate scripts */}
       <Script id="anime-script" src="https://assets.codepen.io/1137/anime.esm.min.js" type="module" strategy="afterInteractive" />
-      <Script id="creature-init" strategy="afterInteractive">
-        {`
-        document.addEventListener('DOMContentLoaded', function() {
-          const initAnimation = async () => {
-            try {
-              // Dynamically import the animation library
-              const { animate, createTimeline, createTimer, stagger, utils } = await import('https://assets.codepen.io/1137/anime.esm.min.js');
-              
-              // Get the creature element in this specific section
-              const creatureEl = document.querySelector('#ai-solutions #creature');
-              
-              if (!creatureEl) {
-                console.error('Creature element not found');
-                return;
-              }
-              
-              // Clear any existing content
-              creatureEl.innerHTML = '';
-              
-              const viewport = { w: window.innerWidth * .5, h: window.innerHeight * .5 };
-              const cursor = { x: 0, y: 0 };
-              const rows = 13;
-              const grid = [rows, rows];
-              const from = 'center';
-              const scaleStagger = stagger([2, 5], { ease: 'inQuad', grid, from });
-              const opacityStagger = stagger([1, .1], { grid, from });
-
-              // Define an array of gradient colors from our AI services
-              const colors = [
-                ['#3b82f6', '#60a5fa'], // blue
-                ['#8b5cf6', '#a78bfa'], // purple
-                ['#06b6d4', '#22d3ee'], // cyan
-                ['#6366f1', '#818cf8'], // indigo
-                ['#ec4899', '#f472b6'], // pink
-                ['#10b981', '#34d399']  // emerald
-              ];
-
-              // Define gradient colors from the AI Solutions title
-              const titleGradientColors = [
-                '#3b82f6', // blue-500
-                '#6366f1', // indigo-500
-                '#8b5cf6'  // purple-600
-              ];
-
-              for (let i = 0; i < (rows * rows); i++) {
-                creatureEl.appendChild(document.createElement('div'));
-              }
-
-              const particuleEls = creatureEl.querySelectorAll('div');
-
-              utils.set(creatureEl, {
-                width: rows * 10 + 'em',
-                height: rows * 10 + 'em'
-              });
-
-              utils.set(particuleEls, {
-                x: 0,
-                y: 0,
-                scale: scaleStagger,
-                opacity: opacityStagger,
-                background: stagger([0, particuleEls.length - 1], { grid, from,
-                  modifier: (v) => {
-                    // Use title gradient colors for a consistent theme with the title
-                    // Calculate position in the gradient based on particle position
-                    const startIndex = Math.floor((v / particuleEls.length) * (titleGradientColors.length - 1));
-                    const endIndex = (startIndex + 1) % titleGradientColors.length;
-                    // Create a gradient matching the title's gradient direction
-                    return \`linear-gradient(to right, \${titleGradientColors[startIndex]}, \${titleGradientColors[endIndex]})\`;
-                  },
-                }),
-                boxShadow: stagger([8, 1], { grid, from,
-                  modifier: v => {
-                    // Use matching title gradient color for glow
-                    const colorIndex = Math.floor((v / 8) * titleGradientColors.length);
-                    const color = titleGradientColors[colorIndex % titleGradientColors.length];
-                    return \`0px 0px \${utils.round(v, 0)}em 0px \${color}\`;
-                  },
-                }),
-                zIndex: stagger([rows * rows, 1], { grid, from, modifier: utils.round(0) }),
-              });
-
-              const pulse = () => {
-                animate(particuleEls, {
-                  keyframes: [
-                    {
-                      scale: 5,
-                      opacity: 1,
-                      delay: stagger(90, { start: 1650, grid, from }),
-                      duration: 150,
-                    }, {
-                      scale: scaleStagger,
-                      opacity: opacityStagger,
-                      ease: 'inOutQuad',
-                      duration: 600
-                    }
-                  ],
-                });
-              }
-
-              const mainLoop = createTimer({
-                frameRate: 15, // Animate to the new cursor position every 250ms
-                onUpdate: () => {
-                  animate(particuleEls, {
-                    x: cursor.x,
-                    y: cursor.y,
-                    delay: stagger(40, { grid, from }),
-                    duration: stagger(120, { start: 750, ease: 'inQuad', grid, from }),
-                    ease: 'inOut',
-                    composition: 'blend', // This allows the animations to overlap nicely
-                  });
-                }
-              });
-
-              const autoMove = createTimeline()
-              .add(cursor, {
-                x: [-viewport.w * .45, viewport.w * .45],
-                modifier: x => x + Math.sin(mainLoop.currentTime * .0007) * viewport.w * .5,
-                duration: 3000,
-                ease: 'inOutExpo',
-                alternate: true,
-                loop: true,
-                onBegin: pulse,
-                onLoop: pulse,
-              }, 0)
-              .add(cursor, {
-                y: [-viewport.h * .45, viewport.h * .45],
-                modifier: y => y + Math.cos(mainLoop.currentTime * .00012) * viewport.h * .5,
-                duration: 1000,
-                ease: 'inOutQuad',
-                alternate: true,
-                loop: true,
-              }, 0);
-
-              // Start the animations
-              mainLoop.start();
-              autoMove.play();
-              
-              // Handle window resize
-              window.addEventListener('resize', () => {
-                viewport.w = window.innerWidth * .5;
-                viewport.h = window.innerHeight * .5;
-              });
-              
-              console.log('AI Section animation initialized successfully');
-            } catch (error) {
-              console.error('Error initializing animation:', error);
-            }
-          };
-          
-          // Initialize the animation
-          initAnimation();
-        });
-        
-        // Trigger DOMContentLoaded if it already happened
-        if (document.readyState === 'complete' || document.readyState === 'interactive') {
-          setTimeout(() => {
-            document.dispatchEvent(new Event('DOMContentLoaded'));
-          }, 500);
-        }
-        `}
-      </Script>
+      <Script id="creature-script" src="/js/creature.js" strategy="afterInteractive" />
     </section>
   );
 };

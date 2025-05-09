@@ -27,7 +27,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap" rel="stylesheet" />
       </head>
-      <body className={inter.className}>
+      <body 
+        className={inter.className}
+        style={{ touchAction: 'manipulation' }}
+      >
         <TranslationProvider>
           {children}
         </TranslationProvider>

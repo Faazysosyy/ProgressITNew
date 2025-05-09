@@ -84,8 +84,13 @@
         console.warn('Card [data-card="727"] not found');
         return;
       }
+      // Check if animation container already exists
+      if (card.querySelector('.animation-container')) {
+        console.log('Animation for card [data-card="727"] already initialized by a specialized script.');
+        return;
+      }
       
-      console.log('Initializing Digital Twin Engineering animation');
+      console.log('Initializing Digital Twin Engineering animation via basic loader');
       
       const container = document.createElement('div');
       container.className = 'animation-container';
@@ -207,8 +212,13 @@
         console.warn('Card [data-card="889"] not found');
         return;
       }
+      // Check if animation container already exists
+      if (card.querySelector('.animation-container')) {
+        console.log('Animation for card [data-card="889"] already initialized by a specialized script.');
+        return;
+      }
       
-      console.log('Initializing Holographic Interfaces animation');
+      console.log('Initializing Holographic Interfaces animation via basic loader');
       
       const container = document.createElement('div');
       container.className = 'animation-container';
@@ -332,7 +342,12 @@
     function initEdgeComputingSolutions() {
       const card = document.querySelector('[data-card="646"]');
       if (!card) return;
-      console.log('Initializing Edge Computing Solutions animation');
+      // Check if animation container already exists or a pulse-container for this specific basic animation
+      if (card.querySelector('.animation-container') || card.querySelector('.pulse-container')) {
+        console.log('Animation for card [data-card="646"] already initialized.');
+        return;
+      }
+      console.log('Initializing Edge Computing Solutions animation via basic loader');
       
       // Basic pulse animation
       const container = document.createElement('div');
@@ -365,7 +380,12 @@
     function initSyntheticMediaCreation() {
       const card = document.querySelector('[data-card="739"]');
       if (!card) return;
-      console.log('Initializing Synthetic Media Creation animation');
+      // Check if animation container already exists
+      if (card.querySelector('.animation-container')) {
+        console.log('Animation for card [data-card="739"] already initialized by a specialized script.');
+        return;
+      }
+      console.log('Initializing Synthetic Media Creation animation via basic loader');
       
       const container = document.createElement('div');
       container.className = 'animation-container';
@@ -609,7 +629,12 @@
     function initQuantumEncryption() {
       const card = document.querySelector('[data-card="738"]');
       if (!card) return;
-      console.log('Initializing Quantum Encryption animation');
+      // Check if animation container already exists
+      if (card.querySelector('.animation-container')) {
+        console.log('Animation for card [data-card="738"] already initialized by a specialized script.');
+        return;
+      }
+      console.log('Initializing Quantum Encryption animation via basic loader');
       
       const container = document.createElement('div');
       container.className = 'animation-container';
@@ -774,7 +799,12 @@
     function initAugmentedDevelopment() {
       const card = document.querySelector('[data-card="574"]');
       if (!card) return;
-      console.log('Initializing Augmented Development animation');
+      // Check if animation container already exists
+      if (card.querySelector('.animation-container')) {
+        console.log('Animation for card [data-card="574"] already initialized by a specialized script.');
+        return;
+      }
+      console.log('Initializing Augmented Development animation via basic loader');
       
       const container = document.createElement('div');
       container.className = 'animation-container';
@@ -980,7 +1010,12 @@
     function initBiodigitalInterfaces() {
       const card = document.querySelector('[data-card="136"]');
       if (!card) return;
-      console.log('Initializing Biodigital Interfaces animation');
+      // Check if animation container already exists
+      if (card.querySelector('.animation-container')) {
+        console.log('Animation for card [data-card="136"] already initialized by a specialized script.');
+        return;
+      }
+      console.log('Initializing Biodigital Interfaces animation via basic loader');
       
       const container = document.createElement('div');
       container.className = 'animation-container';
@@ -1240,46 +1275,76 @@
   function initializeAllAnimations() {
     console.log('Initializing all animations...');
     
-    // Initialize our specialized animations
-    const specializedAnimations = [
-      { name: 'Adaptive Interfaces', fn: window.initAdaptiveInterfaces },
-      { name: 'Quantum Architecture', fn: window.initQuantumArchitecture },
-      { name: 'Neural Integration', fn: window.initNeuralIntegration },
-      { name: 'Data Mesh Systems', fn: window.initDataMeshSystems },
-      { name: 'Cybernetic Security', fn: window.initCyberneticSecurity },
-      { name: 'Digital Twin Engineering', fn: window.initDigitalTwinEngineering },
-      { name: 'Holographic Interfaces', fn: window.initHolographicInterfaces },
-      { name: 'Edge Computing Solutions', fn: window.initEdgeComputingSolutions }
+    // Initialize our specialized animations from window object
+    const specializedAnimationInitializers = [
+      // These names should match global functions defined by specialized scripts
+      { name: 'Adaptive Interfaces', fnName: 'initAdaptiveInterfaces', cardSelector: '[data-card="242"]' },
+      { name: 'Quantum Architecture', fnName: 'initQuantumArchitecture', cardSelector: '[data-card="627"]' },
+      { name: 'Neural Integration', fnName: 'initNeuralIntegration', cardSelector: '[data-card="675"]' },
+      { name: 'Data Mesh Systems', fnName: 'initDataMeshSystems', cardSelector: '[data-card="937"]' },
+      { name: 'Cybernetic Security', fnName: 'initCyberneticSecurity', cardSelector: '[data-card="886"]' },
+      // The following are also in basic, so specialized should take precedence
+      { name: 'Digital Twin Engineering', fnName: 'initDigitalTwinEngineeringSpecialized', cardSelector: '[data-card="727"]' }, // Assuming specialized script defines this
+      { name: 'Holographic Interfaces', fnName: 'initHolographicInterfacesSpecialized', cardSelector: '[data-card="889"]' }, // Assuming specialized script defines this
+      { name: 'Edge Computing Solutions', fnName: 'initEdgeComputingSolutionsSpecialized', cardSelector: '[data-card="646"]' }  // Assuming specialized script defines this
     ];
     
-    specializedAnimations.forEach(animation => {
-      if (typeof animation.fn === 'function') {
-        console.log(`Initializing ${animation.name} animation`);
-        try {
-          animation.fn();
-        } catch (error) {
-          console.error(`Error initializing ${animation.name} animation:`, error);
+    specializedAnimationInitializers.forEach(anim => {
+      const cardElement = document.querySelector(anim.cardSelector);
+      if (cardElement) {
+        if (typeof window[anim.fnName] === 'function') {
+          console.log(`Initializing ${anim.name} animation via specialized script (${anim.fnName})`);
+          try {
+            window[anim.fnName](cardElement); // Pass card element if needed by specialized function
+             // Mark as initialized by specialized script
+            cardElement.setAttribute('data-specialized-animation-init', 'true');
+          } catch (error) {
+            console.error(`Error initializing ${anim.name} (specialized) animation:`, error);
+          }
+        } else {
+          console.warn(`${anim.name} specialized animation function ${anim.fnName} not found on window.`);
         }
       } else {
-        console.warn(`${animation.name} animation function not found`);
+        console.warn(`Card for ${anim.name} (${anim.cardSelector}) not found.`);
       }
     });
     
-    // Initialize basic animations for remaining cards
+    // Initialize basic animations for cards not handled by specialized scripts
+    // The internal checks in these functions will prevent re-initialization
+    console.log('Proceeding to initialize basic animations (will skip if already handled by specialized scripts)...');
     initializeBasicAnimations();
   }
   
   // Start the loading process
   loadAnimeJS()
     .then(() => {
-      console.log('Starting specialized animations load');
-      return loadSpecializedAnimations();
+      console.log('Starting specialized animations load (for non-grid elements if any)');
+      return loadSpecializedAnimations(); // This loads scripts like tech-animate-neural.js etc.
     })
     .then(() => {
-      console.log('Starting animation initialization');
-      initializeAllAnimations();
+      console.log('Initializing existing page animations (e.g., for elements outside the main grid)');
+      // This calls functions like window.initAdaptiveInterfaces if they exist from specialized scripts
+      // It also calls initializeBasicAnimations which has its own internal checks now.
+      initializeAllAnimations(); 
+
+      // Now, load and initialize the new tech grid card animations
+      console.log('Attempting to load tech-grid-animations.js');
+      const techGridAnimScript = document.createElement('script');
+      techGridAnimScript.src = '/js/tech-grid-animations.js';
+      techGridAnimScript.onload = () => {
+        if (typeof window.initAllTechGridAnimations === 'function') {
+          console.log('Initializing new tech grid card animations via tech-grid-animations.js');
+          window.initAllTechGridAnimations();
+        } else {
+          console.error('initAllTechGridAnimations function not found after loading script.');
+        }
+      };
+      techGridAnimScript.onerror = () => {
+        console.error('Failed to load tech-grid-animations.js');
+      };
+      document.head.appendChild(techGridAnimScript);
     })
     .catch(error => {
-      console.error('Animation initialization failed:', error);
+      console.error('Main animation initialization failed:', error);
     });
 })(); 

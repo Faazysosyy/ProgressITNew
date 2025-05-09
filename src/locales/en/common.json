@@ -17,6 +17,28 @@
     "contact": "Contact",
     "scrollToExplore": "Scroll to explore"
   },
+  "stats": {
+    "weBuild": "We Build",
+    "digitalExcellence": "Digital Excellence",
+    "innovativeSolutions": "Innovative Web Solutions, Strategic Marketing & Cutting-Edge Technology",
+    "description": "At Progress IT, we craft powerful digital solutions worldwide that drive growth, engagement, and measurable results.",
+    "topRated": "What makes us one of the top-rated developer companies?",
+    "yearsInBusiness": "Years in business",
+    "projectsLaunched": "Websites & projects launched",
+    "blockchainSolutions": "Blockchain Solutions",
+    "longevity": "Longevity",
+    "longevityDescription": "Established in 2008, ProgressIT has built a stellar reputation for delivering cutting-edge solutions across industries. Our extensive experience positions us at the forefront of both traditional and blockchain development.",
+    "webDevDesign": "Web Dev & Design Focus",
+    "webDevDesignDescription": "ProgressIT delivers exceptional web development services with innovative design principles. Our development approach creates distinctive digital presences that outperform competitors and capture audience attention effectively.",
+    "breathtakingDesign": "Breathtaking Design",
+    "breathtakingDesignDescription": "Our unique design philosophy sets us apart in the digital landscape. We craft interfaces that are not only visually striking but also intuitive, adaptable, and performance-optimized across all devices and platforms.",
+    "onBrandExperiences": "On-Brand Experiences",
+    "onBrandExperiencesDescription": "At ProgressIT, we understand the critical importance of brand alignment. We've helped countless organizations enhance their digital identity through carefully crafted design elements that reinforce brand values and messaging strategies.",
+    "uniqueSolutions": "One-Of-A-Kind Solutions",
+    "uniqueSolutionsDescription": "Our development team specializes in creating bespoke solutions tailored precisely to each client's specific requirements. We don't believe in template approaches—every project receives customized attention and strategic development.",
+    "partnership": "Partnership & Collaboration",
+    "partnershipDescription": "We maintain consistent, transparent communication throughout your project journey. Our collaborative approach ensures you're informed at every stage, and our relationship continues with dedicated support long after launch."
+  },
   "services": {
     "title": "Our Services & Capabilities",
     "subtitle": "We deliver exceptional digital experiences through our comprehensive range of services.",
@@ -28,7 +50,452 @@
     "completeServiceDescription": "Each service is tailored to meet your specific needs, ensuring exceptional results that exceed expectations.",
     "comprehensiveDigitalSolutions": "Our Comprehensive Digital Solutions",
     "readyToStartProject": "Ready to Start Your Project?",
-    "readyToStartDescription": "Our team of experts is ready to help you achieve your goals. Let's discuss your project and create a solution that's perfect for your business."
+    "readyToStartDescription": "Our team of experts is ready to help you achieve your goals. Let's discuss your project and create a solution that's perfect for your business.",
+    "viewAllServices": "View All Services",
+    "serviceTaglines": {
+      "webDevelopment": "Powerful websites with ongoing support.",
+      "seo": "Visibility that drives results.",
+      "mobileDevelopment": "Seamless experiences in every pocket.",
+      "uiuxDesign": "Where psychology meets pixels.",
+      "brandIdentity": "From concepts to cohesive identities.",
+      "webApplications": "Tailored solutions for complex needs.",
+      "aiAnalytics": "Your data, weaponized.",
+      "digitalMarketing": "Algorithms meet artistry.",
+      "cyberResilience": "Security as a priority."
+    },
+    "serviceBulletPoints": {
+      "webDevelopment": [
+        "Custom CMS development (WordPress, Shopify, Webflow)",
+        "Regular updates, security patches & monitoring",
+        "Performance optimization & speed improvements",
+        "Content management & technical support"
+      ],
+      "seo": [
+        "Comprehensive keyword research & strategy",
+        "On-page & technical SEO optimization",
+        "Link building & off-page optimization",
+        "Regular performance tracking & reporting"
+      ],
+      "mobileDevelopment": [
+        "iOS & Android native app development",
+        "Flutter & React Native cross-platform apps",
+        "Progressive Web Apps (PWAs)",
+        "App maintenance & version updates"
+      ],
+      "uiuxDesign": [
+        "User journey mapping & wireframing",
+        "Responsive & mobile-first design",
+        "Accessibility improvements (WCAG compliance)",
+        "Usability testing & iterative optimization"
+      ],
+      "brandIdentity": [
+        "Logo design & visual identity systems",
+        "Brand voice & messaging guidelines",
+        "Style guides & brand assets creation",
+        "Brand strategy & positioning"
+      ],
+      "webApplications": [
+        "Enterprise-grade application development",
+        "SaaS & cloud-based solutions",
+        "API development & third-party integrations",
+        "Database design & performance optimization"
+      ],
+      "aiAnalytics": [
+        "Predictive analytics & machine learning models",
+        "Real-time dashboards with Tableau/Power BI",
+        "Customer behavior segmentation",
+        "AI-driven A/B testing for hyper-optimization"
+      ],
+      "digitalMarketing": [
+        "Programmatic advertising with AI bidding",
+        "Social media marketing & content strategy",
+        "Email marketing & automation workflows",
+        "Meta (Facebook/Instagram) & Google ads"
+      ],
+      "cyberResilience": [
+        "Penetration testing & vulnerability audits",
+        "GDPR/CCPA compliance consulting",
+        "Security protocol implementation",
+        "Ransomware response planning"
+      ]
+    },
+    "serviceCards": {
+      "webDevelopment": {
+        "title": "Website Development & Maintenance",
+        "description": "Custom websites built with cutting-edge technology and comprehensive maintenance services to ensure optimal performance."
+      },
+      "seo": {
+        "title": "Search Engine Optimization",
+        "description": "Strategic SEO solutions that improve your website's visibility and drive qualified organic traffic to boost your online presence."
+      },
+      "mobileDevelopment": {
+        "title": "Mobile Application Development",
+        "description": "Native and cross-platform mobile applications that deliver intuitive experiences across all devices and platforms."
+      },
+      "uiuxDesign": {
+        "title": "UI/UX Design & Optimization",
+        "description": "Intuitive and engaging user interfaces that create memorable digital experiences and drive conversions."
+      },
+      "brandIdentity": {
+        "title": "Brand Identity Development",
+        "description": "Strategic brand development that establishes a strong market presence and connects with your target audience."
+      },
+      "webApplications": {
+        "title": "Custom Web Application Development",
+        "description": "Bespoke web applications designed to solve specific business challenges and streamline operations."
+      },
+      "aiAnalytics": {
+        "title": "AI & Data Analytics",
+        "description": "Comprehensive data analysis that provides actionable insights to optimize your digital strategy and ROI."
+      },
+      "digitalMarketing": {
+        "title": "Digital Marketing",
+        "description": "Strategic marketing campaigns that increase brand visibility and drive qualified traffic to your digital platforms."
+      },
+      "cyberResilience": {
+        "title": "Cyber Resilience",
+        "description": "Protect your digital assets and ensure business continuity with comprehensive cybersecurity solutions."
+      }
+    },
+    "workingWithLeadingCompanies": "Working with leading companies worldwide to deliver exceptional solutions and services.",
+    "detailed": {
+      "webDevelopment": {
+        "cardTitle": "Website Development & Maintenance Services",
+        "cardSubtext": "Custom websites with ongoing support to keep your digital presence operating at peak performance.",
+        "sectionTitle": "Elevate Your Digital Presence with Expert Web Solutions",
+        "sectionDescription": "At Progress IT, we craft exceptional websites that not only look stunning but also deliver measurable business results. Our comprehensive website development and maintenance services ensure your site remains secure, up-to-date, and optimized for both users and search engines.",
+        "categories": {
+          "customWebDev": {
+            "title": "Custom Web Development",
+            "items": [
+              "Responsive, mobile-first design principles",
+              "Performance-optimized code architecture",
+              "Intuitive user interfaces and seamless UX"
+            ]
+          },
+          "cmsSolutions": {
+            "title": "CMS Solutions",
+            "items": [
+              "WordPress, Shopify, and custom CMS development",
+              "User-friendly admin interfaces",
+              "Content management training and support"
+            ]
+          },
+          "ongoingMaintenance": {
+            "title": "Ongoing Maintenance",
+            "items": [
+              "Regular security updates and monitoring",
+              "Performance optimization and speed improvements",
+              "Backup management and disaster recovery"
+            ]
+          },
+          "technicalSupport": {
+            "title": "Technical Support",
+            "items": [
+              "Dedicated support team for quick issue resolution",
+              "Regular performance reporting and analytics",
+              "Proactive monitoring to prevent downtime"
+            ]
+          }
+        }
+      },
+      "seo": {
+        "cardTitle": "Search Engine Optimization",
+        "cardSubtext": "Strategic SEO solutions to improve visibility and drive qualified organic traffic to your website.",
+        "sectionTitle": "Amplify Your Online Visibility with Strategic SEO",
+        "sectionDescription": "Our comprehensive SEO services are designed to elevate your digital presence, improve search rankings, and drive targeted organic traffic to your website. We employ data-driven strategies and cutting-edge techniques to ensure your business stands out in an increasingly competitive digital landscape.",
+        "categories": {
+          "technicalSeo": {
+            "title": "Technical SEO",
+            "items": [
+              "Site architecture optimization",
+              "Page speed enhancement",
+              "Mobile optimization & structured data"
+            ]
+          },
+          "onPageSeo": {
+            "title": "On-Page SEO",
+            "items": [
+              "Keyword research & content strategy",
+              "Meta tag optimization",
+              "Content enhancement for search intent"
+            ]
+          },
+          "offPageOptimization": {
+            "title": "Off-Page Optimization",
+            "items": [
+              "High-quality backlink acquisition",
+              "Digital PR & brand mentions",
+              "Social signals & online reputation management"
+            ]
+          },
+          "analyticsReporting": {
+            "title": "Analytics & Reporting",
+            "items": [
+              "Custom KPI tracking dashboards",
+              "Comprehensive performance reports",
+              "Competitor analysis & market insights"
+            ]
+          }
+        }
+      },
+      "mobileAppDevelopment": {
+        "cardTitle": "Mobile Application Development",
+        "cardSubtext": "Native and cross-platform mobile apps that deliver seamless experiences across all devices.",
+        "sectionTitle": "Powerful Mobile Solutions for the Modern World",
+        "sectionDescription": "Our expert mobile development team creates innovative, user-focused applications that drive engagement and deliver exceptional experiences. Whether you need a native app for maximum performance or a cross-platform solution for broader reach, we deliver mobile products that exceed expectations.",
+        "categories": {
+          "nativeAppDev": {
+            "title": "Native App Development",
+            "items": [
+              "iOS development with Swift",
+              "Android development with Kotlin",
+              "Platform-specific optimizations"
+            ]
+          },
+          "crossPlatformSolutions": {
+            "title": "Cross-Platform Solutions",
+            "items": [
+              "React Native for consistent UI/UX",
+              "Flutter for beautiful interfaces",
+              "Single codebase efficiency"
+            ]
+          },
+          "progressiveWebApps": {
+            "title": "Progressive Web Apps",
+            "items": [
+              "Offline functionality",
+              "App-like experience with web technology",
+              "Fast loading and responsive design"
+            ]
+          },
+          "appLifecycle": {
+            "title": "App Lifecycle Management",
+            "items": [
+              "Ongoing maintenance and updates",
+              "Performance monitoring and optimization",
+              "Feature enhancements and scaling"
+            ]
+          }
+        }
+      },
+      "uiuxDesign": {
+        "cardTitle": "UI/UX Design & Optimization",
+        "cardSubtext": "Intuitive and engaging user interfaces that create memorable digital experiences and drive conversions.",
+        "sectionTitle": "Transform User Experiences with Exceptional Design",
+        "sectionDescription": "Our UI/UX design team creates intuitive, visually stunning interfaces that enhance user satisfaction and drive business results. We combine aesthetic excellence with deep user research to craft digital experiences that delight users and achieve your business objectives.",
+        "categories": {
+          "userResearch": {
+            "title": "User Research & Strategy",
+            "items": [
+              "User personas & journey mapping",
+              "Competitive analysis",
+              "Information architecture design"
+            ]
+          },
+          "interfaceDesign": {
+            "title": "Interface Design",
+            "items": [
+              "Wireframing & prototyping",
+              "Visual design & brand integration",
+              "Responsive & mobile-first design"
+            ]
+          },
+          "usabilityAccessibility": {
+            "title": "Usability & Accessibility",
+            "items": [
+              "WCAG compliance implementation",
+              "Usability testing & analysis",
+              "Inclusive design principles"
+            ]
+          },
+          "optimizationImprovement": {
+            "title": "Optimization & Improvement",
+            "items": [
+              "Conversion rate optimization (CRO)",
+              "A/B testing & data-driven refinement",
+              "User satisfaction measurement"
+            ]
+          }
+        }
+      },
+      "brandIdentity": {
+        "cardTitle": "Brand Identity Development",
+        "cardSubtext": "Strategic brand development that establishes a strong market presence and connects with your target audience.",
+        "sectionTitle": "Create a Distinctive Brand that Resonates",
+        "sectionDescription": "Our brand identity services help you develop a cohesive, memorable brand that captivates your audience and differentiates your business. From visual elements to voice and messaging, we craft comprehensive brand systems that build recognition and foster customer loyalty.",
+        "categories": {
+          "brandStrategy": {
+            "title": "Brand Strategy",
+            "items": [
+              "Market positioning & differentiation",
+              "Brand architecture & naming",
+              "Value proposition development"
+            ]
+          },
+          "visualIdentity": {
+            "title": "Visual Identity",
+            "items": [
+              "Logo design & variations",
+              "Color palette & typography system",
+              "Iconography & image style guidelines"
+            ]
+          },
+          "voiceMessaging": {
+            "title": "Voice & Messaging",
+            "items": [
+              "Brand voice & tone development",
+              "Messaging framework & key narratives",
+              "Content strategy alignment"
+            ]
+          },
+          "brandImplementation": {
+            "title": "Brand Implementation",
+            "items": [
+              "Comprehensive brand guidelines",
+              "Digital & print collateral design",
+              "Brand launch & activation strategy"
+            ]
+          }
+        }
+      },
+      "customWebApplications": {
+        "cardTitle": "Custom Web Application Development",
+        "cardSubtext": "Bespoke web applications designed to solve specific business challenges and streamline operations.",
+        "sectionTitle": "Tailored Solutions for Complex Business Needs",
+        "sectionDescription": "Our custom web application development services deliver powerful, scalable solutions that address your unique business requirements. From enterprise systems to SaaS platforms, we build robust applications that optimize workflows, enhance productivity, and drive growth.",
+        "categories": {
+          "enterpriseApplications": {
+            "title": "Enterprise Applications",
+            "items": [
+              "Workflow & process automation",
+              "Business intelligence dashboards",
+              "Custom CRM & ERP solutions"
+            ]
+          },
+          "saasPlatforms": {
+            "title": "SaaS Platforms",
+            "items": [
+              "Multi-tenant architecture",
+              "Subscription & billing management",
+              "Scalable cloud infrastructure"
+            ]
+          },
+          "apiDevelopment": {
+            "title": "API Development",
+            "items": [
+              "RESTful & GraphQL API design",
+              "Third-party integration services",
+              "Microservices architecture"
+            ]
+          },
+          "performanceSecurity": {
+            "title": "Performance & Security",
+            "items": [
+              "Load testing & performance optimization",
+              "Security audit & vulnerability testing",
+              "Continuous integration/deployment"
+            ]
+          }
+        }
+      },
+      "aiDevelopment": {
+        "cardTitle": "Enterprise AI Development & Implementation",
+        "cardSubtext": "Advanced artificial intelligence solutions that transform business operations and create competitive advantages.",
+        "sectionTitle": "Harnessing the Power of Artificial Intelligence for Business Transformation",
+        "sectionDescription": "Our comprehensive AI development services help organizations leverage cutting-edge artificial intelligence technologies to solve complex business challenges, automate processes, and gain valuable insights from data. With a focus on practical implementation and measurable results, we deliver AI solutions that drive real business value.",
+        "categories": {
+          "machineLearning": {
+            "title": "Machine Learning Development",
+            "items": [
+              "Custom ML model development and training",
+              "Supervised and unsupervised learning solutions",
+              "Predictive analytics implementation"
+            ]
+          },
+          "nlp": {
+            "title": "Natural Language Processing",
+            "items": [
+              "Domain-specific LLM fine-tuning and deployment",
+              "Sentiment analysis and text classification",
+              "Multilingual content processing capabilities"
+            ]
+          },
+          "computerVision": {
+            "title": "Computer Vision Solutions",
+            "items": [
+              "Object detection and image recognition",
+              "Automated visual inspection systems",
+              "Video analytics and surveillance enhancement"
+            ]
+          },
+          "intelligentAutomation": {
+            "title": "Intelligent Automation",
+            "items": [
+              "Robotic Process Automation (RPA) with AI",
+              "Intelligent document processing",
+              "Cognitive workflow optimization"
+            ]
+          },
+          "aiStrategy": {
+            "title": "AI Strategy & Consulting",
+            "items": [
+              "AI readiness assessment and roadmap development",
+              "Data strategy and governance frameworks",
+              "Ethical AI implementation guidance"
+            ]
+          },
+          "customAIApplications": {
+            "title": "Custom AI Application Development",
+            "items": [
+              "AI-powered recommendation engines",
+              "Conversational AI and virtual assistants",
+              "Decision support systems with explainable AI"
+            ]
+          }
+        }
+      },
+      "gamblingSolutions": {
+        "cardTitle": "Custom Gambling & Sportbetting Solutions",
+        "cardSubtext": "Advanced iGaming platforms and custom casino solutions designed for compliance, security, and player engagement.",
+        "sectionTitle": "Custom Gambling & Sportbetting Solutions",
+        "sectionDescription": "Our specialized team develops cutting-edge gambling and betting software solutions that combine security, performance, and engaging user experiences. From online casinos to sportsbooks, we deliver customized platforms that comply with regulatory requirements while maximizing player engagement and operator revenue.",
+        "categories": {
+          "casinoGameDev": {
+            "title": "Casino Game Development",
+            "items": [
+              "Custom slot game development with unique themes",
+              "Table games and live dealer integration",
+              "Progressive jackpot systems and gamification"
+            ]
+          },
+          "sportsbettingPlatforms": {
+            "title": "Sportsbetting Platforms",
+            "items": [
+              "Real-time odds management systems",
+              "Live betting and match streaming integration",
+              "Custom betting markets and prop bets creation"
+            ]
+          },
+          "gamblingPlatformOps": {
+            "title": "Gambling Platform Operations",
+            "items": [
+              "Payment gateway and cryptocurrency integration",
+              "KYC/AML compliance and responsible gambling tools",
+              "Admin panels and real-time reporting dashboards"
+            ]
+          },
+          "igamingInnovation": {
+            "title": "iGaming Innovation",
+            "items": [
+              "AI-powered personalized player experiences",
+              "VR/AR casino environments and games",
+              "Blockchain-based provably fair gaming solutions"
+            ]
+          }
+        }
+      }
+    }
   },
   "industries": {
     "expertise": "INDUSTRY EXPERTISE",
@@ -37,15 +504,51 @@
     "learnMore": "Learn more",
     "financialServices": "Financial Services Digital Transformation",
     "financialDescription": "Transforming financial institutions with cutting-edge technology solutions that enhance customer experience, streamline operations, and ensure regulatory compliance.",
+    "financialFeatures": {
+      "securePayment": "Secure payment processing systems",
+      "mobileBanking": "Mobile banking applications",
+      "investmentPortfolio": "Investment portfolio management",
+      "regulatoryCompliance": "Regulatory compliance solutions",
+      "customerData": "Customer data analytics"
+    },
+    "industry": "Industry?",
     "realEstate": "Real Estate Digital Marketing",
     "realEstateDescription": "Comprehensive digital marketing strategies for real estate professionals that drive leads, showcase properties, and build lasting client relationships.",
+    "realEstateFeatures": {
+      "virtualTours": "Virtual property tours",
+      "listingWebsites": "Property listing websites",
+      "leadGeneration": "Lead generation systems",
+      "marketAnalysis": "Market analysis tools",
+      "clientRelationship": "Client relationship management"
+    },
     "ecommerce": "E-commerce & Retail Solutions",
     "ecommerceDescription": "Scalable e-commerce platforms and retail solutions that optimize inventory, enhance shopping experiences, and maximize conversion rates.",
+    "ecommerceFeatures": {
+      "customStores": "Custom e-commerce stores",
+      "inventoryManagement": "Inventory management systems",
+      "paymentProcessing": "Payment processing integration",
+      "loyaltyPrograms": "Customer loyalty programs",
+      "recommendationEngines": "Product recommendation engines"
+    },
     "blockchain": "Blockchain & DApp Solutions",
     "blockchainDescription": "Innovative blockchain applications and decentralized solutions that enhance security, transparency, and efficiency across various business operations.",
+    "blockchainFeatures": {
+      "smartContract": "Smart contract development",
+      "dapps": "Decentralized applications (DApps)",
+      "tokenCreation": "Token creation and management",
+      "integration": "Blockchain integration services",
+      "walletDevelopment": "Crypto wallet development"
+    },
     "entertainment": "Entertainment & Media Platforms",
     "entertainmentDescription": "Engaging digital platforms for entertainment and media companies that captivate audiences, optimize content delivery, and enhance monetization.",
-    "readyToTransform": "Ready to Transform Your Industry?",
+    "entertainmentFeatures": {
+      "streamingPlatforms": "Content streaming platforms",
+      "rightsManagement": "Digital rights management",
+      "mediaAnalytics": "Media analytics solutions",
+      "audienceExperiences": "Interactive audience experiences",
+      "revenueOptimization": "Ad revenue optimization"
+    },
+    "readyToTransform": "Ready to Transform Your",
     "readyToTransformDescription": "Our team of experts is ready to help you navigate the digital landscape and leverage technology to achieve your business goals.",
     "letsWorkTogether": "LET'S WORK TOGETHER"
   },
@@ -103,11 +606,206 @@
   },
   "technologies": {
     "title": "Technologies We Use",
-    "subtitle": "We leverage cutting-edge technologies to build robust, scalable, and future-proof solutions."
+    "subtitle": "We leverage cutting-edge technologies to build robust, scalable, and future-proof solutions.",
+    "pageTitle": "Our Technologies",
+    "backToHome": "Back to home",
+    "pageDescription": "At Progress IT, we leverage cutting-edge technologies to build robust, scalable, and innovative digital solutions. Our expertise spans across enterprise systems, modern web frameworks, and blockchain development.",
+    "sections": {
+      "frontend": "FRONTEND",
+      "backendDatabases": "BACKEND & DATABASES",
+      "web3Blockchain": "WEB3 & BLOCKCHAIN"
+    },
+    "cards": {
+      "reactNextjs": {
+        "title": "React/Next.js",
+        "description": "Cutting-edge UI capabilities, server components, and state management"
+      },
+      "angularTypescript": {
+        "title": "Angular/TypeScript",
+        "description": "Enterprise-ready applications with robust typing and structured architecture"
+      },
+      "vueNuxt": {
+        "title": "Vue/Nuxt",
+        "description": "Lightweight, high-performance interfaces with SSR capabilities and rapid development"
+      },
+      "backendMastery": {
+        "title": "Backend Mastery",
+        "description": "Node.js, Java, C#, C++, Python, and Rust with microservices architecture"
+      },
+      "databaseExpertise": {
+        "title": "Database Expertise",
+        "description": "MySQL, MongoDB, MSSQL, PostgreSQL with performance optimization"
+      },
+      "apiDevelopment": {
+        "title": "API Development",
+        "description": "RESTful, GraphQL, and real-time solutions with WebSockets"
+      },
+      "smartContractDev": {
+        "title": "Smart Contract Development",
+        "description": "Solidity and Rust for secure, auditable blockchain applications"
+      },
+      "dappArchitecture": {
+        "title": "DApp Architecture",
+        "description": "Full-stack Web3 development with ethers.js and blockchain integration"
+      },
+      "tokenomicsNft": {
+        "title": "Tokenomics & NFT Solutions",
+        "description": "Custom token ecosystems and digital asset platforms"
+      }
+    },
+    "roadmap": {
+      "title": "Technology Development Roadmap",
+      "description": "Our development process from initial planning to successful launch. We follow a structured approach to ensure high-quality, secure, and performant digital solutions.",
+      "start": "START",
+      "launch": "LAUNCH",
+      "frontendProcess": "FRONTEND/DESIGN PROCESS",
+      "backendProcess": "BACKEND/TECHNICAL PROCESS",
+      "phaseLabel": "Phase:",
+      "stages": {
+        "strategicPlanning": {
+          "name": "Strategic Planning",
+          "duration": "week 1-2"
+        },
+        "uxuiDesign": {
+          "name": "UX/UI Design",
+          "duration": "week 3-4"
+        },
+        "frontendDevelopment": {
+          "name": "Frontend Development",
+          "duration": "week 5-8"
+        },
+        "testing": {
+          "name": "Testing",
+          "duration": "week 9"
+        },
+        "deployment": {
+          "name": "Deployment",
+          "duration": "week 10"
+        },
+        "userSupport": {
+          "name": "User Support",
+          "duration": "ongoing"
+        },
+        "technicalArchitecture": {
+          "name": "Technical Architecture",
+          "duration": "week 1-2"
+        },
+        "databaseDesign": {
+          "name": "Database Design",
+          "duration": "week 3"
+        },
+        "backendDevelopment": {
+          "name": "Backend Development",
+          "duration": "week 4-7"
+        },
+        "apiIntegration": {
+          "name": "API Integration",
+          "duration": "week 8"
+        },
+        "securityImplementation": {
+          "name": "Security Implementation",
+          "duration": "week 9"
+        },
+        "performanceOptimization": {
+          "name": "Performance Optimization",
+          "duration": "week 10-12"
+        }
+      }
+    },
+    "innovation": {
+      "title": "Digital Innovation Through Advanced Technology",
+      "description": "We combine technical expertise with creative innovation to build solutions that drive results and deliver exceptional digital experiences.",
+      "cta": {
+        "tagline": "LET'S BUILD THE FUTURE",
+        "title": "Leverage Our Tech Expertise?",
+        "description": "Ready to implement cutting-edge technology? Discuss your project with our specialists and let's innovate together.",
+        "button": "Contact Us"
+      },
+      "cards": {
+        "adaptiveInterfaces": {
+          "title": "Adaptive Interfaces",
+          "description": "Building responsive systems that evolve with user behavior and device capabilities."
+        },
+        "quantumArchitecture": {
+          "title": "Quantum-Ready Architecture",
+          "description": "Developing systems prepared for the next generation of computing paradigms."
+        },
+        "neuralIntegration": {
+          "title": "Neural Integration",
+          "description": "Merging AI capabilities with human-centered design for intuitive experiences."
+        },
+        "dataMesh": {
+          "title": "Data Mesh Systems",
+          "description": "Distributed domain-specific data architecture for enterprise-scale solutions."
+        },
+        "cyberneticSecurity": {
+          "title": "Cybernetic Security",
+          "description": "Advanced threat detection with self-healing protection protocols."
+        },
+        "digitalTwin": {
+          "title": "Digital Twin Engineering",
+          "description": "Creating virtual replicas of physical systems for testing and optimization."
+        },
+        "holographicInterfaces": {
+          "title": "Holographic Interfaces",
+          "description": "Developing next-generation spatial computing experiences beyond traditional screens."
+        },
+        "edgeComputing": {
+          "title": "Edge Computing Solutions",
+          "description": "Processing data closer to its source for reduced latency and enhanced performance."
+        },
+        "syntheticMedia": {
+          "title": "Synthetic Media Creation",
+          "description": "Generating hyper-realistic content through advanced AI algorithms."
+        },
+        "quantumEncryption": {
+          "title": "Quantum Encryption",
+          "description": "Implementing future-proof security through quantum-resistant algorithms."
+        },
+        "augmentedDevelopment": {
+          "title": "Augmented Development",
+          "description": "AI-assisted coding and system architecture for accelerated innovation."
+        },
+        "biodigitalInterfaces": {
+          "title": "Biodigital Interfaces",
+          "description": "Creating seamless connections between biological systems and digital environments."
+        }
+      }
+    }
   },
   "showcase": {
     "title": "Our Showcase",
-    "subtitle": "Discover our most innovative and impactful projects."
+    "subtitle": "Discover our most innovative and impactful projects.",
+    "excellence": {
+      "title": "Technology Excellence",
+      "subtitle": "Modern Frameworks, Secure Infrastructure & Scalable Architectures",
+      "description": "Behind every showcase project stands our technical foundation. We employ the latest technologies to ensure our solutions remain at the forefront of innovation."
+    },
+    "categories": {
+      "all": "All",
+      "uxui": "UX/UI Design",
+      "mobile": "Mobile App",
+      "design": "Design Strategy",
+      "prototyping": "Prototyping",
+      "animation": "Animation",
+      "backend": "Backend Development"
+    },
+    "viewProject": "View Project",
+    "projectCard": {
+      "description": "Showcasing innovative technology with unprecedented capabilities that transform digital interaction."
+    },
+    "modal": {
+      "projectOverview": "Project Overview",
+      "technologiesUsed": "Technologies Used",
+      "teamComposition": "Team Composition",
+      "category": "Category",
+      "year": "Year",
+      "status": "Status",
+      "completed": "Completed",
+      "fullCaseStudy": "View Full Case Study",
+      "defaultDescription": "This cutting-edge project represents the pinnacle of our innovation. By combining advanced technologies with human-centered design, we've created a solution that pushes the boundaries of what's possible.",
+      "defaultDescription2": "Our solution integrates seamlessly with existing systems while providing unprecedented capabilities that transform how users interact with technology. Its modular architecture enables adaptation to various use cases across industries."
+    }
   },
   "portfolio": {
     "title": "Our Work",
@@ -191,5 +889,94 @@
     "privacyPolicy": "Privacy Policy",
     "termsAndConditions": "Terms & Conditions",
     "contactUs": "Contact Us"
+  },
+  "blockchain": {
+    "solutions": "Blockchain Solutions",
+    "portfolioDescription": "Explore our diverse portfolio of digital solutions that have helped businesses transform and grow in the digital landscape.",
+    "teamDescription": "Our team specializes in enterprise-grade blockchain development, creating innovative solutions across multiple platforms including Ethereum, Polkadot, Solana, and custom networks. We combine technical expertise with strategic insights to deliver Web3 applications that drive real business value.",
+    "smartContract": {
+      "title": "Smart Contract Development",
+      "description": "Our engineers develop secure, auditable smart contracts tailored to your specific business requirements. Using Solidity, Rust, and other leading languages, we create automated business logic that reduces costs, eliminates intermediaries, and ensures transparent transactions across multiple blockchain platforms."
+    },
+    "strategicConsulting": "Strategic Blockchain Consulting",
+    "development": "Smart Contract Development",
+    "dAppDevelopment": "DApp Development",
+    "tokenizationSolutions": "Tokenization Solutions",
+    "web3Integration": "Web3 Integration",
+    "blockchainSecurity": "Blockchain Security & Auditing"
+  },
+  "aiSolutions": {
+    "title": "AI Solutions",
+    "subtitle": "Advanced AI Development & Integration",
+    "description": "Our team of AI specialists develops cutting-edge artificial intelligence solutions designed to transform your business operations. From custom models to seamless integration, we bring the power of AI to your organization.",
+    "exploreButton": "Explore AI Solutions",
+    "commonDescription": "Strategic AI solutions that improve your business operations and drive qualified results.",
+    "services": {
+      "aiAgents": {
+        "title": "AI Agents for Business",
+        "subtitle": "Advanced automation for your company.",
+        "features": [
+          "24/7 automated task handling",
+          "40% reduction in operational costs",
+          "Seamless integration with existing systems",
+          "Free consultation to assess your specific needs"
+        ]
+      },
+      "predictiveAnalytics": {
+        "title": "Predictive Analytics",
+        "subtitle": "Turn data into actionable business insights.",
+        "features": [
+          "35% improved forecasting accuracy",
+          "28% reduced inventory costs",
+          "Stay ahead of market changes",
+          "Data-driven decision making"
+        ]
+      },
+      "seamlessIntegration": {
+        "title": "Seamless AI Integration",
+        "subtitle": "No disruption to current operations.",
+        "features": [
+          "Works with your existing infrastructure",
+          "Phased implementation approach",
+          "Measurable ROI within first 3 months",
+          "Continuous support and optimization"
+        ]
+      },
+      "industryLLM": {
+        "title": "Industry-Specific LLM Solutions",
+        "subtitle": "Custom-trained for your industry.",
+        "features": [
+          "Compliance with sector-specific regulations",
+          "65% faster document processing",
+          "Personalized demo available",
+          "Continuous model improvement"
+        ]
+      },
+      "workflowOptimization": {
+        "title": "AI Workflow Optimization",
+        "subtitle": "Streamlined processes for maximum efficiency.",
+        "features": [
+          "Identify and eliminate process bottlenecks",
+          "30% faster processing times",
+          "75% reduction in manual errors",
+          "Custom solutions for your unique challenges"
+        ]
+      },
+      "decisionSupport": {
+        "title": "AI-Powered Decision Support",
+        "subtitle": "Strategic insights for smarter business choices.",
+        "features": [
+          "Real-time data analysis for better decisions",
+          "42% faster strategic planning cycles",
+          "Risk assessment with 87% accuracy",
+          "Custom dashboards for executive insights"
+        ]
+      }
+    }
+  },
+  "creativeAlliance": {
+    "title": "CREATIVE ALLIANCE",
+    "description": "Forging next-generation technological alliances that transcend traditional boundaries",
+    "dimensionalTeam": "DIMENSIONAL TEAM"
   }
 } 

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import {
   Facebook,
   Twitter,
@@ -17,6 +18,7 @@ import {
   Calculator,
   MessageSquare,
 } from "lucide-react";
+import { useTranslation } from "@/lib/useTranslation";
 
 interface ContactSectionProps {
   title?: string;
@@ -39,6 +41,7 @@ const ContactSection = ({
     linkedin: "https://linkedin.com",
   },
 }: ContactSectionProps) => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<"quote" | "contact">("quote");
   const [hoverButton, setHoverButton] = useState<string | null>(null);
 
@@ -135,17 +138,17 @@ const ContactSection = ({
             transition={{ delay: 0.3, duration: 0.5 }}
             className="inline-block px-4 py-1 rounded-full bg-blue-600 text-white font-medium text-sm mb-4"
           >
-            CONNECT WITH US
+            {t('contact.connectWithUs')}
           </motion.span>
           <h2 className="text-6xl md:text-7xl font-bold mb-8">
             <span className="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 text-transparent bg-clip-text animate-gradient-x">
-              Let's Create
+              {t('contact.letsCreate')}
             </span>
           </h2>
           <h3 className="text-4xl md:text-5xl font-bold mb-6">
-            Together and Build Something Extraordinary
+            {t('contact.together')}
           </h3>
-          <p className="text-xl text-gray-400 mt-6">{subtitle}</p>
+          <p className="text-xl text-gray-400 mt-6">{t('contact.subtitle')}</p>
         </motion.div>
 
         {/* Tab navigation */}
@@ -155,13 +158,13 @@ const ContactSection = ({
               onClick={() => setActiveTab("quote")}
               className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${activeTab === "quote" ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg" : "text-gray-400 hover:text-white"}`}
             >
-              Get a Quote
+              {t('contact.getQuote')}
             </button>
             <button
               onClick={() => setActiveTab("contact")}
               className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${activeTab === "contact" ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg" : "text-gray-400 hover:text-white"}`}
             >
-              Contact Info
+              {t('contact.contactInfo')}
             </button>
           </div>
         </div>
@@ -186,7 +189,7 @@ const ContactSection = ({
                 transition={{ delay: 0.2, duration: 0.5 }}
                 className="text-3xl md:text-4xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent relative z-10"
               >
-                How can we help you?
+                {t('contact.howCanWeHelp')}
               </motion.h3>
 
               <motion.p
@@ -195,9 +198,7 @@ const ContactSection = ({
                 transition={{ delay: 0.4, duration: 0.5 }}
                 className="text-lg text-center text-gray-400 mb-12 max-w-3xl mx-auto relative z-10"
               >
-                Our award-winning team has helped businesses of all sizes
-                achieve digital excellence through custom solutions tailored to
-                your specific needs.
+                {t('contact.helpText')}
               </motion.p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto relative z-10">
@@ -219,20 +220,21 @@ const ContactSection = ({
                       <Calculator className="w-8 h-8 relative z-10" />
                     </div>
                     <h4 className="font-mono font-bold text-xl mb-2 text-white tracking-wide">
-                      Project Calculator
+                      {t('contact.projectCalculator')}
                     </h4>
                     <p className="text-gray-400 text-sm mb-auto pb-6">
-                      Get an instant estimate for your project based on your
-                      requirements
+                      {t('contact.projectCalculatorDesc')}
                     </p>
                     <div className="mt-auto w-full">
-                      <Button 
-                        size="sm"
-                        className="w-full group/btn bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300 flex items-center gap-2 relative overflow-hidden py-2.5"
-                      >
-                        Calculate Now
-                        <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                      </Button>
+                      <Link href="/calculator" passHref>
+                        <Button 
+                          size="sm"
+                          className="w-full group/btn bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300 flex items-center gap-2 relative overflow-hidden py-2.5"
+                        >
+                          {t('contact.calculateNow')}
+                          <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </motion.div>
@@ -255,10 +257,10 @@ const ContactSection = ({
                       <MessageSquare className="w-8 h-8 relative z-10" />
                     </div>
                     <h4 className="font-mono font-bold text-xl mb-2 text-white tracking-wide">
-                      Project Details
+                      {t('contact.projectDetails')}
                     </h4>
                     <p className="text-gray-400 text-sm mb-auto pb-6">
-                      Tell us about your project needs and get a personalized quote
+                      {t('contact.projectDetailsDesc')}
                     </p>
                     <div className="mt-auto w-full">
                       <Button 
@@ -266,7 +268,7 @@ const ContactSection = ({
                         className="w-full group/btn bg-indigo-600 hover:bg-indigo-700 text-white transition-all duration-300 flex items-center gap-2 relative overflow-hidden py-2.5"
                       >
                         <a href="https://t.me/SlavoSS" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                          Start Now
+                          {t('contact.startNow')}
                           <Send className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                         </a>
                       </Button>
@@ -292,10 +294,10 @@ const ContactSection = ({
                       <Calendar className="w-8 h-8 relative z-10" />
                     </div>
                     <h4 className="font-mono font-bold text-xl mb-2 text-white tracking-wide">
-                      Schedule a Call
+                      {t('contact.scheduleCall')}
                     </h4>
                     <p className="text-gray-400 text-sm mb-auto pb-6">
-                      Book a consultation with our experts to discuss your project in detail
+                      {t('contact.scheduleCallDesc')}
                     </p>
                     <div className="mt-auto w-full">
                       <Button 
@@ -303,7 +305,7 @@ const ContactSection = ({
                         className="w-full group/btn bg-teal-600 hover:bg-teal-700 text-white transition-all duration-300 flex items-center gap-2 relative overflow-hidden py-2.5"
                       >
                         <a href="https://calendly.com/artjom-lupjak" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                          Book Now
+                          {t('contact.bookNow')}
                           <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                         </a>
                       </Button>
@@ -342,7 +344,7 @@ const ContactSection = ({
                       <MapPin className="w-8 h-8 text-blue-400 relative z-10" />
                     </div>
                     <h4 className="text-2xl font-bold mb-2 text-white font-mono tracking-wide">
-                      Riga, Latvia
+                      {t('contact.locations.riga')}
                     </h4>
                     <a href="mailto:info@progressit.online" className="text-blue-300 mb-1 font-medium hover:text-blue-200 hover:underline transition-colors">
                       info@progressit.online
@@ -369,7 +371,7 @@ const ContactSection = ({
                       <MapPin className="w-8 h-8 text-purple-400 relative z-10" />
                     </div>
                     <h4 className="text-2xl font-bold mb-2 text-white font-mono tracking-wide">
-                      Heidelberg, Germany
+                      {t('contact.locations.heidelberg')}
                     </h4>
                     <a href="mailto:v.popp@progressit.online" className="text-purple-300 mb-1 font-medium hover:text-purple-200 hover:underline transition-colors">
                       v.popp@progressit.online
@@ -396,7 +398,7 @@ const ContactSection = ({
                       <MapPin className="w-8 h-8 text-teal-400 relative z-10" />
                     </div>
                     <h4 className="text-2xl font-bold mb-2 text-white font-mono tracking-wide">
-                      London, UK
+                      {t('contact.locations.london')}
                     </h4>
                     <a href="mailto:info@progressit.online" className="text-teal-300 mb-1 font-medium hover:text-teal-200 hover:underline transition-colors">
                       info@progressit.online
@@ -422,7 +424,7 @@ const ContactSection = ({
                     </div>
                     <div>
                       <h4 className="text-lg font-semibold mb-1 text-white font-mono tracking-wide">
-                        Email Us
+                        {t('contact.emailUs')}
                       </h4>
                       <a href="mailto:hello@progressit.online" className="text-blue-300 hover:text-blue-200 hover:underline transition-colors">hello@progressit.online</a>
                     </div>
@@ -435,7 +437,7 @@ const ContactSection = ({
                     </div>
                     <div>
                       <h4 className="text-lg font-semibold mb-1 text-white font-mono tracking-wide">
-                        Call Us
+                        {t('contact.callUs')}
                       </h4>
                       <a href="tel:+12345678910" className="text-indigo-300 hover:text-indigo-200 hover:underline transition-colors">+12345678910</a>
                     </div>

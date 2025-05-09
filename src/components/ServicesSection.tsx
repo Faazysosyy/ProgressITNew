@@ -17,6 +17,7 @@ import { Button } from "./ui/button";
 import { motion } from "framer-motion";
 import FeatureGrid from "./FeatureGrid";
 import Link from "next/link";
+import { useTranslation } from "@/lib/useTranslation";
 
 interface ServicesSectionProps {
   title?: string;
@@ -29,59 +30,61 @@ const ServicesSection = ({
   subtitle = "We deliver exceptional digital experiences through our comprehensive range of services.",
   showAll = false,
 }: ServicesSectionProps) => {
+  const { t } = useTranslation();
+  
   // Basic services for homepage - now showing all 9 services instead of just 6
   const basicServices = [
     {
-      title: "Website Development & Maintenance",
-      description: "Custom websites built with cutting-edge technology and comprehensive maintenance services to ensure optimal performance.",
+      title: t('services.serviceCards.webDevelopment.title'),
+      description: t('services.serviceCards.webDevelopment.description'),
       icon: <Code className="w-6 h-6" />,
       hue: 210
     },
     {
-      title: "Search Engine Optimization",
-      description: "Strategic SEO solutions that improve your website's visibility and drive qualified organic traffic to boost your online presence.",
+      title: t('services.serviceCards.seo.title'),
+      description: t('services.serviceCards.seo.description'),
       icon: <Globe className="w-6 h-6" />,
       hue: 160
     },
     {
-      title: "Mobile Application Development",
-      description: "Native and cross-platform mobile applications that deliver intuitive experiences across all devices and platforms.",
+      title: t('services.serviceCards.mobileDevelopment.title'),
+      description: t('services.serviceCards.mobileDevelopment.description'),
       icon: <Smartphone className="w-6 h-6" />,
       hue: 120
     },
     {
-      title: "UI/UX Design & Optimization",
-      description: "Intuitive and engaging user interfaces that create memorable digital experiences and drive conversions.",
+      title: t('services.serviceCards.uiuxDesign.title'),
+      description: t('services.serviceCards.uiuxDesign.description'),
       icon: <Palette className="w-6 h-6" />,
       hue: 280
     },
     {
-      title: "Brand Identity Development",
-      description: "Strategic brand development that establishes a strong market presence and connects with your target audience.",
+      title: t('services.serviceCards.brandIdentity.title'),
+      description: t('services.serviceCards.brandIdentity.description'),
       icon: <Lightbulb className="w-6 h-6" />,
       hue: 330
     },
     {
-      title: "Custom Web Application Development",
-      description: "Bespoke web applications designed to solve specific business challenges and streamline operations.",
+      title: t('services.serviceCards.webApplications.title'),
+      description: t('services.serviceCards.webApplications.description'),
       icon: <Rocket className="w-6 h-6" />,
       hue: 0
     },
     {
-      title: "AI & Data Analytics",
-      description: "Comprehensive data analysis that provides actionable insights to optimize your digital strategy and ROI.",
+      title: t('services.serviceCards.aiAnalytics.title'),
+      description: t('services.serviceCards.aiAnalytics.description'),
       icon: <BarChart className="w-6 h-6" />,
       hue: 30
     },
     {
-      title: "Digital Marketing",
-      description: "Strategic marketing campaigns that increase brand visibility and drive qualified traffic to your digital platforms.",
+      title: t('services.serviceCards.digitalMarketing.title'),
+      description: t('services.serviceCards.digitalMarketing.description'),
       icon: <Megaphone className="w-6 h-6" />,
       hue: 60
     },
     {
-      title: "Cyber Resilience",
-      description: "Protect your digital assets and ensure business continuity with comprehensive cybersecurity solutions.",
+      title: t('services.serviceCards.cyberResilience.title'),
+      description: t('services.serviceCards.cyberResilience.description'),
       icon: <Shield className="w-6 h-6" />,
       hue: 240
     }
@@ -90,123 +93,84 @@ const ServicesSection = ({
   // All services with full details
   const allServices = [
     {
-      title: "Website Development & Maintenance",
-      tagline: "Powerful websites with ongoing support.",
-      description: "Custom websites built with cutting-edge technology and comprehensive maintenance services to ensure optimal performance.",
-      bulletPoints: [
-        "Custom CMS development (WordPress, Shopify, Webflow)",
-        "Regular updates, security patches & monitoring",
-        "Performance optimization & speed improvements",
-        "Content management & technical support"
-      ],
+      title: t('services.serviceCards.webDevelopment.title'),
+      tagline: t('services.serviceTaglines.webDevelopment', "Powerful websites with ongoing support."),
+      description: t('services.serviceCards.webDevelopment.description'),
+      bulletPoints: t('services.serviceBulletPoints.webDevelopment', { returnObjects: true }) as string[],
       icon: <Code className="w-6 h-6" />,
       hue: 210
     },
     {
-      title: "Search Engine Optimization",
-      tagline: "Visibility that drives results.",
-      description: "Strategic SEO solutions that improve your website's visibility and drive qualified organic traffic to boost your online presence.",
-      bulletPoints: [
-        "Comprehensive keyword research & strategy",
-        "On-page & technical SEO optimization",
-        "Link building & off-page optimization",
-        "Regular performance tracking & reporting"
-      ],
+      title: t('services.serviceCards.seo.title'),
+      tagline: t('services.serviceTaglines.seo', "Visibility that drives results."),
+      description: t('services.serviceCards.seo.description'),
+      bulletPoints: t('services.serviceBulletPoints.seo', { returnObjects: true }) as string[],
       icon: <Globe className="w-6 h-6" />,
       hue: 160
     },
     {
-      title: "Mobile Application Development",
-      tagline: "Seamless experiences in every pocket.",
-      description: "Native and cross-platform mobile applications that deliver intuitive experiences across all devices and platforms.",
-      bulletPoints: [
-        "iOS & Android native app development",
-        "Flutter & React Native cross-platform apps",
-        "Progressive Web Apps (PWAs)",
-        "App maintenance & version updates"
-      ],
+      title: t('services.serviceCards.mobileDevelopment.title'),
+      tagline: t('services.serviceTaglines.mobileDevelopment', "Seamless experiences in every pocket."),
+      description: t('services.serviceCards.mobileDevelopment.description'),
+      bulletPoints: t('services.serviceBulletPoints.mobileDevelopment', { returnObjects: true }) as string[],
       icon: <Smartphone className="w-6 h-6" />,
       hue: 120
     },
     {
-      title: "UI/UX Design & Optimization",
-      tagline: "Where psychology meets pixels.",
-      description: "Intuitive and engaging user interfaces that create memorable digital experiences and drive conversions.",
-      bulletPoints: [
-        "User journey mapping & wireframing",
-        "Responsive & mobile-first design",
-        "Accessibility improvements (WCAG compliance)",
-        "Usability testing & iterative optimization"
-      ],
+      title: t('services.serviceCards.uiuxDesign.title'),
+      tagline: t('services.serviceTaglines.uiuxDesign', "Where psychology meets pixels."),
+      description: t('services.serviceCards.uiuxDesign.description'),
+      bulletPoints: t('services.serviceBulletPoints.uiuxDesign', { returnObjects: true }) as string[],
       icon: <Palette className="w-6 h-6" />,
       hue: 280
     },
     {
-      title: "Brand Identity Development",
-      tagline: "From concepts to cohesive identities.",
-      description: "Strategic brand development that establishes a strong market presence and connects with your target audience.",
-      bulletPoints: [
-        "Logo design & visual identity systems",
-        "Brand voice & messaging guidelines",
-        "Style guides & brand assets creation",
-        "Brand strategy & positioning"
-      ],
+      title: t('services.serviceCards.brandIdentity.title'),
+      tagline: t('services.serviceTaglines.brandIdentity', "From concepts to cohesive identities."),
+      description: t('services.serviceCards.brandIdentity.description'),
+      bulletPoints: t('services.serviceBulletPoints.brandIdentity', { returnObjects: true }) as string[],
       icon: <Lightbulb className="w-6 h-6" />,
       hue: 330
     },
     {
-      title: "Custom Web Application Development",
-      tagline: "Tailored solutions for complex needs.",
-      description: "Bespoke web applications designed to solve specific business challenges and streamline operations.",
-      bulletPoints: [
-        "Enterprise-grade application development",
-        "SaaS & cloud-based solutions",
-        "API development & third-party integrations",
-        "Database design & performance optimization"
-      ],
+      title: t('services.serviceCards.webApplications.title'),
+      tagline: t('services.serviceTaglines.webApplications', "Tailored solutions for complex needs."),
+      description: t('services.serviceCards.webApplications.description'),
+      bulletPoints: t('services.serviceBulletPoints.webApplications', { returnObjects: true }) as string[],
       icon: <Rocket className="w-6 h-6" />,
       hue: 0
     },
     {
-      title: "AI & Data Analytics",
-      tagline: "Your data, weaponized.",
-      description: "Comprehensive data analysis that provides actionable insights to optimize your digital strategy and ROI.",
-      bulletPoints: [
-        "Predictive analytics & machine learning models",
-        "Real-time dashboards with Tableau/Power BI",
-        "Customer behavior segmentation",
-        "AI-driven A/B testing for hyper-optimization"
-      ],
+      title: t('services.serviceCards.aiAnalytics.title'),
+      tagline: t('services.serviceTaglines.aiAnalytics', "Your data, weaponized."),
+      description: t('services.serviceCards.aiAnalytics.description'),
+      bulletPoints: t('services.serviceBulletPoints.aiAnalytics', { returnObjects: true }) as string[],
       icon: <BarChart className="w-6 h-6" />,
       hue: 30
     },
     {
-      title: "Digital Marketing",
-      tagline: "Algorithms meet artistry.",
-      description: "Strategic marketing campaigns that increase brand visibility and drive qualified traffic to your digital platforms.",
-      bulletPoints: [
-        "Programmatic advertising with AI bidding",
-        "Social media marketing & content strategy",
-        "Email marketing & automation workflows",
-        "Meta (Facebook/Instagram) & Google ads"
-      ],
+      title: t('services.serviceCards.digitalMarketing.title'),
+      tagline: t('services.serviceTaglines.digitalMarketing', "Algorithms meet artistry."),
+      description: t('services.serviceCards.digitalMarketing.description'),
+      bulletPoints: t('services.serviceBulletPoints.digitalMarketing', { returnObjects: true }) as string[],
       icon: <Megaphone className="w-6 h-6" />,
       hue: 60
     },
     {
-      title: "Cyber Resilience",
-      tagline: "Security as a priority.",
-      description: "Protect your digital assets and ensure business continuity with comprehensive cybersecurity solutions.",
-      bulletPoints: [
-        "Penetration testing & vulnerability audits",
-        "GDPR/CCPA compliance consulting",
-        "Security protocol implementation",
-        "Ransomware response planning"
-      ],
+      title: t('services.serviceCards.cyberResilience.title'),
+      tagline: t('services.serviceTaglines.cyberResilience', "Security as a priority."),
+      description: t('services.serviceCards.cyberResilience.description'),
+      bulletPoints: t('services.serviceBulletPoints.cyberResilience', { returnObjects: true }) as string[],
       icon: <Shield className="w-6 h-6" />,
       hue: 240
     }
   ];
+
+  // Debug the bullet points
+  console.log("Bullet points for services:", allServices.map(service => ({
+    title: service.title,
+    bulletPoints: service.bulletPoints
+  })));
 
   return (
     <section id="services" className="py-24 bg-black text-white">
@@ -222,17 +186,17 @@ const ServicesSection = ({
             >
               <h2 className="text-6xl md:text-7xl font-bold mb-8">
                 <span className="bg-gradient-to-r from-blue-400 to-teal-400 text-transparent bg-clip-text">
-                  We Build
+                  {t('stats.weBuild')}
                 </span>
               </h2>
               <h3 className="text-4xl md:text-5xl font-bold mb-6">
-                Digital Excellence
+                {t('stats.digitalExcellence')}
               </h3>
               <h4 className="text-2xl md:text-3xl font-bold text-gray-300">
-                Innovative Web Solutions, Strategic Marketing & Cutting-Edge Technology
+                {t('stats.innovativeSolutions')}
               </h4>
               <p className="text-xl text-gray-400 mt-6">
-                At Progress IT, we craft powerful digital solutions worldwide that drive growth, engagement, and measurable results.
+                {t('stats.description')}
               </p>
             </motion.div>
 
@@ -244,7 +208,7 @@ const ServicesSection = ({
               className="mb-16"
             >
               <h2 className="text-3xl font-bold mb-8 pb-4 border-b border-gray-800">
-                What makes us one of the top-rated developer companies?
+                {t('stats.topRated')}
               </h2>
             </motion.div>
 
@@ -258,15 +222,15 @@ const ServicesSection = ({
             >
               <div className="flex flex-col items-start">
                 <h3 className="text-4xl font-bold text-white mb-2">15+</h3>
-                <p className="text-gray-400">Years in business</p>
+                <p className="text-gray-400">{t('stats.yearsInBusiness')}</p>
               </div>
               <div className="flex flex-col items-start">
                 <h3 className="text-4xl font-bold text-white mb-2">200+</h3>
-                <p className="text-gray-400">Websites & projects launched</p>
+                <p className="text-gray-400">{t('stats.projectsLaunched')}</p>
               </div>
               <div className="flex flex-col items-start">
                 <h3 className="text-4xl font-bold text-white mb-2">50+</h3>
-                <p className="text-gray-400">Blockchain Solutions</p>
+                <p className="text-gray-400">{t('stats.blockchainSolutions')}</p>
               </div>
             </motion.div>
 
@@ -281,11 +245,11 @@ const ServicesSection = ({
                 className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-8 border-b border-gray-800"
               >
                 <div>
-                  <h3 className="text-2xl font-bold mb-4">Longevity</h3>
+                  <h3 className="text-2xl font-bold mb-4">{t('stats.longevity')}</h3>
                 </div>
                 <div>
                   <p className="text-gray-400">
-                    Established in 2008, ProgressIT has built a stellar reputation for delivering cutting-edge solutions across industries. Our extensive experience positions us at the forefront of both traditional and blockchain development.
+                    {t('stats.longevityDescription')}
                   </p>
                 </div>
               </motion.div>
@@ -299,11 +263,11 @@ const ServicesSection = ({
                 className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-8 border-b border-gray-800"
               >
                 <div>
-                  <h3 className="text-2xl font-bold mb-4">Web Dev & Design Focus</h3>
+                  <h3 className="text-2xl font-bold mb-4">{t('stats.webDevDesign')}</h3>
                 </div>
                 <div>
                   <p className="text-gray-400">
-                    ProgressIT delivers exceptional web development services with innovative design principles. Our development approach creates distinctive digital presences that outperform competitors and capture audience attention effectively.
+                    {t('stats.webDevDesignDescription')}
                   </p>
                 </div>
               </motion.div>
@@ -317,11 +281,11 @@ const ServicesSection = ({
                 className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-8 border-b border-gray-800"
               >
                 <div>
-                  <h3 className="text-2xl font-bold mb-4">Breathtaking Design</h3>
+                  <h3 className="text-2xl font-bold mb-4">{t('stats.breathtakingDesign')}</h3>
                 </div>
                 <div>
                   <p className="text-gray-400">
-                    Our unique design philosophy sets us apart in the digital landscape. We craft interfaces that are not only visually striking but also intuitive, adaptable, and performance-optimized across all devices and platforms.
+                    {t('stats.breathtakingDesignDescription')}
                   </p>
                 </div>
               </motion.div>
@@ -335,11 +299,11 @@ const ServicesSection = ({
                 className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-8 border-b border-gray-800"
               >
                 <div>
-                  <h3 className="text-2xl font-bold mb-4">On-Brand Experiences</h3>
+                  <h3 className="text-2xl font-bold mb-4">{t('stats.onBrandExperiences')}</h3>
                 </div>
                 <div>
                   <p className="text-gray-400">
-                    At ProgressIT, we understand the critical importance of brand alignment. We've helped countless organizations enhance their digital identity through carefully crafted design elements that reinforce brand values and messaging strategies.
+                    {t('stats.onBrandExperiencesDescription')}
                   </p>
                 </div>
               </motion.div>
@@ -353,11 +317,11 @@ const ServicesSection = ({
                 className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-8 border-b border-gray-800"
               >
                 <div>
-                  <h3 className="text-2xl font-bold mb-4">One-Of-A-Kind Solutions</h3>
+                  <h3 className="text-2xl font-bold mb-4">{t('stats.uniqueSolutions')}</h3>
                 </div>
                 <div>
                   <p className="text-gray-400">
-                    Our development team specializes in creating bespoke solutions tailored precisely to each client's specific requirements. We don't believe in template approaches—every project receives customized attention and strategic development.
+                    {t('stats.uniqueSolutionsDescription')}
                   </p>
                 </div>
               </motion.div>
@@ -371,11 +335,11 @@ const ServicesSection = ({
                 className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-8 border-b border-gray-800"
               >
                 <div>
-                  <h3 className="text-2xl font-bold mb-4">Partnership & Collaboration</h3>
+                  <h3 className="text-2xl font-bold mb-4">{t('stats.partnership')}</h3>
                 </div>
                 <div>
                   <p className="text-gray-400">
-                    We maintain consistent, transparent communication throughout your project journey. Our collaborative approach ensures you're informed at every stage, and our relationship continues with dedicated support long after launch.
+                    {t('stats.partnershipDescription')}
                   </p>
                 </div>
               </motion.div>
@@ -429,7 +393,7 @@ const ServicesSection = ({
               asChild
             >
               <Link href="/services">
-                <span>View All Services</span>
+                <span>{t('services.viewAllServices')}</span>
                 <ArrowUpRight className="ml-2 h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </Link>
             </Button>
@@ -444,7 +408,7 @@ const ServicesSection = ({
           viewport={{ once: true }}
           className="mt-24"
         >
-          <h3 className="text-xl font-medium text-center text-gray-400 mb-8">Working with leading companies worldwide to deliver exceptional solutions and services.</h3>
+          <h3 className="text-xl font-medium text-center text-gray-400 mb-8">{t('services.workingWithLeadingCompanies')}</h3>
           <div className="container brandsCarousel">
             <div className="carouselTrack">
               <div className="brandLogo">

@@ -19,6 +19,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useTranslation } from "@/lib/useTranslation";
 
 interface PortfolioSectionProps {
   title?: string;
@@ -114,6 +115,7 @@ const PortfolioSection = ({
     },
   ],
 }: PortfolioSectionProps) => {
+  const { t } = useTranslation();
   const [filteredProjects, setFilteredProjects] = useState(projects);
   const [activeFilter, setActiveFilter] = useState("All");
   const [activeStep, setActiveStep] = useState("2");
@@ -123,42 +125,41 @@ const PortfolioSection = ({
     {
       id: "1",
       number: "01",
-      title: "Strategic Blockchain Consulting",
+      title: t('blockchain.strategicConsulting'),
       description:
         "We begin with in-depth blockchain strategy consultation, helping you identify the right technology stack and approach for your business needs. Our experts analyze use cases, regulatory requirements, and market opportunities to create a customized roadmap that positions your project for long-term success and adoption.",
     },
     {
       id: "2",
       number: "02",
-      title: "Smart Contract Development",
-      description:
-        "Our engineers develop secure, auditable smart contracts tailored to your specific business requirements. Using Solidity, Rust, and other leading languages, we create automated business logic that reduces costs, eliminates intermediaries, and ensures transparent transactions across multiple blockchain platforms.",
+      title: t('blockchain.development'),
+      description: t('blockchain.smartContract.description'),
     },
     {
       id: "3",
       number: "03",
-      title: "DApp Development",
+      title: t('blockchain.dAppDevelopment'),
       description:
         "We build intuitive decentralized applications that connect seamlessly with blockchain networks. Our full-stack development team creates responsive, user-friendly interfaces that abstract blockchain complexity while delivering the security and transparency benefits of decentralized systems to your users.",
     },
     {
       id: "4",
       number: "04",
-      title: "Tokenization Solutions",
+      title: t('blockchain.tokenizationSolutions'),
       description:
         "From utility tokens to NFTs and security tokens, we design and implement comprehensive tokenization solutions. Our economic modeling ensures sustainable token economies with proper incentive mechanisms, governance structures, and regulatory compliance built into every project.",
     },
     {
       id: "5",
       number: "05",
-      title: "Web3 Integration",
+      title: t('blockchain.web3Integration'),
       description:
         "We bridge traditional systems with decentralized technologies, enabling smooth transitions to Web3 capabilities. Our integration services connect existing infrastructure with cryptocurrency payments, decentralized identity systems, and blockchain-based data verification solutions.",
     },
     {
       id: "6",
       number: "06",
-      title: "Blockchain Security & Auditing",
+      title: t('blockchain.blockchainSecurity'),
       description:
         "Our security experts perform comprehensive audits and implement robust safeguards for your blockchain applications. We identify vulnerabilities, optimize gas usage, and ensure your smart contracts and decentralized systems are protected against common attack vectors and exploits.",
     },
@@ -253,14 +254,14 @@ const PortfolioSection = ({
         >
           <h2 className="mb-6 text-6xl md:text-7xl font-bold tracking-tight">
             <span className="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 text-transparent bg-clip-text animate-gradient-x">
-              Blockchain Solutions
+              {t('blockchain.solutions')}
             </span>
           </h2>
           <h3 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-            {description}
+            {t('blockchain.portfolioDescription')}
           </h3>
           <p className="text-lg text-gray-300 max-w-3xl">
-            Our team specializes in enterprise-grade blockchain development, creating innovative solutions across multiple platforms including Ethereum, Polkadot, Solana, and custom networks. We combine technical expertise with strategic insights to deliver Web3 applications that drive real business value.
+            {t('blockchain.teamDescription')}
           </p>
 
           {/* Video button removed */}
@@ -278,7 +279,7 @@ const PortfolioSection = ({
                   <a className="flex justify-between items-center w-full text-white text-xl font-semibold">
                     <div className="flex items-center">
                       <span className="text-gray-500 mr-2">{step.number}</span>
-                      <span>{step.title}</span>
+                      <span style={{ whiteSpace: 'pre-line' }}>{step.title}</span>
                     </div>
                     <ChevronDown
                       className={`h-5 w-5 transition-transform ${activeStep === step.id ? "rotate-180" : ""}`}
@@ -340,7 +341,7 @@ const PortfolioSection = ({
                       {step.number}
                     </span>
                     <span
-                      className={`text-sm lg:text-base font-medium ${activeStep === step.id ? "text-white" : "text-gray-400"} text-center vertical-text`}
+                      className={`text-sm lg:text-base font-medium ${activeStep === step.id ? "text-white" : "text-gray-400"} text-center vertical-text px-2 py-1`}
                     >
                       {step.title}
                     </span>
@@ -460,6 +461,12 @@ const PortfolioSection = ({
             writing-mode: vertical-rl;
             text-orientation: mixed;
             transform: rotate(180deg);
+            white-space: pre-line;
+            max-width: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
           }
         }
       `}</style>

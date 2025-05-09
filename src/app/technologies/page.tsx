@@ -8,8 +8,11 @@ import { ChevronLeft, Server, Code, Database, Globe, Cloud, Layout } from "lucid
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Script from "next/script";
+import { useTranslation } from "@/lib/useTranslation";
 
 export default function Technologies() {
+  const { t } = useTranslation();
+  
   // Ref for the particle canvas
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
@@ -27,24 +30,472 @@ export default function Technologies() {
     orange: false
   });
   
+  // Add style element to the document
+  useEffect(() => {
+    // Create style element for both rocket and card animations
+    const styleElement = document.createElement('style');
+    styleElement.id = 'tech-animations';
+    
+    // Combine styles for all animations
+    const combinedStyles = `
+      ${rocketStyles}
+      
+      /* Card animations */
+      .scanlines {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+          to bottom,
+          transparent 0%,
+          rgba(255, 255, 255, 0.05) 0.5%,
+          transparent 1%
+        );
+        background-size: 100% 8px;
+        animation: scanlines 8s linear infinite;
+        pointer-events: none;
+        /* opacity: 0.1; */ /* Managed by JS or new CSS */
+        /* transition: opacity 0.3s ease; */
+      }
+      
+      /* @keyframes scanlines { ... } */ /* Keep if still used, or remove if new animations replace */
+      
+      /* .group:hover .scanlines { opacity: 0.3; } */
+      
+      .technology-card {
+        transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+      }
+      
+      .technology-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.3); /* Existing hover */
+      }
+      
+      .group:hover .border {
+        opacity: 1 !important;
+        box-shadow: 0 0 15px 2px rgba(124, 58, 237, 0.3) !important;
+      }
+      
+      .group:hover .h-0\\.5 {
+        width: 100% !important;
+      }
+      
+      .group:hover .opacity-20 {
+        opacity: 0.4 !important;
+      }
+      
+      .drop-shadow-glow-sm {
+        filter: drop-shadow(0 0 2px rgba(124, 58, 237, 0.5));
+      }
+      
+      .drop-shadow-glow-lg {
+        filter: drop-shadow(0 0 5px rgba(124, 58, 237, 0.8));
+      }
+      
+      .text-transparent.bg-clip-text {
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+      
+      @keyframes lightSweep {
+        0% { transform: translateX(-100%); opacity: 0; }
+        50% { transform: translateX(100%); opacity: 0.3; }
+        100% { transform: translateX(100%); opacity: 0; }
+      }
+      
+      .card-highlight {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+      
+      .group:hover .card-highlight {
+        animation: lightSweep 2s ease-in-out;
+      }
+      
+      /* NEW CSS FOR 12 CIRCLE ANIMATIONS */
+      .tech-grid-animation-host .dot {
+        position: absolute;
+        border-radius: 50%;
+        /* Default background is set by JS per theme */
+      }
+      
+      /* 1. Pulsating Circles */
+      .tech-grid-animation-host .pulse-dot {
+        opacity: 0;
+        transform-origin: center;
+        animation: pulseFadeIn 3s infinite ease-in-out;
+      }
+      @keyframes pulseFadeIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.2);
+        }
+        40%,
+        60% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.2);
+        }
+      }
+      
+      /* 2. Rotating Orbits */
+      .tech-grid-animation-host .orbit-container {
+        position: absolute;
+        width: 100%; /* Will be contained by host */
+        height: 100%;
+        border-radius: 50%;
+        transform-style: preserve-3d;
+        animation: rotateOrbitAnim 8s infinite linear; /* Renamed to avoid conflict */
+      }
+      @keyframes rotateOrbitAnim {
+        to {
+          transform: rotateZ(360deg);
+        }
+      }
+      
+      /* 3. Sequential Rings */
+      /* .sequential-dot uses specific animation via JS style.animation */
+      /* Keyframes for Sequential Rings (if .sequential-dot needs it directly) */
+      @keyframes expandRing {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        20% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        40%,
+        100% {
+          transform: scale(1.1);
+          opacity: 0;
+        }
+      }
+      .tech-grid-animation-host .sequential-dot {
+          /* animation: expandRing 3s infinite; Applied by JS */ 
+      }
+      
+      /* 4. Concentric Rotations */
+      .tech-grid-animation-host .concentric-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+      }
+      .tech-grid-animation-host .concentric-ring {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        transform-style: preserve-3d;
+        animation: rotateRingAnim linear infinite; /* Renamed */
+      }
+      @keyframes rotateRingAnim {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      
+      /* 5. Circular Waves */
+      .tech-grid-animation-host .circular-wave-dot {
+        animation: circularWaveAnim 3s infinite ease-in-out; /* Renamed */
+        transform-origin: center;
+      }
+      @keyframes circularWaveAnim {
+        0% {
+          transform: scale(0.7);
+          opacity: 0.3;
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(0.7);
+          opacity: 0.3;
+        }
+      }
+      
+      /* 6. Expanding Lines */
+      .tech-grid-animation-host .line-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        animation: rotateLinesAnim 8s infinite linear; /* Renamed */
+        transform-origin: center;
+      }
+      @keyframes rotateLinesAnim {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .tech-grid-animation-host .expanding-line {
+        position: absolute;
+        height: 1px; /* Can be themed */
+        left: 50%;
+        top: 50%;
+        transform-origin: left center;
+        /* background: rgba(255, 255, 255, 0.3); themed by JS */
+        animation: expandLineAnim 4s infinite ease-in-out; /* Renamed */
+      }
+      @keyframes expandLineAnim {
+        0% {
+          width: 0;
+          opacity: 0;
+        }
+        20%,
+        80% {
+          width: 40%; /* Make width relative or smaller fixed */
+          opacity: 1;
+        }
+        100% {
+          width: 0;
+          opacity: 0;
+        }
+      }
+       .tech-grid-animation-host .expanding-line .dot {
+          left: calc(100% - 3px); /* Position dot at the end of its parent line */
+          top: calc(50% - 1.5px); /* Adjust based on dot size */
+      }
+      
+      
+      /* 7. Breathing Grid */
+      .tech-grid-animation-host .breathing-dot {
+        animation: breatheAnim 4s infinite cubic-bezier(0.4, 0, 0.2, 1); /* Renamed */
+        transform-origin: center;
+      }
+      @keyframes breatheAnim {
+        0% {
+          transform: scale(0.8);
+          opacity: 0.3;
+        }
+        50% {
+          transform: scale(1.3);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(0.8);
+          opacity: 0.3;
+        }
+      }
+      
+      /* 8. Ripple Effect */
+      .tech-grid-animation-host .ripple-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+      .tech-grid-animation-host .ripple-ring {
+        position: absolute;
+        /* border: 1px solid rgba(255, 255, 255, 0.3); themed by JS */
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 50%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        animation: rippleAnim 4s infinite cubic-bezier(0, 0.5, 0.5, 1); /* Renamed */
+      }
+      @keyframes rippleAnim {
+        0% {
+          width: 0;
+          height: 0;
+          opacity: 1;
+        }
+        100% {
+          width: 100%; /* Expand to container size */
+          height: 100%;
+          opacity: 0;
+        }
+      }
+      .tech-grid-animation-host .ripple-wave-dot {
+        /* position: absolute; - already a .dot */
+        /* border-radius: 50%; */
+        /* background: #fff; */
+        transform-origin: center;
+        animation: rippleWaveAnim 1s infinite ease-in-out; /* Renamed */
+      }
+      @keyframes rippleWaveAnim {
+        0%,
+        100% {
+          transform: scale(0.8);
+          opacity: 0.3;
+        }
+        50% {
+          transform: scale(1.8);
+          opacity: 1;
+        }
+      }
+      
+      /* 9. Fibonacci Spiral */
+      .tech-grid-animation-host .fibonacci-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        animation: rotateSlowAnim 30s infinite linear; /* Renamed */
+        transform-origin: center;
+      }
+      @keyframes rotateSlowAnim {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .tech-grid-animation-host .fibonacci-dot {
+        /* position: absolute; .dot class */
+        /* border-radius: 50%; */
+        /* background: #fff; */
+        animation: fibPulseAnim 3s infinite ease-in-out; /* Renamed */
+      }
+      @keyframes fibPulseAnim {
+        0%,
+        100% {
+          opacity: 0.2;
+          transform: scale(0.8);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+      }
+      
+      /* 10. Halftone Gradient */
+      .tech-grid-animation-host .halftone-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        animation: rotateSlowHalftoneAnim 20s infinite linear; /* Renamed and distinct */
+        transform-origin: center;
+      }
+      @keyframes rotateSlowHalftoneAnim {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .tech-grid-animation-host .halftone-dot {
+        animation: halftoneFadeAnim 4s infinite ease-in-out; /* Renamed */
+      }
+      @keyframes halftoneFadeAnim {
+        0%,
+        100% {
+          opacity: 0.3;
+          transform: scale(0.5);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      
+      /* 11. Silver Spiral */
+      .tech-grid-animation-host .silver-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        animation: rotateSlowSilverAnim 25s infinite reverse linear; /* Renamed */
+        transform-origin: center;
+      }
+      @keyframes rotateSlowSilverAnim { /* Distinct name if used by other rotateSlow types */
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .tech-grid-animation-host .silver-dot {
+        animation: silverPulseAnim 3s infinite ease-in-out; /* Renamed */
+      }
+      @keyframes silverPulseAnim {
+        0%,
+        100% {
+          opacity: 0.2;
+          transform: scale(0.7);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.3);
+        }
+      }
+      /* Sunflower Spiral (12) uses SMIL, no extra CSS needed beyond .dot if used for fallback */
+
+      /* Ensure card text content remains visible */
+      .tech-card-content-wrapper {
+        opacity: 1 !important;
+        visibility: visible !important;
+        position: relative !important; /* Reinforce existing style */
+        z-index: 10 !important; /* Reinforce existing style */
+        overflow: visible !important; /* Prevent content clipping */
+        background-color: transparent !important; /* Ensure no opaque background covers text */
+      }
+      .tech-card-content-wrapper > div {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+      .tech-card-content-wrapper h3,
+      .tech-card-content-wrapper p,
+      .tech-card-content-wrapper span,
+      .tech-card-content-wrapper div {
+        opacity: 1 !important;
+        visibility: visible !important;
+        color: inherit !important; /* Ensure text color isn't made transparent or same as bg */
+      }
+    `;
+    
+    styleElement.innerHTML = combinedStyles;
+    document.head.appendChild(styleElement);
+    
+    // Preload required images
+    const preloadImages = [
+      '/images/grid-pattern.svg',
+      '/circuit-pattern.svg',
+      '/data-pattern.png'
+    ];
+
+    preloadImages.forEach(imageSrc => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.href = imageSrc;
+      link.as = 'image';
+      document.head.appendChild(link);
+    });
+    
+    // Clean up on unmount
+    return () => {
+      document.head.removeChild(styleElement);
+      
+      // Remove preload links on unmount
+      document.querySelectorAll('link[rel="preload"][as="image"]').forEach(link => {
+        document.head.removeChild(link);
+      });
+    };
+  }, []);
+  
   // Frontend track items for roadmap
   const frontendTrack = [
-    { id: 'strategic-planning', name: 'Strategic Planning', duration: 'week 1-2' },
-    { id: 'ux-ui-design', name: 'UX/UI Design', duration: 'week 3-4' },
-    { id: 'frontend-development', name: 'Frontend Development', duration: 'week 5-8' },
+    { id: 'strategicPlanning', name: 'Strategic Planning', duration: 'week 1-2' },
+    { id: 'uxuiDesign', name: 'UX/UI Design', duration: 'week 3-4' },
+    { id: 'frontendDevelopment', name: 'Frontend Development', duration: 'week 5-8' },
     { id: 'testing', name: 'Testing', duration: 'week 9' },
     { id: 'deployment', name: 'Deployment', duration: 'week 10' },
-    { id: 'user-support', name: 'User Support', duration: 'ongoing' }
+    { id: 'userSupport', name: 'User Support', duration: 'ongoing' }
   ];
 
   // Backend track items for roadmap
   const backendTrack = [
-    { id: 'technical-architecture', name: 'Technical Architecture', duration: 'week 1-2' },
-    { id: 'database-design', name: 'Database Design', duration: 'week 3' },
-    { id: 'backend-development', name: 'Backend Development', duration: 'week 4-7' },
-    { id: 'api-integration', name: 'API Integration', duration: 'week 8' },
-    { id: 'security-implementation', name: 'Security Implementation', duration: 'week 9' },
-    { id: 'performance-optimization', name: 'Performance Optimization', duration: 'week 10-12' }
+    { id: 'technicalArchitecture', name: 'Technical Architecture', duration: 'week 1-2' },
+    { id: 'databaseDesign', name: 'Database Design', duration: 'week 3' },
+    { id: 'backendDevelopment', name: 'Backend Development', duration: 'week 4-7' },
+    { id: 'apiIntegration', name: 'API Integration', duration: 'week 8' },
+    { id: 'securityImplementation', name: 'Security Implementation', duration: 'week 9' },
+    { id: 'performanceOptimization', name: 'Performance Optimization', duration: 'week 10-12' }
   ];
   
   // Initialize controls for animations
@@ -525,7 +976,7 @@ export default function Technologies() {
       width: 1px; /* Thin line */
       height: 0;
       transform: translateX(-50%);
-      z-index: 1;
+      z-index: 15; /* Increased from 11 to be above button content but below button clickable area */
       border-radius: 1px;
       opacity: 0;
       transition: height 1.5s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.8s ease-in-out;
@@ -627,6 +1078,82 @@ export default function Technologies() {
         transform: scale(0.5);
       }
     }
+    
+    /* Grid card animations */
+    .scanlines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(255, 255, 255, 0.05) 0.5%,
+        transparent 1%
+      );
+      background-size: 100% 8px;
+      animation: scanlines 8s linear infinite;
+      pointer-events: none;
+    }
+    
+    @keyframes scanlines {
+      0% {
+        background-position: 0 0;
+      }
+      100% {
+        background-position: 0 100%;
+      }
+    }
+    
+    /* Ensure scanlines are visible on hover */
+    .group:hover .scanlines {
+      opacity: 0.4 !important;
+    }
+    
+    .drop-shadow-glow-sm {
+      filter: drop-shadow(0 0 2px rgba(124, 58, 237, 0.5));
+    }
+    
+    .drop-shadow-glow-lg {
+      filter: drop-shadow(0 0 5px rgba(124, 58, 237, 0.8));
+    }
+    
+    .group:hover .group-hover\\:drop-shadow-glow-lg {
+      filter: drop-shadow(0 0 5px rgba(124, 58, 237, 0.8));
+    }
+    
+    .group:hover .group-hover\\:w-full {
+      width: 100% !important;
+    }
+
+    /* Additional animation styles for grid cards */
+    .technology-grid-card {
+      transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    }
+    
+    .technology-grid-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.2);
+    }
+    
+    .connector-line {
+      transition: width 0.5s ease-out;
+      width: 0;
+    }
+    
+    .group:hover .connector-line {
+      width: 100%;
+    }
+    
+    .card-circuit {
+      opacity: 0.2;
+      transition: opacity 0.3s ease-out;
+    }
+    
+    .group:hover .card-circuit {
+      opacity: 0.4;
+    }
   `;
   
   // Function to handle START button click
@@ -715,8 +1242,8 @@ export default function Technologies() {
       {/* Particle background */}
       <canvas 
         ref={canvasRef} 
-        className="fixed inset-0 z-0 opacity-50"
-        style={{ pointerEvents: 'none' }}
+        className="fixed inset-0 opacity-50"
+        style={{ pointerEvents: 'none', zIndex: -10 }} /* Ensure it's behind interactive elements */
       />
       
       <section className="pt-32 pb-10 relative z-10">
@@ -724,7 +1251,7 @@ export default function Technologies() {
           <div className="max-w-4xl mb-8">
             <Link href="/" className="inline-flex items-center text-gray-400 hover:text-blue-500 mb-6 transition-colors">
               <ChevronLeft className="h-4 w-4 mr-1" />
-              Back to home
+              {t('technologies.backToHome')}
             </Link>
             
             <motion.h1 
@@ -734,7 +1261,7 @@ export default function Technologies() {
               className="text-5xl md:text-6xl font-bold mb-4"
             >
               <span className="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500 text-transparent bg-clip-text animate-gradient-x">
-                Our Technologies
+                {t('technologies.pageTitle')}
               </span>
             </motion.h1>
             
@@ -744,7 +1271,7 @@ export default function Technologies() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-xl text-gray-400 mb-6"
             >
-              At Progress IT, we leverage cutting-edge technologies to build robust, scalable, and innovative digital solutions. Our expertise spans across enterprise systems, modern web frameworks, and blockchain development.
+              {t('technologies.pageDescription')}
             </motion.p>
           </div>
         </div>
@@ -762,7 +1289,7 @@ export default function Technologies() {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <span className="text-cyan-400">FRONTEND</span>
+              <span className="text-cyan-400">{t('technologies.sections.frontend')}</span>
             </motion.h3>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -786,9 +1313,9 @@ export default function Technologies() {
                     </svg>
                   </div>
                 </div>
-                <h4 className="text-xl font-bold mb-2 text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300">React/Next.js</h4>
+                <h4 className="text-xl font-bold mb-2 text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300">{t('technologies.cards.reactNextjs.title')}</h4>
                 <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                  Cutting-edge UI capabilities, server components, and state management
+                  {t('technologies.cards.reactNextjs.description')}
                 </p>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 group-hover:w-full transition-all duration-500"></div>
               </motion.div>
@@ -814,9 +1341,9 @@ export default function Technologies() {
                     </svg>
                   </div>
                 </div>
-                <h4 className="text-xl font-bold mb-2 text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300">Angular/TypeScript</h4>
+                <h4 className="text-xl font-bold mb-2 text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300">{t('technologies.cards.angularTypescript.title')}</h4>
                 <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                  Enterprise-ready applications with robust typing and structured architecture
+                  {t('technologies.cards.angularTypescript.description')}
                 </p>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 group-hover:w-full transition-all duration-500"></div>
               </motion.div>
@@ -841,9 +1368,9 @@ export default function Technologies() {
                     </svg>
                   </div>
                 </div>
-                <h4 className="text-xl font-bold mb-2 text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300">Vue/Nuxt</h4>
+                <h4 className="text-xl font-bold mb-2 text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300">{t('technologies.cards.vueNuxt.title')}</h4>
                 <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                  Lightweight, high-performance interfaces with SSR capabilities and rapid development
+                  {t('technologies.cards.vueNuxt.description')}
                 </p>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 group-hover:w-full transition-all duration-500"></div>
               </motion.div>
@@ -859,7 +1386,7 @@ export default function Technologies() {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <span className="text-purple-400">BACKEND & DATABASES</span>
+              <span className="text-purple-400">{t('technologies.sections.backendDatabases')}</span>
             </motion.h3>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -884,9 +1411,9 @@ export default function Technologies() {
                     </svg>
                   </div>
                 </div>
-                <h4 className="text-xl font-bold mb-2 text-purple-400 group-hover:text-purple-300 transition-colors duration-300">Backend Mastery</h4>
+                <h4 className="text-xl font-bold mb-2 text-purple-400 group-hover:text-purple-300 transition-colors duration-300">{t('technologies.cards.backendMastery.title')}</h4>
                 <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                  Node.js, Java, C#, C++, Python, and Rust with microservices architecture
+                  {t('technologies.cards.backendMastery.description')}
                 </p>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-fuchsia-400 group-hover:w-full transition-all duration-500"></div>
               </motion.div>
@@ -913,9 +1440,9 @@ export default function Technologies() {
                     </svg>
                   </div>
                 </div>
-                <h4 className="text-xl font-bold mb-2 text-purple-400 group-hover:text-purple-300 transition-colors duration-300">Database Expertise</h4>
+                <h4 className="text-xl font-bold mb-2 text-purple-400 group-hover:text-purple-300 transition-colors duration-300">{t('technologies.cards.databaseExpertise.title')}</h4>
                 <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                  MySQL, MongoDB, MSSQL, PostgreSQL with performance optimization
+                  {t('technologies.cards.databaseExpertise.description')}
                 </p>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-fuchsia-400 group-hover:w-full transition-all duration-500"></div>
               </motion.div>
@@ -939,9 +1466,9 @@ export default function Technologies() {
                     </svg>
                   </div>
                 </div>
-                <h4 className="text-xl font-bold mb-2 text-purple-400 group-hover:text-purple-300 transition-colors duration-300">API Development</h4>
+                <h4 className="text-xl font-bold mb-2 text-purple-400 group-hover:text-purple-300 transition-colors duration-300">{t('technologies.cards.apiDevelopment.title')}</h4>
                 <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                  RESTful, GraphQL, and real-time solutions with WebSockets
+                  {t('technologies.cards.apiDevelopment.description')}
                 </p>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-fuchsia-400 group-hover:w-full transition-all duration-500"></div>
               </motion.div>
@@ -957,7 +1484,7 @@ export default function Technologies() {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <span className="text-pink-400">WEB3 & BLOCKCHAIN</span>
+              <span className="text-pink-400">{t('technologies.sections.web3Blockchain')}</span>
             </motion.h3>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -976,16 +1503,17 @@ export default function Technologies() {
                   <div className="relative w-16 h-16 flex items-center justify-center">
                     <div className="absolute inset-0 bg-pink-500/0 group-hover:bg-pink-500/20 rounded-full blur-xl transition-all duration-300 group-hover:scale-110"></div>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 relative z-10 text-pink-400 group-hover:text-pink-300 transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M18 15v3H6v-3H4v3c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-3h-2z" />
-                      <path d="M17 11l-1.41-1.41L13 12.17V4h-2v8.17L8.41 9.59 7 11l5 5 5-5z" />
+                      <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" fillOpacity="0.2" />
+                      <path d="M12 19a7 7 0 100-14 7 7 0 000 14z" fillOpacity="0.3" />
+                      <path d="M12 6v12M7.5 12h9" />
                     </svg>
                   </div>
                 </div>
-                <h4 className="text-xl font-bold mb-2 text-pink-400 group-hover:text-pink-300 transition-colors duration-300">Smart Contract Development</h4>
+                <h4 className="text-xl font-bold mb-2 text-pink-400 group-hover:text-pink-300 transition-colors duration-300">{t('technologies.cards.smartContractDev.title')}</h4>
                 <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                  Solidity and Rust for secure, auditable blockchain applications
+                  {t('technologies.cards.smartContractDev.description')}
                 </p>
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-400 to-fuchsia-400 group-hover:w-full transition-all duration-500"></div>
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-400 group-hover:w-full transition-all duration-500"></div>
               </motion.div>
 
               {/* DApp Architecture */}
@@ -1003,15 +1531,18 @@ export default function Technologies() {
                   <div className="relative w-16 h-16 flex items-center justify-center">
                     <div className="absolute inset-0 bg-pink-500/0 group-hover:bg-pink-500/20 rounded-full blur-xl transition-all duration-300 group-hover:scale-110"></div>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 relative z-10 text-pink-400 group-hover:text-pink-300 transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z" />
+                      <path fillRule="evenodd" clipRule="evenodd" d="M3 3H9V9H3V3Z" />
+                      <path fillRule="evenodd" clipRule="evenodd" d="M3 14H9V20H3V14Z" />
+                      <path fillRule="evenodd" clipRule="evenodd" d="M14 3H20V9H14V3Z" />
+                      <path fillRule="evenodd" clipRule="evenodd" d="M14 14H20V20H14V14Z" />
                     </svg>
                   </div>
                 </div>
-                <h4 className="text-xl font-bold mb-2 text-pink-400 group-hover:text-pink-300 transition-colors duration-300">DApp Architecture</h4>
+                <h4 className="text-xl font-bold mb-2 text-pink-400 group-hover:text-pink-300 transition-colors duration-300">{t('technologies.cards.dappArchitecture.title')}</h4>
                 <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                  Full-stack Web3 development with ethers.js and blockchain integration
+                  {t('technologies.cards.dappArchitecture.description')}
                 </p>
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-400 to-fuchsia-400 group-hover:w-full transition-all duration-500"></div>
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-400 group-hover:w-full transition-all duration-500"></div>
               </motion.div>
 
               {/* Tokenomics & NFT Solutions */}
@@ -1029,15 +1560,15 @@ export default function Technologies() {
                   <div className="relative w-16 h-16 flex items-center justify-center">
                     <div className="absolute inset-0 bg-pink-500/0 group-hover:bg-pink-500/20 rounded-full blur-xl transition-all duration-300 group-hover:scale-110"></div>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 relative z-10 text-pink-400 group-hover:text-pink-300 transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z" />
+                      <path d="M13 2.06v4.84c6.36.59 11.36 5.24 11.92 11.53h-5c-.53-4.04-3.87-7.17-7.92-7.28v5.15l-9-7.12 9-7.12z" />
                     </svg>
                   </div>
                 </div>
-                <h4 className="text-xl font-bold mb-2 text-pink-400 group-hover:text-pink-300 transition-colors duration-300">Tokenomics & NFT Solutions</h4>
+                <h4 className="text-xl font-bold mb-2 text-pink-400 group-hover:text-pink-300 transition-colors duration-300">{t('technologies.cards.tokenomicsNft.title')}</h4>
                 <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                  Custom token ecosystems and digital asset platforms
+                  {t('technologies.cards.tokenomicsNft.description')}
                 </p>
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-400 to-fuchsia-400 group-hover:w-full transition-all duration-500"></div>
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-400 group-hover:w-full transition-all duration-500"></div>
               </motion.div>
             </div>
           </div>
@@ -1070,7 +1601,7 @@ export default function Technologies() {
           >
             <h2 className="text-5xl md:text-6xl font-bold mb-6 relative inline-block">
               <span className="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500 text-transparent bg-clip-text">
-                Technology Development Roadmap
+                {t('technologies.roadmap.title')}
               </span>
               <div className="absolute -bottom-4 left-0 w-full h-px bg-gradient-to-r from-blue-500/0 via-indigo-500/50 to-purple-500/0"></div>
               <div className="absolute -top-4 -left-4 w-8 h-8 border-l-2 border-t-2 border-blue-500/40"></div>
@@ -1083,12 +1614,12 @@ export default function Technologies() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg text-gray-400 mb-16"
             >
-              Our development process from initial planning to successful launch. We follow a structured approach to ensure high-quality, secure, and performant digital solutions.
+              {t('technologies.roadmap.description')}
             </motion.p>
           </motion.div>
           
           {/* Interactive Roadmap Visualization */}
-          <div className="relative cyberpunk-roadmap" style={{ position: 'relative', zIndex: 15 }}>
+          <div className="relative cyberpunk-roadmap" style={{ position: 'relative', zIndex: 5 }}>
             {/* Shooting Lines */}
             <div className={`shooting-line cyan ${shootingLines && activeLines.cyan ? 'active' : ''}`} style={{ transitionDelay: '0s' }}></div>
             <div className={`shooting-line magenta ${shootingLines && activeLines.magenta ? 'active' : ''}`} style={{ transitionDelay: '0.1s' }}></div>
@@ -1133,19 +1664,19 @@ export default function Technologies() {
             </div>
             
             {/* START marker */}
-            <motion.div 
+            <div
               className="roadmap-marker start-marker mx-auto mb-16 relative"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={roadmapRevealed ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.5 }}
+              // initial={{ opacity: 0, scale: 0.8 }}
+              // animate={roadmapRevealed ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              // transition={{ duration: 0.5 }}
             >
-              <div className="futuristic-button-wrapper relative z-10 mx-auto w-max">
+              <div className="futuristic-button-wrapper relative z-20 mx-auto w-max">
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/30 to-blue-500/30 rounded-full blur-xl"></div>
                 <button 
                   onClick={handleStartClick}
-                  className="futuristic-button relative z-10 px-8 py-3 rounded-full bg-gradient-to-r from-cyan-900/80 to-blue-900/80 text-cyan-300 font-bold tracking-wider border border-cyan-500/30 flex items-center justify-center gap-2 overflow-hidden shadow-lg shadow-cyan-500/20"
+                  className="futuristic-button relative z-20 px-8 py-3 rounded-full bg-gradient-to-r from-cyan-900/80 to-blue-900/80 text-cyan-300 font-bold tracking-wider border border-cyan-500/30 flex items-center justify-center gap-2 overflow-hidden shadow-lg shadow-cyan-500/20"
                 >
-                  <span className="relative z-10 uppercase tracking-widest text-sm">START</span>
+                  <span className="relative z-20 uppercase tracking-widest text-sm">{t('technologies.roadmap.start')}</span>
                   <div className="absolute inset-0 w-full h-full bg-[url('/circuit-pattern.svg')] bg-cover opacity-10"></div>
                   <div className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-cyan-400 to-blue-400"></div>
                 </button>
@@ -1154,7 +1685,7 @@ export default function Technologies() {
               <div className="absolute left-1/2 top-full w-px h-16 bg-gradient-to-b from-cyan-400 to-transparent transform -translate-x-1/2"></div>
               <div className="absolute left-1/2 top-[calc(100%+2px)] w-6 h-6 rounded-full bg-cyan-400/30 transform -translate-x-1/2 -translate-y-1/2 blur-md"></div>
               <div className="absolute left-1/2 top-[calc(100%+2px)] w-2 h-2 rounded-full bg-cyan-400 transform -translate-x-1/2 -translate-y-1/2 shadow-lg shadow-cyan-500/50"></div>
-            </motion.div>
+            </div>
             
             {/* Main timeline */}
             <div className="cyberpunk-timeline relative grid md:grid-cols-2 gap-8 md:gap-0">
@@ -1171,10 +1702,10 @@ export default function Technologies() {
                 >
                   <span className="cyber-glitch-text relative">
                     <span className="relative z-10 bg-gradient-to-r from-cyan-400 to-blue-400 text-transparent bg-clip-text">
-                      FRONTEND/DESIGN PROCESS
+                      {t('technologies.roadmap.frontendProcess')}
                     </span>
-                    <span className="absolute -left-1 top-0 text-cyan-500/10">FRONTEND/DESIGN PROCESS</span>
-                    <span className="absolute -right-1 top-0 text-blue-500/10">FRONTEND/DESIGN PROCESS</span>
+                    <span className="absolute -left-1 top-0 text-cyan-500/10">{t('technologies.roadmap.frontendProcess')}</span>
+                    <span className="absolute -right-1 top-0 text-blue-500/10">{t('technologies.roadmap.frontendProcess')}</span>
                   </span>
                 </motion.h3>
                 
@@ -1203,7 +1734,7 @@ export default function Technologies() {
                             <div className="flex items-center mb-3">
                               <div className="h-6 w-2 bg-cyan-500/70 mr-3"></div>
                               <h4 className="text-xl font-bold bg-gradient-to-r from-cyan-300 to-blue-300 text-transparent bg-clip-text">
-                                {item.name}
+                                {t(`technologies.roadmap.stages.${item.id}.name`)}
                               </h4>
                               <div className="ml-auto text-xs font-mono text-cyan-500/70">#{index + 1}</div>
                             </div>
@@ -1211,7 +1742,7 @@ export default function Technologies() {
                             {/* Timeline phase */}
                             <div className="flex items-center mb-3">
                               <div className="px-3 py-1 rounded-full bg-cyan-900/40 border border-cyan-700/30 text-sm text-cyan-300">
-                                Phase: {item.duration}
+                                {t('technologies.roadmap.phaseLabel')} {t(`technologies.roadmap.stages.${item.id}.duration`)}
                               </div>
                             </div>
                             
@@ -1256,10 +1787,10 @@ export default function Technologies() {
                 >
                   <span className="cyber-glitch-text relative">
                     <span className="relative z-10 bg-gradient-to-r from-fuchsia-400 to-purple-400 text-transparent bg-clip-text">
-                      BACKEND/TECHNICAL PROCESS
+                      {t('technologies.roadmap.backendProcess')}
                     </span>
-                    <span className="absolute -left-1 top-0 text-fuchsia-500/10">BACKEND/TECHNICAL PROCESS</span>
-                    <span className="absolute -right-1 top-0 text-purple-500/10">BACKEND/TECHNICAL PROCESS</span>
+                    <span className="absolute -left-1 top-0 text-fuchsia-500/10">{t('technologies.roadmap.backendProcess')}</span>
+                    <span className="absolute -right-1 top-0 text-purple-500/10">{t('technologies.roadmap.backendProcess')}</span>
                   </span>
                 </motion.h3>
                 
@@ -1290,7 +1821,7 @@ export default function Technologies() {
                             <div className="flex items-center mb-3">
                               <div className="h-6 w-2 bg-purple-500/70 mr-3"></div>
                               <h4 className="text-xl font-bold bg-gradient-to-r from-fuchsia-300 to-purple-300 text-transparent bg-clip-text">
-                                {item.name}
+                                {t(`technologies.roadmap.stages.${item.id}.name`)}
                               </h4>
                               <div className="ml-auto text-xs font-mono text-purple-500/70">#{index + 1}</div>
                             </div>
@@ -1298,7 +1829,7 @@ export default function Technologies() {
                             {/* Timeline phase */}
                             <div className="flex items-center mb-3">
                               <div className="px-3 py-1 rounded-full bg-purple-900/40 border border-purple-700/30 text-sm text-purple-300">
-                                Phase: {item.duration}
+                                {t('technologies.roadmap.phaseLabel')} {t(`technologies.roadmap.stages.${item.id}.duration`)}
                               </div>
                             </div>
                             
@@ -1349,25 +1880,25 @@ export default function Technologies() {
             </div>
             
             {/* LAUNCH marker */}
-            <motion.div 
+            <div
               className="roadmap-marker end-marker mx-auto mt-16 relative"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={roadmapRevealed ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.5, delay: 1.2 }}
+              // initial={{ opacity: 0, scale: 0.8 }}
+              // animate={roadmapRevealed ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              // transition={{ duration: 0.5, delay: 1.2 }}
             >
               <div className="absolute left-1/2 bottom-full w-px h-16 bg-gradient-to-t from-purple-400 to-transparent"></div>
-              <div className="futuristic-button-wrapper relative z-10 mx-auto w-max">
+              <div className="futuristic-button-wrapper relative z-20 mx-auto w-max">
                 <div className={`absolute inset-0 bg-gradient-to-r ${startCompleted ? 'from-purple-500/30 to-fuchsia-500/30' : 'from-gray-500/10 to-gray-700/10'} rounded-full blur-xl transition-all duration-500`}></div>
                 <button 
                   onClick={handleLaunchClick}
-                  className={`futuristic-button relative z-10 px-8 py-3 rounded-full ${startCompleted ? 'bg-gradient-to-r from-purple-900/80 to-fuchsia-900/80 text-purple-300 border-purple-500/30' : 'bg-gradient-to-r from-gray-900/60 to-gray-800/60 text-gray-500 border-gray-700/20 cursor-not-allowed'} font-bold tracking-wider border flex items-center justify-center gap-2 overflow-hidden shadow-lg transition-all duration-500`}
+                  className={`futuristic-button relative z-20 px-8 py-3 rounded-full ${startCompleted ? 'bg-gradient-to-r from-purple-900/80 to-fuchsia-900/80 text-purple-300 border-purple-500/30' : 'bg-gradient-to-r from-gray-900/60 to-gray-800/60 text-gray-500 border-gray-700/20 cursor-not-allowed'} font-bold tracking-wider border flex items-center justify-center gap-2 overflow-hidden shadow-lg transition-all duration-500`}
                 >
-                  <span className="relative z-10 uppercase tracking-widest text-sm">LAUNCH</span>
+                  <span className="relative z-20 uppercase tracking-widest text-sm">{t('technologies.roadmap.launch')}</span>
                   <div className="absolute inset-0 w-full h-full bg-[url('/circuit-pattern.svg')] bg-cover opacity-10"></div>
                   <div className={`absolute top-0 left-0 h-1 w-full ${startCompleted ? 'bg-gradient-to-r from-purple-400 to-fuchsia-400' : 'bg-gray-700'}`}></div>
                 </button>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -1384,7 +1915,7 @@ export default function Technologies() {
               className="text-4xl font-bold mb-6"
             >
               <span className="bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text">
-                Digital Innovation Through Advanced Technology
+                {t('technologies.innovation.title')}
               </span>
             </motion.h2>
             
@@ -1395,7 +1926,7 @@ export default function Technologies() {
               viewport={{ once: true }}
               className="text-lg text-gray-400"
             >
-              We combine technical expertise with creative innovation to build solutions that drive results and deliver exceptional digital experiences.
+              {t('technologies.innovation.description')}
             </motion.p>
           </div>
           
@@ -1408,96 +1939,84 @@ export default function Technologies() {
               {[
                 {
                   code: 242,
-                  title: "Adaptive Interfaces",
-                  description: "Building responsive systems that evolve with user behavior and device capabilities.",
+                  key: "adaptiveInterfaces",
                   icon: "🔄",
                   color: "from-blue-400 to-cyan-400",
                   borderColor: "border-cyan-500/50"
                 },
                 {
                   code: 627,
-                  title: "Quantum-Ready Architecture",
-                  description: "Developing systems prepared for the next generation of computing paradigms.",
+                  key: "quantumArchitecture",
                   icon: "⚛️",
                   color: "from-purple-400 to-fuchsia-400",
                   borderColor: "border-fuchsia-500/50"
                 },
                 {
                   code: 675,
-                  title: "Neural Integration",
-                  description: "Merging AI capabilities with human-centered design for intuitive experiences.",
+                  key: "neuralIntegration",
                   icon: "🧠",
                   color: "from-teal-400 to-blue-400",
                   borderColor: "border-blue-500/50"
                 },
                 {
                   code: 937,
-                  title: "Data Mesh Systems",
-                  description: "Distributed domain-specific data architecture for enterprise-scale solutions.",
+                  key: "dataMesh",
                   icon: "🌐",
                   color: "from-cyan-400 to-blue-400",
                   borderColor: "border-blue-500/50"
                 },
                 {
                   code: 886,
-                  title: "Cybernetic Security",
-                  description: "Advanced threat detection with self-healing protection protocols.",
+                  key: "cyberneticSecurity",
                   icon: "🛡️",
                   color: "from-red-400 to-purple-400",
                   borderColor: "border-purple-500/50"
                 },
                 {
                   code: 727,
-                  title: "Digital Twin Engineering",
-                  description: "Creating virtual replicas of physical systems for testing and optimization.",
+                  key: "digitalTwin",
                   icon: "👥",
                   color: "from-blue-400 to-indigo-400",
                   borderColor: "border-indigo-500/50"
                 },
                 {
                   code: 889,
-                  title: "Holographic Interfaces",
-                  description: "Developing next-generation spatial computing experiences beyond traditional screens.",
+                  key: "holographicInterfaces",
                   icon: "🔮",
                   color: "from-fuchsia-400 to-pink-400",
                   borderColor: "border-pink-500/50"
                 },
                 {
                   code: 646,
-                  title: "Edge Computing Solutions",
-                  description: "Processing data closer to its source for reduced latency and enhanced performance.",
+                  key: "edgeComputing",
                   icon: "⚡",
                   color: "from-amber-400 to-orange-400",
                   borderColor: "border-orange-500/50"
                 },
                 {
                   code: 739,
-                  title: "Synthetic Media Creation",
-                  description: "Generating hyper-realistic content through advanced AI algorithms.",
+                  key: "syntheticMedia",
                   icon: "🎭",
                   color: "from-green-400 to-teal-400",
                   borderColor: "border-teal-500/50"
                 },
                 {
                   code: 738,
-                  title: "Quantum Encryption",
-                  description: "Implementing future-proof security through quantum-resistant algorithms.",
+                  key: "quantumEncryption",
                   icon: "🔒",
                   color: "from-indigo-400 to-violet-400",
                   borderColor: "border-violet-500/50"
                 },
                 {
                   code: 574,
-                  title: "Augmented Development",
-                  description: "AI-assisted coding and system architecture for accelerated innovation.",
+                  key: "augmentedDevelopment",
                   icon: "🤖",
                   color: "from-blue-400 to-sky-400",
                   borderColor: "border-sky-500/50"
                 },
                 {
                   code: 136,
-                  title: "Biodigital Interfaces",
-                  description: "Creating seamless connections between biological systems and digital environments.",
+                  key: "biodigitalInterfaces",
                   icon: "🧬",
                   color: "from-emerald-400 to-green-400",
                   borderColor: "border-green-500/50"
@@ -1509,30 +2028,35 @@ export default function Technologies() {
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.7, delay: index * 0.08 }}
                   viewport={{ once: true }}
-                  className="bg-gray-900/80 aspect-square relative group overflow-hidden rounded-lg border border-gray-800 hover:border-indigo-500/50 transition-all duration-500"
+                  className="bg-gray-900/80 aspect-square relative group overflow-hidden rounded-lg border border-gray-800 hover:border-indigo-500/50 transition-all duration-500 technology-card"
                   data-card={item.code}
                 >
-                  {/* Cyberpunk grid background */}
+                  {/* Animation host is inserted here by JS as first child, with z-index: 0 */}
+                  
+                  {/* Cyberpunk grid background (visual, low z-index implicitly) */}
                   <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] bg-repeat opacity-5"></div>
                   
-                  {/* Neon border effect */}
+                  {/* Neon border effect (visual) */}
                   <div className={`absolute inset-0 border ${item.borderColor} rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg`} 
                     style={{ boxShadow: `0 0 15px 2px rgba(124, 58, 237, 0.3)` }}></div>
                   
-                  {/* Scanline effect */}
+                  {/* Scanline effect (visual, low z-index implicitly if animHost is 0) */}
                   <div className="absolute inset-0 overflow-hidden opacity-10">
                     <div className="scanlines"></div>
                   </div>
                   
-                  {/* Content container */}
-                  <div className="relative z-10 h-full w-full p-5 flex flex-col justify-between">
+                  {/* Light sweep effect (visual) */}
+                  <div className="card-highlight"></div>
+                  
+                  {/* Content container - ADDING NEW CLASS HERE */}
+                  <div className="relative z-10 h-full w-full p-5 flex flex-col justify-between tech-card-content-wrapper">
                     {/* Title with neon effect */}
                     <div className="space-y-2">
                       <div className="text-xs font-mono text-gray-500">{`</${item.code}>`}</div>
                       <div className="flex gap-2 items-center">
                         <span className="text-2xl">{item.icon}</span>
                         <h3 className={`text-xl font-bold bg-gradient-to-r ${item.color} text-transparent bg-clip-text drop-shadow-glow-sm group-hover:drop-shadow-glow-lg transition-all duration-300`}>
-                          {item.title}
+                          {t(`technologies.innovation.cards.${item.key}.title`)}
                         </h3>
                       </div>
                       
@@ -1544,7 +2068,7 @@ export default function Technologies() {
                     
                     {/* Description - appears on hover */}
                     <div className="mt-2 text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                      {item.description}
+                      {t(`technologies.innovation.cards.${item.key}.description`)}
                     </div>
                     
                     {/* Circuit pattern in corner */}
@@ -1584,15 +2108,15 @@ export default function Technologies() {
               transition={{ delay: 0.3, duration: 0.5 }}
               className="inline-block px-4 py-1 rounded-full bg-indigo-600 text-white font-medium text-sm mb-6"
             >
-              LET'S BUILD THE FUTURE
+              {t('technologies.innovation.cta.tagline')}
             </motion.span>
             {/* Customized Title */}
             <h2 className="text-4xl md:text-6xl font-bold mb-6">
-              Leverage Our <span className="bg-gradient-to-r from-blue-400 to-indigo-500 text-transparent bg-clip-text">Tech Expertise</span>?
+              {t('technologies.innovation.cta.title').split('?')[0]} <span className="bg-gradient-to-r from-blue-400 to-indigo-500 text-transparent bg-clip-text">?</span>
             </h2>
             {/* Customized Subtitle */}
             <p className="text-xl text-gray-300 mb-10 mx-auto max-w-3xl">
-              Ready to implement cutting-edge technology? Discuss your project with our specialists and let's innovate together.
+              {t('technologies.innovation.cta.description')}
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
@@ -1602,7 +2126,7 @@ export default function Technologies() {
                 onClick={(e) => handleScrollAndSetTab(e, 'contact')}
                 className="inline-flex items-center px-8 py-4 rounded-lg bg-gray-900 text-white font-medium transition-all hover:bg-gray-800 border border-gray-800"
               >
-                <span>Contact Us</span> { /* Changed button text */ }
+                <span>{t('technologies.innovation.cta.button')}</span>
               </a>
             </div>
           </motion.div>
@@ -1610,6 +2134,13 @@ export default function Technologies() {
       </section>
       {/* --- END OF INSERTED CTA SECTION --- */}
 
+      <style jsx global>{rocketStyles}</style>
+      
+      {/* Script for animations (main loader) */}
+      <Script src="/js/animation-loader.js" strategy="afterInteractive" />
+      
+      {/* Removed: <Script src="/js/animation-debug.js" strategy="afterInteractive" /> */}
+      
       <Footer />
     </main>
   );

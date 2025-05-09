@@ -12,12 +12,14 @@ import {
   MapPin,
   Instagram,
 } from "lucide-react";
+import { useTranslation } from "@/lib/useTranslation";
 
 interface FooterProps {
   companyName?: string;
 }
 
 export default function Footer({ companyName = "Progress IT" }: FooterProps) {
+  const { t } = useTranslation();
   const footerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -58,7 +60,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
             {/* Industries Column */}
             <div className="space-y-6">
               <h3 className="text-sm font-medium uppercase tracking-wider text-gray-400">
-                INDUSTRIES
+                {t('footer.industries')}
               </h3>
               <ul className="space-y-4">
                 <li>
@@ -66,7 +68,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/industries#financial-services"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    Financial Services Digital Transformation
+                    {t('footer.financialServices')}
                   </Link>
                 </li>
                 <li>
@@ -74,7 +76,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/industries#real-estate"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    Real Estate Digital Marketing
+                    {t('footer.realEstate')}
                   </Link>
                 </li>
                 <li>
@@ -82,7 +84,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/industries#ecommerce"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    E-commerce & Retail Solutions
+                    {t('footer.ecommerce')}
                   </Link>
                 </li>
                 <li>
@@ -90,7 +92,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/industries#blockchain"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    Blockchain & DApp Solutions
+                    {t('footer.blockchain')}
                   </Link>
                 </li>
                 <li>
@@ -98,7 +100,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/industries#entertainment"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    Entertainment & Media Platforms
+                    {t('footer.entertainment')}
                   </Link>
                 </li>
               </ul>
@@ -107,7 +109,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
             {/* Services Column */}
             <div className="space-y-6">
               <h3 className="text-sm font-medium uppercase tracking-wider text-gray-400">
-                SERVICES
+                {t('footer.services')}
               </h3>
               <ul className="space-y-4">
                 <li>
@@ -115,7 +117,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/services#website-development"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    Website Development & Maintenance
+                    {t('footer.websiteDevelopment')}
                   </Link>
                 </li>
                 <li>
@@ -123,7 +125,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/services#seo"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    Search Engine Optimization
+                    {t('footer.seo')}
                   </Link>
                 </li>
                 <li>
@@ -131,7 +133,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/services#mobile-app-development"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    Mobile Application Development
+                    {t('footer.mobileAppDevelopment')}
                   </Link>
                 </li>
                 <li>
@@ -139,7 +141,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/services#uiux-design"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    UI/UX Design & Optimization
+                    {t('footer.uiuxDesign')}
                   </Link>
                 </li>
                 <li>
@@ -147,7 +149,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/services#brand-identity"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    Brand Identity Development
+                    {t('footer.brandIdentity')}
                   </Link>
                 </li>
                 <li>
@@ -155,7 +157,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/services#custom-web-applications"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    Custom Web Application Development
+                    {t('footer.customWebApplications')}
                   </Link>
                 </li>
               </ul>
@@ -164,7 +166,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
             {/* Technologies Column */}
             <div className="space-y-6">
               <h3 className="text-sm font-medium uppercase tracking-wider text-gray-400">
-                TECHNOLOGIES
+                {t('footer.technologies')}
               </h3>
               <ul className="space-y-4">
                 <li>
@@ -172,7 +174,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/technologies"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    ASP.NET Development Services
+                    {t('footer.aspNet')}
                   </Link>
                 </li>
                 <li>
@@ -180,7 +182,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/technologies"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    React.js
+                    {t('footer.reactjs')}
                   </Link>
                 </li>
                 <li>
@@ -188,7 +190,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/technologies"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    Node.js
+                    {t('footer.nodejs')}
                   </Link>
                 </li>
                 <li>
@@ -196,7 +198,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/technologies"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    Angular
+                    {t('footer.angular')}
                   </Link>
                 </li>
                 <li>
@@ -204,7 +206,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/technologies"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    AWS / Azure Cloud Solutions
+                    {t('footer.awsAzure')}
                   </Link>
                 </li>
                 <li>
@@ -212,7 +214,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/technologies"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    Solana / ERC20 Development
+                    {t('footer.solanaDevelopment')}
                   </Link>
                 </li>
               </ul>
@@ -221,7 +223,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
             {/* Case Studies Column */}
             <div className="space-y-6">
               <h3 className="text-sm font-medium uppercase tracking-wider text-gray-400">
-                SHOWCASE
+                {t('footer.showcase')}
               </h3>
               <ul className="space-y-4">
                 <li>
@@ -229,7 +231,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/showcase"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    Elevate Inc. - Benefits Platform
+                    {t('footer.elevateInc')}
                   </Link>
                 </li>
                 <li>
@@ -237,7 +239,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/showcase"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    Woosh Air - Smart Air Filtration
+                    {t('footer.wooshAir')}
                   </Link>
                 </li>
                 <li>
@@ -245,7 +247,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/showcase"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    GastroGuide App - Restaurant Discovery
+                    {t('footer.gastroGuide')}
                   </Link>
                 </li>
                 <li>
@@ -253,7 +255,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/showcase"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    CHMedic App - Healthcare Platform
+                    {t('footer.chMedic')}
                   </Link>
                 </li>
                 <li>
@@ -261,7 +263,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
                     href="/showcase"
                     className="hover:text-blue-400 transition-colors"
                   >
-                    Care AI - Customer Support Solution
+                    {t('footer.careAI')}
                   </Link>
                 </li>
               </ul>
@@ -274,7 +276,7 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
           {/* Chat With Us */}
           <div className="space-y-4">
             <h3 className="text-sm font-medium uppercase tracking-wider text-gray-400">
-              CHAT WITH US
+              {t('footer.chatWithUs')}
             </h3>
             <div>
               <Link
@@ -297,19 +299,19 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
           {/* Find Us */}
           <div className="space-y-4">
             <h3 className="text-sm font-medium uppercase tracking-wider text-gray-400">
-              FIND US
+              {t('footer.findUs')}
             </h3>
             <address className="text-xl md:text-2xl font-medium not-italic">
-              Head Office UK, London
+              {t('footer.headOffice')}
               <br />
-              27 Old Gloucester Street, London
+              {t('footer.address')}
             </address>
           </div>
 
           {/* Follow Us */}
           <div className="space-y-4">
             <h3 className="text-sm font-medium uppercase tracking-wider text-gray-400">
-              FOLLOW US ON
+              {t('footer.followUs')}
             </h3>
             {/* Commented out social icons */}
             {/*
@@ -339,18 +341,18 @@ export default function Footer({ companyName = "Progress IT" }: FooterProps) {
           <div className="mb-6 md:mb-0">
             <div className="text-2xl font-bold">{companyName}</div>
             <div className="text-sm text-gray-400 mt-2">
-              © {new Date().getFullYear()} Progress IT All Rights Reserved
+              © {new Date().getFullYear()} {t('footer.allRightsReserved')}
             </div>
           </div>
           <div className="flex space-x-6 text-sm">
             {/* <Link href="/#contact" className="hover:text-blue-400 transition-colors">
-              Contact Us
+              {t('footer.contactUs')}
             </Link> */}
             <Link href="/privacy-policy" className="hover:text-blue-400 transition-colors">
-              Privacy Policy
+              {t('footer.privacyPolicy')}
             </Link>
             <Link href="/terms-and-conditions" className="hover:text-blue-400 transition-colors">
-              Terms & Conditions
+              {t('footer.termsAndConditions')}
             </Link>
           </div>
         </div>
